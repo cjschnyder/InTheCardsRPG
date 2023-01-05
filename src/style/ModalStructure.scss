@@ -1,0 +1,53 @@
+@import 'variables';
+
+.modal-wrapper {
+    display: none;
+    background-color: $dark;
+    z-index: 3;
+    left: 50%;
+    top: 150px;
+    position: absolute;
+    width: 500px;
+    height: 600px;
+    border-radius: 10px;
+    transform: translateX(-50%);
+    border: 2px solid $light;
+    color: $light;
+    flex-direction: column;
+    overflow-y: scroll;
+        
+    &.show {
+        display: flex;
+    }
+    
+    .modal-title {
+        display: flex;
+
+        h2{
+            margin-left: 20px;
+        }
+        
+        .close-button {
+            position: absolute;
+            right: 20px;
+            padding-top: 20px;
+            font-size: 25px;
+            
+            &:hover{
+                cursor:pointer;
+            }
+        }
+    }
+    
+    &::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background: #f1f1f1; 
+    }
+ 
+    &::-webkit-scrollbar-thumb {
+        background: #242528; 
+    }
+}

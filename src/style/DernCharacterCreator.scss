@@ -1,0 +1,50 @@
+@import 'variables';
+
+#dernCharacterCreator {
+    color: $dark;
+
+    header {
+        background-color: $dark;
+        width: 100%;
+        height: 80px;
+        padding: 5px; 
+        display: flex;
+        color: $light;
+
+        .title {
+            margin-top: 25px;
+            font-size: 25px;
+        }
+
+        .character-menu {
+            display: flex;
+
+            .option {
+                height: 50px;
+                margin-left: 20px;
+                margin-top: 15px;
+                padding-left: 10px;
+                border-left: 2px solid $light;
+                transform: skewX(-15deg);
+
+                & :hover{
+                    cursor:pointer;
+                }
+
+                span {
+                    transform: skewX(15deg);
+                    display: inline-block;
+                    font-weight: bold;
+                    padding-top: 17px;
+                }
+            }      
+        }
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #dernCharacterCreator {
+        color: skyblue;
+    }
+}
+

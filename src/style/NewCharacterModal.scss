@@ -1,0 +1,60 @@
+@import 'variables';
+
+.modal-body {
+        margin-left: 20px;
+        margin-right: 50px;
+        font-weight: bold;
+        
+        .modal-option {
+            margin-bottom: 10px;
+            display: flex;
+            
+            &.hide {
+                display: none;
+            }
+            
+            .modal-input {
+                display: flex;
+                flex-grow: 1;
+                justify-content: flex-end;
+            }
+        }
+        
+        .modal-option-multi-select {
+            display: flex;
+            margin-bottom: 10px;
+            flex-direction: column;
+            border: 2px solid $light;
+            border-radius: 5px;
+            
+            &:hover {
+                background-color: $darkHover;
+            }
+            
+            .skill-dropdown-button {
+                padding: 0 10px;
+                display: flex;
+                flex-direction: row;
+                
+                h3 {
+                    display: flex;
+                    flex-grow: 1;
+                }
+
+                .arrow {
+                    transform: rotate(-90deg);
+                    font-size: 30px;
+                }
+            }
+            
+            .skills-list {
+                background-color: $light;
+                color: $dark;
+                padding: 5px;
+                
+                &.hide {
+                    display: none;
+                }
+            }
+        }
+    }

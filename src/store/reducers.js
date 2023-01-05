@@ -1,4 +1,5 @@
 const initialState = {
-    cards: [],
-    health: 0
+    name: "",
+    level: 1,
+    cards: []
 };
