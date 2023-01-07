@@ -1,4 +1,6 @@
 import {Component} from 'react';
+import { connect } from 'react-redux';
+import {createDeck, setName} from './store/actions'
 import './style/ModalStructure.scss'
 import './style/NewCharacterModal.scss'
 
@@ -10,6 +12,7 @@ class NewCharacterModal extends Component {
             level: 1,
             ancestry: "",
             classOne: "",
+            classTwo: "",
             classThree: "",
             fiveSkills: [],
             fiveSkillsOpen: false,
@@ -22,18 +25,79 @@ class NewCharacterModal extends Component {
         const {
             isOpen,
             close,
+            createDeck,
         } = this.props
         const {
             name,
             level,
             ancestry,
             classOne,
+            classTwo,
             classThree,
             fiveSkills,
             fiveSkillsOpen,
             tenSkills,
             tenSkillsOpen
         } = this.state
+        
+        const characterSkills = [
+            'Animal Handling',
+            'Appraise',
+            'Athletics',
+            'History',
+            'Magic Knowledge',
+            'Magic School: Arcane',
+            'Magic School: Creation',
+            'Magic School: Divine',
+            'Magic School: Elemental',
+            'Manipulation',
+            'Medicine',
+            'Melee Attack',
+            'Nature',
+            'Perception',
+            'Ranged Attack',
+            'Read Intent',
+            'Reflexes',
+            'Resist Manipulation',
+            'Resist Poison',
+            'Slight of Hand',
+            'Social Knowledge',
+            'Stealth',
+            'Toughness'
+            
+        ];
+        
+        const toggleFivePtSkills = (skill) => {
+            if(fiveSkills.includes(skill))
+                {
+                    const skills = fiveSkills.filter(elem => elem != skill);
+                    this.setState({fiveSkills: skills});
+                }
+            else
+                {
+                    const skills = fiveSkills;
+                    skills.push(skill);
+                    this.setState({fiveSkills: skills});
+                }
+        }
+        
+        const toggleTenPtSkills = (skill) => {
+            if(tenSkills.includes(skill))
+                {
+                    const skills = tenSkills.filter(elem => elem != skill);
+                    this.setState({tenSkills: skills});
+                }
+            else
+                {
+                    const skills = tenSkills;
+                    skills.push(skill);
+                    this.setState({tenSkills: skills});
+                }
+        }
+        
+        const saveCharacter = () => {
+            
+        }
         
         return(
             <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
@@ -47,7 +111,10 @@ class NewCharacterModal extends Component {
                     <div className='modal-option'>
                         <span>Character Name: </span>
                         <div className='modal-input'>
-                            <input/>
+                            <input
+                                value={name}
+                                onChange={(e) => {this.setState({name: e.target.value})}}
+                            />
                         </div>
                     </div>
                     <div className='modal-option'>
@@ -71,8 +138,12 @@ class NewCharacterModal extends Component {
                     <div className='modal-option'>
                         <span>Character Ancestry: </span>
                         <div className='modal-input'>
-                            <select>
-                                <option value='dwarf' selected>Dwarf</option>
+                            <select 
+                                value={ancestry}
+                                onChange={e => this.setState({ancestry: event.target.value})}
+                            >
+                                <option selected>-- Select an Ancestry --</option>
+                                <option value='dwarf'>Dwarf</option>
                                 <option value='elf'>Elf</option>
                                 <option value='faeling'>Faeling</option>
                                 <option value='goblin'>Goblin</option>
@@ -83,8 +154,12 @@ class NewCharacterModal extends Component {
                     <div className='modal-option'>
                         <span>Level One Class: </span>
                         <div className='modal-input'>
-                            <select>
-                                <option value='fighter' selected>Fighter</option>
+                            <select 
+                                value={classOne}
+                                onChange={e => this.setState({classOne: event.target.value})}
+                            >
+                                <option selected>-- Select a Class --</option>
+                                <option value='fighter'>Fighter</option>
                                 <option value='mage'>Mage</option>
                                 <option value='nomad'>Nomad</option>
                                 <option value='priest'>Priest</option>
@@ -96,8 +171,12 @@ class NewCharacterModal extends Component {
                     <div className={`modal-option ${level >= 3 ? '' : 'hide'}`}>
                         <span>Level Three Class: </span>
                         <div className='modal-input'>
-                            <select>
-                                <option value='alchemist' selected>Alchemist</option>
+                            <select 
+                                value={classTwo}
+                                onChange={e => this.setState({classTwo: event.target.value})}
+                            >
+                                <option selected>-- Select a Class --</option>
+                                <option value='alchemist'>Alchemist</option>
                                 <option value='armsman'>Armsman</option>
                                 <option value='barbarian'>Barbarian</option>
                                 <option value='bard'>Bard</option>
@@ -117,16 +196,45 @@ class NewCharacterModal extends Component {
                     <div className='modal-option-multi-select'>
                         <div className='skill-dropdown-button' onClick={() => this.setState({fiveSkillsOpen: !fiveSkillsOpen}) }>
                             <h3>5 Point Skills</h3>
-                            <span className='arrow'>&#8249;</span>
+                            <span className={`arrow ${fiveSkillsOpen ? 'flip' : ''}`}>&#8249;</span>
                         </div>
                         <div className={`skills-list ${fiveSkillsOpen ? '' : 'hide'}`}>
-                            <div className='skill'>Animal Handling</div>
+                            {
+                                characterSkills.map((skill) =>
+                                    <div 
+                                        className={`skill ${fiveSkills.includes(skill) ? 'selected' : ''}`} 
+                                        onClick={() => toggleFivePtSkills(skill)}
+                                    >
+                                        {skill}
+                                    </div>
+                                )
+                            }
                         </div>
                     </div>
                     <div className='modal-option-multi-select'>
-                        <div className='skill-dropdown-button'>
+                        <div className='skill-dropdown-button' onClick={() => this.setState({tenSkillsOpen: !tenSkillsOpen}) }>
                             <h3>10 Point Skills</h3>
-                            <span className='arrow'>&#8249;</span>
+                            <span className={`arrow ${tenSkillsOpen ? 'flip' : ''}`}>&#8249;</span>
+                        </div>
+                        <div className={`skills-list ${tenSkillsOpen ? '' : 'hide'}`}>
+                            {
+                                characterSkills.map((skill) =>
+                                    <div 
+                                        className={`skill ${tenSkills.includes(skill) ? 'selected' : ''}`} 
+                                        onClick={() => toggleTenPtSkills(skill)}
+                                    >
+                                        {skill}
+                                    </div>
+                                )
+                            }
+                        </div>
+                    </div>
+                    <div className='horizontal-buttons'>
+                        <div className='button' onClick={() => createDeck(level, ancestry, classOne, classOne, classThree, fiveSkills, tenSkills)}>
+                            Save
+                        </div>
+                        <div className='button' onClick={() => close()}>
+                            Cancel
                         </div>
                     </div>
                 </div>
@@ -135,4 +243,7 @@ class NewCharacterModal extends Component {
     }
 }
 
-export default NewCharacterModal;
+export default connect(null,{
+    createDeck: createDeck,
+    setName: setName
+})(NewCharacterModal);

@@ -44,17 +44,48 @@
                 .arrow {
                     transform: rotate(-90deg);
                     font-size: 30px;
+                    
+                    &.flip {
+                        transform: rotate(90deg);
+                        margin-right: 20px;
+                    }
                 }
             }
             
             .skills-list {
                 background-color: $light;
                 color: $dark;
-                padding: 5px;
                 
                 &.hide {
                     display: none;
                 }
+                
+                .skill {
+                    text-transform: capitalize;
+                    padding: 5px 5px;
+                    
+                    &.selected {
+                        background: $highlight;
+                    }
+                }
+            }
+        }
+    .horizontal-buttons{
+        display: flex;
+        flex-direction: row;
+    
+        .button {
+            margin-right: 10px;
+            text-align: center;
+            width: 60px;
+            padding: 5px;
+            border: 2px solid $light;
+            border-radius: 3px;
+            
+            &:active{
+                background-color: $light;
+                color: $dark;
             }
         }
     }
+}

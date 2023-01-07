@@ -11,7 +11,7 @@
     height: 600px;
     border-radius: 10px;
     transform: translateX(-50%);
-    border: 2px solid $light;
+    border: 2px solid $dark;
     color: $light;
     flex-direction: column;
     overflow-y: scroll;
@@ -44,10 +44,10 @@
     }
 
     &::-webkit-scrollbar-track {
-        background: #f1f1f1; 
+        background: $dark; 
     }
  
     &::-webkit-scrollbar-thumb {
-        background: #242528; 
+        background: $light; 
     }
 }
