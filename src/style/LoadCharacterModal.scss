@@ -1,0 +1,26 @@
+@import 'variables';
+
+.load-deck-wrapper {
+    background: $light;
+    color: $dark;
+    border-radius: 5px;
+    
+    .load-deck {
+        padding: 7px;
+        h3 {
+            display: inline;
+        }
+        .button {
+            display: inline;
+            background: $dark;
+            color: $light;
+            padding: 5px 10px;
+            border-radius: 3px;
+            margin-left: 5px;
+            
+            &.delete {
+                background-color: $deleteRed;
+            }
+        }
+    }
+}

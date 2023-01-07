@@ -5,13 +5,14 @@
     background-color: $dark;
     z-index: 3;
     left: 50%;
-    top: 150px;
+    top: 140px;
     position: absolute;
     width: 500px;
     height: 600px;
     border-radius: 10px;
     transform: translateX(-50%);
     border: 2px solid $dark;
+    box-shadow: 0 0 0 3px $light;
     color: $light;
     flex-direction: column;
     overflow-y: scroll;

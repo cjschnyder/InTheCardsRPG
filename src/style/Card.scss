@@ -1,0 +1,54 @@
+@import 'variables';
+
+.card-wrapper {
+    display: flex;
+    flex-direction: column;
+    background-color: $dark;
+    width: 300px;
+    min-width: 300px;
+    height: 400px;
+    border-radius: 10px;
+    border: 2px solid $dark;
+    color: $light;
+    margin-right: 10px;
+    margin-top: 10px;
+    
+    .card-title, .card-action {
+        width: 100%;
+        margin-top: 5px;
+        text-align: center;
+    }
+    
+    .card-title {
+        font-size: 18px;
+        font-weight: bold;
+    }
+    
+    .card-description {
+        background-color: $light;
+        color: $dark;
+        margin: 15px 5px;
+        padding: 5px;
+        border-radius: 3px;
+        flex-grow: 1;
+    }
+    
+    .card-actions {
+        display:flex;
+        flex-direction: row;
+        
+        .action {
+            border: 2px solid $light;
+            border-radius: 3px;
+            padding: 5px;
+            flex-grow: 1;
+            text-align: center;
+            margin: 5px;
+            
+            &:active {
+                color: $dark;
+                background-color: $light;
+            }
+        }
+    }
+}

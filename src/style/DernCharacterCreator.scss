@@ -40,6 +40,51 @@
             }      
         }
     }
+    main {
+        .card-options-menu {
+            display: flex;
+            flex-direction: row;
+            height: 40px;
+            
+            .card-option {
+                flex-grow: 1;
+                text-align: center;
+                border: 2px solid $dark;
+                border-radius: 3px;
+                margin: 3px;
+                padding-top: 6px;
+                font-weight: bold;
+                text-transform: capitalize;
+                
+                &.selected {
+                    background: $highlight
+                }
+            }
+        }
+        
+        .card-display {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            margin-top: 10px;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        
+        .reset-deck {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            padding: 20px 10px;
+            border: 2px solid $light;
+            color: $light;
+            font-weight: bold;
+            text-align: center;
+            border-radius: 10px;
+            background: $deleteRed;
+        }
+    }
 }
 
 @media only screen and (max-width: 600px) {

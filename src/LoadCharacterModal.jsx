@@ -1,5 +1,8 @@
 import {Component} from 'react';
+import { connect } from 'react-redux';
+import {loadDeck} from './store/actions'
 import './style/ModalStructure.scss'
+import './style/LoadCharacterModal.scss'
 
 class LoadCharacterModal extends Component {
     constructor(props) {
@@ -13,6 +16,7 @@ class LoadCharacterModal extends Component {
         const {
             isOpen,
             close,
+            loadDeck
         } = this.props
         const {
             cards
@@ -27,10 +31,40 @@ class LoadCharacterModal extends Component {
                             <span>X</span>
                         </div>
                     </div>
+                    <div className='load-deck-wrapper'>
+                            {
+                                
+                                Object.keys(JSON.parse(JSON.stringify(localStorage))).filter(deck => !deck.includes('persist')).map(deck =>
+                                    <div className='load-deck'>
+                                        <h3>{deck}:</h3>
+                                        <div 
+                                            className='button' 
+                                            onClick={() => {
+                                                loadDeck(JSON.parse(localStorage.getItem(deck)), deck);
+                                                close();
+                                            }}
+                                        >
+                                            Load
+                                        </div>
+                                        <div 
+                                            className='button delete' 
+                                            onClick={() => {
+                                                localStorage.removeItem(deck);
+                                                close();
+                                            }}
+                                        >
+                                            Delete
+                                        </div>
+                                    </div>
+                                )
+                            }
+                        </div>
                 </div>
             </div>
         )
     }
 }
 
-export default LoadCharacterModal;
+export default connect(null, {
+    loadDeck: loadDeck
+})(LoadCharacterModal);

@@ -1,4 +1,7 @@
 import { Component } from 'react';
+import { connect } from 'react-redux';
+import Card from './Card';
+import {resetDeck} from './store/actions'
 import NewCharacterModal from './NewCharacterModal';
 import LoadCharacterModal from './LoadCharacterModal';
 import './style/DernCharacterCreator.scss'
@@ -8,14 +11,26 @@ class DernCharacterCreator extends Component {
         super(props);
         this.state = {
             showNewCharacter: false,
-            showLoadCharacter: false
+            showLoadCharacter: false,
+            selectedCardView: 0,
+            cardViewOrder: ['deck', 'hand', 'discard', 'burn']
         }
     }
     
     render(){
         const {
+            deck,
+            hand,
+            discard,
+            burn,
+            resetDeck
+        } = this.props
+        
+        const {
             showNewCharacter,
-            showLoadCharacter
+            showLoadCharacter,
+            selectedCardView,
+            cardViewOrder
         } = this.state
         
         const toggleNewCharacterModal = () => {
@@ -41,6 +56,50 @@ class DernCharacterCreator extends Component {
                         </div>
                     </div>
                 </header>
+                <main>
+                    <div className='card-options-menu'>
+                        {
+                            cardViewOrder.map((item, index) => 
+                                <div 
+                                    className={`card-option ${selectedCardView === index && 'selected'}`}
+                                    onClick={() => this.setState({selectedCardView: index})}
+                                    key={item}
+                                >
+                                    <span>{item}</span>
+                                </div>             
+                            )
+                        }
+                    </div>
+                    <div className='card-display'>
+                        {
+                            cardViewOrder[selectedCardView] === 'deck' ?
+                                deck.map(card => 
+                                    <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
+                                )
+                            :
+                                cardViewOrder[selectedCardView] === 'hand' ?
+                                    hand.map(card => 
+                                        <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
+                                    )
+                                :
+                                    cardViewOrder[selectedCardView] === 'discard' ?
+                                        discard.map(card => 
+                                            <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
+                                        )
+                                    :
+                                        burn.map(card => 
+                                            <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
+                                        )
+                            
+                        }
+                    </div>
+                    <div
+                        className='reset-deck'
+                        onClick={() => resetDeck()}
+                    >
+                        Reset Deck
+                    </div>
+                </main>
                 <div>
                     <NewCharacterModal
                         isOpen={showNewCharacter}
@@ -56,4 +115,15 @@ class DernCharacterCreator extends Component {
     }
 }
 
-export default DernCharacterCreator;
+const mapStateToProps = (state) => {
+    return {
+        deck: state.deck,
+        hand: state.hand,
+        discard: state.discard,
+        burn: state.burn
+    };
+};
+
+export default connect(mapStateToProps, {
+    resetDeck: resetDeck
+})(DernCharacterCreator);

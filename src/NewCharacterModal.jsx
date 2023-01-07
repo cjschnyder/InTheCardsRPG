@@ -26,6 +26,8 @@ class NewCharacterModal extends Component {
             isOpen,
             close,
             createDeck,
+            setName,
+            deck
         } = this.props
         const {
             name,
@@ -79,7 +81,7 @@ class NewCharacterModal extends Component {
                     skills.push(skill);
                     this.setState({fiveSkills: skills});
                 }
-        }
+        };
         
         const toggleTenPtSkills = (skill) => {
             if(tenSkills.includes(skill))
@@ -93,11 +95,29 @@ class NewCharacterModal extends Component {
                     skills.push(skill);
                     this.setState({tenSkills: skills});
                 }
+        };
+        
+        const clearState = () => {
+            this.setState({
+                name: "",
+                level: 1,
+                ancestry: "",
+                classOne: "",
+                classTwo: "",
+                classThree: "",
+                fiveSkills: [],
+                fiveSkillsOpen: false,
+                tenSkills: [],
+                tenSkillsOpen: false
+            })
         }
         
         const saveCharacter = () => {
-            
-        }
+            setName(name);
+            createDeck(level, ancestry, classOne, classOne, classThree, fiveSkills, tenSkills);
+            clearState();
+            close();
+        };
         
         return(
             <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
@@ -204,6 +224,7 @@ class NewCharacterModal extends Component {
                                     <div 
                                         className={`skill ${fiveSkills.includes(skill) ? 'selected' : ''}`} 
                                         onClick={() => toggleFivePtSkills(skill)}
+                                        key={`5${skill}`}
                                     >
                                         {skill}
                                     </div>
@@ -222,6 +243,7 @@ class NewCharacterModal extends Component {
                                     <div 
                                         className={`skill ${tenSkills.includes(skill) ? 'selected' : ''}`} 
                                         onClick={() => toggleTenPtSkills(skill)}
+                                        key={`10${skill}`}
                                     >
                                         {skill}
                                     </div>
@@ -230,7 +252,7 @@ class NewCharacterModal extends Component {
                         </div>
                     </div>
                     <div className='horizontal-buttons'>
-                        <div className='button' onClick={() => createDeck(level, ancestry, classOne, classOne, classThree, fiveSkills, tenSkills)}>
+                        <div className='button' onClick={() => saveCharacter()}>
                             Save
                         </div>
                         <div className='button' onClick={() => close()}>
@@ -243,7 +265,13 @@ class NewCharacterModal extends Component {
     }
 }
 
-export default connect(null,{
+const mapStateToProps = (state) => {
+    return {
+        deck: state.deck
+    };
+};
+
+export default connect(mapStateToProps,{
     createDeck: createDeck,
     setName: setName
 })(NewCharacterModal);
