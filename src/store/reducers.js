@@ -5,24 +5,76 @@ const initialState = {
     deck: [],
     discard: [],
     hand: [],
-    name: ""
+    name: "",
+    ancestry: "",
+    level: 1,
+    classOne: "",
+    classTwo: "",
+    classThree: "",
+    characterFiveSkills: [],
+    characterTenSkills: []
 };
 
 const rootReducer = (state = initialState, action) => {
     switch (action.type) {
-        case 'SET_NAME':
+        case 'SAVE_ATTRIBUTES':
+            localStorage.setItem(
+                state.name, 
+                JSON.stringify({
+                        name: state.name, 
+                        level: state.level,
+                        ancestry: state.ancestry,
+                        classOne: state.classOne, 
+                        classTwo: state.classTwo, 
+                        classThree: state.classThree, 
+                        characterFiveSkills: state.characterFiveSkills, 
+                        characterTenSkills: state.characterTenSkills, 
+                        deck: state.deck
+                })
+            );
             return {
-                ...state,
-                name: action.name
+                state
             }
         case 'CREATE_DECK':
-            const ancestryCards = cards.allAncestryCards[action.ancestry].filter(item => item.level <= parseInt(action.level));
+            const ancestryCards = action.ancestry ?
+                  cards.allAncestryCards[action.ancestry].filter(item => item.level <= parseInt(action.level))
+            :
+                [];
+            const classOneCards = action.classOne ? 
+                cards.allClassOneCards[action.classOne].filter(item => item.level <= parseInt(action.level))
+            :
+                [];
+            const classTwoCards = action.classTwo ?
+                  cards.allClassTwoCards[action.classTwo].filter(item => item.level <= parseInt(action.level))
+            :
+                [];
+            const classThreeCards = action.classThree ?
+                  cards.allClassTwoCards[action.classTwo].filter(item => item.level <= parseInt(action.level))
+            :
+                [];
+            const fiveSkillCards = [];
+            action.fiveSkills.map(skill => fiveSkillCards.push(cards.allFiveSkillCards[skill]));
+            const tenSkillCards = [];
+            action.tenSkills.map(skill => tenSkillCards.push(cards.allTenSkillCards[skill]));
             const fullDeck = [
-                ...ancestryCards
+                ...ancestryCards,
+                ...classOneCards,
+                ...classTwoCards,
+                ...classThreeCards,
+                ...fiveSkillCards,
+                ...tenSkillCards
             ];
-            localStorage.setItem(state.name, JSON.stringify(fullDeck));
+                
             return {
                 ...state,
+                name: action.name,
+                level: action.level,
+                ancestry: action.ancestry,
+                classOne: action.classOne,
+                classTwo: action.classTwo,
+                classThree: action.classThree,
+                characterFiveSkills: action.fiveSkills,
+                characterTenSkills: action.tenSkills,
                 deck: fullDeck
             }
         case 'TRANSFER_HAND':
@@ -90,6 +142,13 @@ const rootReducer = (state = initialState, action) => {
                 discard: initialState.deck,
                 burn: initialState.burn,
                 name: action.name,
+                level: action.level,
+                ancestry: action.ancestry,
+                classOne: action.classOne,
+                classTwo: action.classTwo,
+                classThree: action.classThree,
+                characterFiveSkills: action.fiveSkills,
+                characterTenSkills: action.tenSkills,
                 deck: action.deck
             }
         default:

@@ -1,9 +1,9 @@
-export function createDeck(level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills) {
-  return { type: 'CREATE_DECK', level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills};
+export function saveAttributes() {
+  return { type: 'SAVE_ATTRIBUTES'};
 }
 
-export function setName(name) {
-  return { type: 'SET_NAME', name};
+export function createDeck(name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills) {
+  return { type: 'CREATE_DECK', name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills};
 }
 
 export function transferToHand(card) {
@@ -26,6 +26,6 @@ export function resetDeck() {
     return {type: 'RESET_DECK'};
 }
 
-export function loadDeck(deck, name) {
-    return {type: 'LOAD_DECK', deck, name};
+export function loadDeck(deck, name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills) {
+    return {type: 'LOAD_DECK', deck, name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills};
 }

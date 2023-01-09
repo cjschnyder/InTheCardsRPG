@@ -4,19 +4,19 @@ import {createDeck, saveAttributes} from './store/actions'
 import './style/ModalStructure.scss'
 import './style/CharacterModal.scss'
 
-class NewCharacterModal extends Component {
+class EditCharacterModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: "",
-            level: 1,
-            ancestry: "",
-            classOne: "",
-            classTwo: "",
-            classThree: "",
-            fiveSkills: [],
+            name: this.props.name,
+            level: this.props.level,
+            ancestry: this.props.ancestry,
+            classOne: this.props.classOne,
+            classTwo: this.props.classTwo,
+            classThree: this.props.classThree,
+            fiveSkills: this.props.characterFiveSkills,
             fiveSkillsOpen: false,
-            tenSkills: [],
+            tenSkills: this.props.characterTenSkills,
             tenSkillsOpen: false
         }
     }
@@ -96,32 +96,16 @@ class NewCharacterModal extends Component {
                 }
         };
         
-        const clearState = () => {
-            this.setState({
-                name: "",
-                level: 1,
-                ancestry: "",
-                classOne: "",
-                classTwo: "",
-                classThree: "",
-                fiveSkills: [],
-                fiveSkillsOpen: false,
-                tenSkills: [],
-                tenSkillsOpen: false
-            })
-        }
-        
         const saveCharacter = () => {
             createDeck(name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills);
             saveAttributes();
-            clearState();
             close();
         };
         
         return(
             <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
                 <div className='modal-title'>
-                    <h2>Create a New Character</h2>
+                    <h2>Edit Character</h2>
                     <div className='close-button' onClick={() => close()}>
                         <span>X</span>
                     </div>
@@ -264,7 +248,21 @@ class NewCharacterModal extends Component {
     }
 }
 
-export default connect(null,{
+const mapStateToProps = (state) => {
+    return {
+        name: state.name,
+        level: state.level,
+        ancestry: state.ancestry,
+        classOne: state.classOne, 
+        classTwo: state.classTwo, 
+        classThree: state.classThree, 
+        characterFiveSkills: state.characterFiveSkills, 
+        characterTenSkills: state.characterTenSkills
+        
+    };
+};
+
+export default connect(mapStateToProps,{
     createDeck: createDeck,
     saveAttributes: saveAttributes
-})(NewCharacterModal);
+})(EditCharacterModal);

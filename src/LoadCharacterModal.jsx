@@ -34,13 +34,24 @@ class LoadCharacterModal extends Component {
                     <div className='load-deck-wrapper'>
                             {
                                 
-                                Object.keys(JSON.parse(JSON.stringify(localStorage))).filter(deck => !deck.includes('persist')).map(deck =>
+                                Object.keys(JSON.parse(JSON.stringify(localStorage))).filter(deck => !deck.includes('persist')).map(character =>
                                     <div className='load-deck'>
-                                        <h3>{deck}:</h3>
+                                        <h3>{character}:</h3>
                                         <div 
                                             className='button' 
                                             onClick={() => {
-                                                loadDeck(JSON.parse(localStorage.getItem(deck)), deck);
+                                                const selectedCharacter = JSON.parse(localStorage.getItem(character))
+                                                loadDeck(
+                                                    selectedCharacter.deck,
+                                                    character,
+                                                    selectedCharacter.level,
+                                                    selectedCharacter.ancestry,
+                                                    selectedCharacter.classOne,
+                                                    selectedCharacter.classTwo,
+                                                    selectedCharacter.classThree,
+                                                    selectedCharacter.characterFiveSkills,
+                                                    selectedCharacter.characterTenSkills
+                                                );
                                                 close();
                                             }}
                                         >
@@ -49,8 +60,7 @@ class LoadCharacterModal extends Component {
                                         <div 
                                             className='button delete' 
                                             onClick={() => {
-                                                localStorage.removeItem(deck);
-                                                close();
+                                                localStorage.removeItem(character);
                                             }}
                                         >
                                             Delete

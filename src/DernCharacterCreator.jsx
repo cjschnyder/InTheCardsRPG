@@ -4,6 +4,7 @@ import Card from './Card';
 import {resetDeck} from './store/actions'
 import NewCharacterModal from './NewCharacterModal';
 import LoadCharacterModal from './LoadCharacterModal';
+import EditCharacterModal from './EditCharacterModal';
 import './style/DernCharacterCreator.scss'
 
 class DernCharacterCreator extends Component {
@@ -12,6 +13,7 @@ class DernCharacterCreator extends Component {
         this.state = {
             showNewCharacter: false,
             showLoadCharacter: false,
+            showEditCharacter: false,
             selectedCardView: 0,
             cardViewOrder: ['deck', 'hand', 'discard', 'burn']
         }
@@ -29,18 +31,27 @@ class DernCharacterCreator extends Component {
         const {
             showNewCharacter,
             showLoadCharacter,
+            showEditCharacter,
             selectedCardView,
             cardViewOrder
         } = this.state
         
         const toggleNewCharacterModal = () => {
             showLoadCharacter && this.setState({showLoadCharacter: false});
+            showEditCharacter && this.setState({showEditCharacter: false});
             this.setState({showNewCharacter: !showNewCharacter});
         }
         
         const toggleLoadCharacterModal = () => {
             showNewCharacter && this.setState({showNewCharacter: false});
+            showEditCharacter && this.setState({showEditCharacter: false});
             this.setState({showLoadCharacter: !showLoadCharacter});
+        }
+        
+        const toggleEditCharacterModal = () => {
+            showNewCharacter && this.setState({showNewCharacter: false});
+            showLoadCharacter && this.setState({showLoadCharacter: false});
+            this.setState({showEditCharacter: !showEditCharacter});
         }
         
         return (
@@ -108,6 +119,10 @@ class DernCharacterCreator extends Component {
                     <LoadCharacterModal 
                         isOpen={showLoadCharacter}
                         close={() => toggleLoadCharacterModal()}
+                    />
+                    <EditCharacterModal 
+                        isOpen={showEditCharacter}
+                        close={() => toggleEditCharacterModal()}
                     />
                 </div>
             </div>
