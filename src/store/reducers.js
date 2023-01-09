@@ -33,7 +33,7 @@ const rootReducer = (state = initialState, action) => {
                 })
             );
             return {
-                state
+                ...state
             }
         case 'CREATE_DECK':
             const ancestryCards = action.ancestry ?
