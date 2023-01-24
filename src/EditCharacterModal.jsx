@@ -21,6 +21,21 @@ class EditCharacterModal extends Component {
         }
     }
     
+    componentDidUpdate(prevProps){
+    if(prevProps !== this.props){
+        this.setState({
+            name: this.props.name,
+            level: this.props.level,
+            ancestry: this.props.ancestry,
+            classOne: this.props.classOne,
+            classTwo: this.props.classTwo,
+            classThree: this.props.classThree,
+            fiveSkills: this.props.characterFiveSkills,
+            tenSkills: this.props.characterTenSkills
+        });
+    }
+}
+    
     render(){
         const {
             isOpen,

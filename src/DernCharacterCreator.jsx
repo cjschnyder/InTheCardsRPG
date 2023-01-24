@@ -65,6 +65,9 @@ class DernCharacterCreator extends Component {
                         <div className="option" onClick={() => toggleLoadCharacterModal()}>
                             <span>Load Character</span>
                         </div>
+                        <div className="option" onClick={() => toggleEditCharacterModal()}>
+                            <span>Edit Character</span>
+                        </div>
                     </div>
                 </header>
                 <main>

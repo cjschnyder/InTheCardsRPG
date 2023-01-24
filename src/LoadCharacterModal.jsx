@@ -61,6 +61,7 @@ class LoadCharacterModal extends Component {
                                             className='button delete' 
                                             onClick={() => {
                                                 localStorage.removeItem(character);
+                                                close();
                                             }}
                                         >
                                             Delete

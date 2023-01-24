@@ -26,6 +26,9 @@ class Card extends Component {
                 <div className='card-action'>
                     <span>{cardInfo.action}</span>
                 </div>
+                <div className='card-action'>
+                    <span>{cardInfo.from + ' ' + cardInfo.level}</span>
+                </div>
                 <div className='card-description'>
                     <span>{cardInfo.description}</span>
                 </div>

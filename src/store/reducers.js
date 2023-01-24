@@ -4,6 +4,7 @@ const initialState = {
     burn: [],
     deck: [],
     discard: [],
+    handFull: false,
     hand: [],
     name: "",
     ancestry: "",
@@ -66,7 +67,9 @@ const rootReducer = (state = initialState, action) => {
             ];
                 
             return {
-                ...state,
+                burn: initialState.burn,
+                discard: initialState.discard,
+                hand: initialState.hand,
                 name: action.name,
                 level: action.level,
                 ancestry: action.ancestry,
