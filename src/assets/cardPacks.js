@@ -345,6 +345,78 @@ export const allClassOneCards = {
             from: 'socialite',
             level: 4
         },
+    ],
+    storyteller: [
+         {
+            cardName:'Aim',
+            action: 'Active',
+            description: 'The creature you currently control makes an attack with minor advantage',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Aim',
+            action: 'Active',
+            description: 'The creature you currently control makes an attack with minor advantage',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Deflect',
+            action: 'Triggered',
+            description: 'When a creature you control gets hit want an attack you can halve the damage.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Deflect',
+            action: 'Triggered',
+            description: 'When a creature you control gets hit want an attack you can halve the damage.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
+        {
+            cardName:'Ability Card',
+            action: 'Determined by Creature',
+            description: 'You can use an ability of the creature you\'re controlling.',
+            from: 'storyteller',
+            level: 1
+        },
     ]
 }
 
@@ -538,7 +610,7 @@ export const allClassTwoCards = {
             description: 'You and all allies within 4 yards of you gain +2 movement and +1 defense for a number of rounds equal to your Will. Additionally, while this effect is active you deal an extra +1d6 divine damage with any attack using “Magic School: Divine”.',
             from: 'faithful',
             level: 3
-        }
+        },
         {
             cardName:'Undeniable Faith',
             action: 'Active - Spell - Burn',

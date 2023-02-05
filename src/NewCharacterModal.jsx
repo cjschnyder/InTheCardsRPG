@@ -184,6 +184,7 @@ class NewCharacterModal extends Component {
                                 <option value='priest'>Priest</option>
                                 <option value='rogue'>Rogue</option>
                                 <option value='socialite'>Socialite</option>
+                                <option value='storyteller'>Storyteller</option>
                             </select>
                         </div>
                     </div>
