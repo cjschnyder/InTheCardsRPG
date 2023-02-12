@@ -75,11 +75,11 @@ class DernCharacterCreator extends Component {
                         {
                             cardViewOrder.map((item, index) => 
                                 <div 
-                                    className={`card-option ${selectedCardView === index && 'selected'}`}
+                                    className={`card-option ${selectedCardView === index ? 'selected' : ''}`}
                                     onClick={() => this.setState({selectedCardView: index})}
                                     key={item}
                                 >
-                                    <span>{item}</span>
+                                    <span>{`${item} (${this.props[item].length})`}</span>
                                 </div>             
                             )
                         }
