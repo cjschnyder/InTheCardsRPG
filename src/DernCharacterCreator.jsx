@@ -86,25 +86,9 @@ class DernCharacterCreator extends Component {
                     </div>
                     <div className='card-display'>
                         {
-                            cardViewOrder[selectedCardView] === 'deck' ?
-                                deck.map(card =>
-                                    card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                                )
-                            :
-                                cardViewOrder[selectedCardView] === 'hand' ?
-                                    hand.map(card => 
-                                        card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                                    )
-                                :
-                                    cardViewOrder[selectedCardView] === 'discard' ?
-                                        discard.map(card => 
-                                            card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                                        )
-                                    :
-                                        burn.map(card => 
-                                           card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                                        )
-                            
+                            this.props[cardViewOrder[selectedCardView]].map(card =>
+                                card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
+                            )
                         }
                     </div>
                     <div

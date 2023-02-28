@@ -77,7 +77,7 @@ export const allAncestryCards = {
         {
             cardName:'Glamor',
             action: 'Active - Burn - Spell',
-            description: 'You weave fae magic and can disguise yourself as another person, though not your voice, that is approximately your size. You can also keep your facial features and just change your outfit’s appearance. If you change your face the effect lasts for 1 hour and 1 minute. Any other changes last until midnight.',
+            description: 'You weave fae magic and can disguise yourself as another person, though not your voice, that is in your size category. You can also keep your facial features and just change your outfit’s appearance. If you change your face the effect lasts for 1 hour and 1 minute. Any other changes last until midnight.',
             from: 'faeling',
             level: 2
         }
@@ -179,7 +179,7 @@ export const allClassOneCards = {
         {
             cardName:'Magical Blast',
             action: 'Active - Spell - Burn',
-            description: 'In a 6 yard long, 2 yard wide line originating from you, all creatures must make a “Reflexes” skill roll against any of your “Magic School” skills. If they fail each target takes 3d6 + Int arcane damage. If they succeed they take half that.',
+            description: 'In a 6 yard long, 2 yard wide line originating from you, all creatures must make a “Reflexes” skill roll against any of your “Magic School” skills. If they fail each target takes 2d6 + Int arcane damage. If they succeed they take half that.',
             from: 'mage',
             level: 1
         },
@@ -193,7 +193,7 @@ export const allClassOneCards = {
         {
             cardName:'Magical Shards',
             action: 'Active - Spell - Burn',
-            description: 'In a 5 yard wide circle within 10 yards of you, all creatures must make a “Toughness” roll against any of your “Magic School” skills. If they fail they take 2d6 + Int arcane damage and have major disadvantage on their next attack. If they succeed they take half the damage. Finally, the affected area is difficult terrain for a number of rounds equal to your intelligence trait.',
+            description: 'In a 5 yard wide circle within 10 yards of you, all creatures must make a “Toughness” roll against any of your “Magic School” skills. If they fail they take 2d6 arcane damage and have major disadvantage on their next attack. If they succeed they take half the damage. Finally, the affected area is difficult terrain for a number of rounds equal to your intelligence trait.',
             from: 'mage',
             level: 1
         },
@@ -267,14 +267,14 @@ export const allClassOneCards = {
         {
             cardName:'Justice for the Wicked & Holy',
             action: 'Active - Burn',
-            description: 'Make an attack against an enemy within 10 yards, rolling “Magic School: Divine” against their defense. Roll 2d6 + your Will, if you succeed they take that as damage. Additionally, an ally within 10 yards is also healed for the base roll.',
+            description: 'Make an attack against an enemy within 10 yards, rolling “Magic School: Divine” against their defense. Roll 2d6 + your Will, if you succeed they take that as damage. Additionally, an ally within 10 yards is also healed for their healing rate.',
             from: 'priest',
             level: 1
         },
         {
             cardName:'Holy Flare',
             action: 'Active - Spell',
-            description: 'You hurl a bolt of divine energy at a single target within 10 yards. Roll “Magic School: Divine” for the attack, on a hit you deal 3d6 divine damage and attacks against the target have minor advantage until the end of your next turn.',
+            description: 'You hurl a bolt of divine energy at a single target within 10 yards. Roll “Magic School: Divine” for the attack, on a hit you deal 3d6 + your Will divine damage and attacks against the target have minor advantage until the end of your next turn.',
             from: 'priest',
             level: 4
         },
@@ -283,7 +283,7 @@ export const allClassOneCards = {
          {
             cardName:'Weak Points',
             action: 'Passive',
-            description: 'When you hit with an attack you have minor/major advantage on or with a small weapon, deal an extra +1d3 damage.',
+            description: 'When you hit with an attack you have minor/major advantage on, or with a small weapon, deal an extra +1d3 damage.',
             from: 'rogue',
             level: 1
         },
@@ -325,9 +325,9 @@ export const allClassOneCards = {
             level: 1
         },
         {
-            cardName:' Not My Kind of Show',
+            cardName:'Not My Kind of Show',
             action: 'Triggered',
-            description: 'When you take damage from an attack you can move up to half your speed without taking free attacks. Additionally if an ally is adjacent to your attacker they can use their Free Attack against them.',
+            description: 'After you are attacked you can move up to half your speed without taking free attacks. Additionally if an ally is adjacent to your attacker they can use their Free Attack against them.',
             from: 'socialite',
             level: 1
         },
@@ -522,14 +522,14 @@ export const allClassTwoCards = {
         {
             cardName:'Song of Heroism',
             action: 'Active',
-            description: 'For 1 minute, You and all allies within 6 yards that can hear you are immune to the frightened condition and have minor advantage on “Resist Manipulation” rolls. Keep the beat: Action > Attack | Attack > Move => Damage Resistance 3 for all creatures affected by the spell. You can also add your Charm to damage rolls.',
+            description: 'For 1 minute, You and all allies within 6 yards that can hear you are immune to the frightened condition and have minor advantage on “Resist Manipulation” rolls. Keep the beat: Action > Attack | Attack > Move => You can also add your Charm to your damage rolls and the damage rolls of  allies affected by the song.',
             from: 'bard',
             level: 3
         },
         {
             cardName:'Song of Sorrow',
             action: 'Active',
-            description: 'For 1 minute, all enemies within 6 yards that can hear you are slowed and make attacks with minor disadvantage. At the end of their turn they can roll “Resist Manipulation” against your “Magic School: Charm”, if they succeed then they are no longer affected by the song. Keep the beat: Action > Move | Action > Defend => Affected enemies deal half damage (rounded down).',
+            description: 'For 1 minute, all enemies within 6 yards that can hear you are slowed and make attacks with minor disadvantage. At the end of their turn they can roll “Resist Manipulation” against your “Magic School: Charm”, if they succeed then they are no longer affected by the song. Keep the beat: Action > Move | Action > Defend => Affected enemies are fatigued.',
             from: 'bard',
             level: 5
         }
@@ -768,13 +768,6 @@ export const allFiveSkillCards = {
         from: 'athletics',
         level: 5
     },
-    history: {
-        cardName:'Doomed to Repeat it',
-        action: 'Triggered',
-        description: 'If an enemy that attacked you last round or this round attacks you again, they roll their next attack with minor disadvantage.',
-        from: 'history',
-        level: 5
-    },
     magic_knowledge: {
         cardName:'Identify Item',
         action: 'Active - Spell',
@@ -888,9 +881,9 @@ export const allFiveSkillCards = {
         level: 5
     },
     toughness: {
-        cardName:'Bulwark',
-        action: 'Triggered',
-        description: 'When you take the “Defense” action you also take half damage.',
+        cardName:'Rooted',
+        action: 'Passive',
+        description: 'If you didn’t move on your previous turn you can’t be knocked prone until you take the move action.',
         from: 'toughness',
         level: 5
     }
@@ -900,14 +893,14 @@ export const allTenSkillCards = {
     animal_handling: {
         cardName:'Call Steed',
         action: 'Active - Burn',
-        description: 'You gain the trust of a local animal of riding size, one size larger than the caster. They stick with you until midnight. If combat starts they will run away.',
+        description: 'You gain the trust of a local animal of riding size, one size larger than the caster. They stick with you until midnight.  If combat starts they will run away until the combat is over.',
         from: 'animal handling',
         level: 10
     },
     appraise: {
-        cardName:'',
-        action: '',
-        description: '',
+        cardName:'Trade In Value',
+        action: 'Triggered - Burn',
+        description: 'When you would discard or burn a card after use you can instead place this card in the burn pile and keep the triggering card in your deck or hand.',
     },
     athletics: {
         cardName:'Second Wind',
@@ -917,14 +910,9 @@ export const allTenSkillCards = {
         level: 10
     },
     history: {
-        cardName:'',
-        action: '',
-        description: ''
-    },
-    magic_knowledge: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Doomed to Repeat it',
+        action: 'Triggered',
+        description: 'If an enemy that attacked you last round or this round attacks you again, they roll their attack with minor disadvantage.'
     },
     magic_school_arcane: {
         cardName:'Arcane Displacement',
@@ -948,14 +936,18 @@ export const allTenSkillCards = {
         level: 10
     },
     magic_school_elemental: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Lightning Strike',
+        action: 'Active - Spell - Burn',
+        description: 'You call lighting from the sky even on a clear day. You target one creature that you can see within 10 yards of you and roll “Magic School: Elemental” Against their “Reflexes”. On a success you deal 4d6 damage and the lightning jumps to another target within 4 yards where the spell repeats but deals one less d6 on each successive jump. If you fail they take half damage and the spell ends.',
+        from: 'magic school: elemental',
+        level: 10
     },
     manipulation: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Words of Power',
+        action: 'Active - Spell',
+        description: 'Choose a target within 10 yards that can hear and understand you. Roll a “Resist Manipulation” against your “Manipulation”. If You succeed you can inflict one of the following conditions for 1 minute or until they resolve the condition. I.E standing up from prone: Prone, Dazed, Slowed, Frightened',
+        from: 'manipulation',
+        level: 10
     },
     medicine: {
         cardName:'Med Packs',
@@ -972,29 +964,39 @@ export const allTenSkillCards = {
         level: 10
     },
     nature: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Sustenance from the Earth',
+        action: 'Active - Spell',
+        description: 'You find a calm spot in nature and begin to meditate. After 10 minutes you connect with the earth, revitalizing yourself. You heal your healing rate.',
+        from: 'nature',
+        level: 10
     },
     perception: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'See Invisibility',
+        action: 'Active - Spell',
+        description: 'For the next hour you can see creatures and objects that are invisible. ',
+        from: 'perception',
+        level: 10
     },
     ranged_attack: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Pinning Shot',
+        action: 'Triggered',
+        description: 'When you hit with a ranged attack you cause the target of the attack to be immobilized for 1 round.',
+        from: 'ranged attack',
+        level: 10
     },
     read_intent: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Compel Truth',
+        action: 'Active - Spell',
+        description: 'You ask a creature that can hear and understand you a question. They roll a “Resist Manipulation” against your “Read Intent” If they fail they have to answer your question truthfully.',
+        from: 'read intent',
+        level: 10
     },
     reflexes: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Get Down!',
+        action: 'Triggered',
+        description: 'When you make a “Reflex” roll, you can take half the damage if you fail or take no damage if you succeed. Additionally, an adjacent ally can benefit from this card though as part of the triggered effect you knock them prone as well.',
+        from: 'reflexes',
+        level: 10
     },
     resist_manipulation: {
         cardName:'Mind Over Matter',
@@ -1004,28 +1006,38 @@ export const allTenSkillCards = {
         level: 10
     },
     resist_poison: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Antitoxin Blood ',
+        action: 'Active',
+        description: 'If you are adjacent to an ally that is suffering from major or minor poison, you can take 1d3 damage to get rid of the poison status.',
+        from: 'resist poison',
+        level: 10
     },
     slight_of_hand: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Butterfingers',
+        action: 'Active',
+        description: 'Target an adjacent creature holding a weapon, they roll “Reflexes” or “Athletics” against your “Sleight of Hand”. If you succeed, you take their weapon from them. If the creature is 2 sizes larger than you or more, you instead knock the weapon 1d6 yards away in a direction of your choice.',
+        from: 'sleight of hand',
+        level: 10
     },
     social_knowledge: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Polyglot',
+        action: 'Active',
+        description: 'For an hour you can understand all languages written and spoken.',
+        from: 'social knowledge',
+        level: 10
     },
     stealth: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Startle',
+        action: 'Triggered',
+        description: '',
+        from: 'When you break stealth anyone within 2 yards of you is frightened of you for 1 round.',
+        level: 10
     },
     toughness: {
-        cardName:'',
-        action: '',
-        description: ''
+        cardName:'Bulwark',
+        action: 'Triggered',
+        description: 'When you take the “Defense” action you also take half damage and attacks against you trigger your Free Attack.',
+        from: 'toughness',
+        level: 10
     }
 };
