@@ -1,8 +1,8 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
-import {loadDeck} from './store/actions'
-import './style/ModalStructure.scss'
-import './style/LoadCharacterModal.scss'
+import {loadDeck} from '../store/actions'
+import '../style/ModalStructure.scss'
+import '../style/LoadCharacterModal.scss'
 
 class LoadCharacterModal extends Component {
     constructor(props) {

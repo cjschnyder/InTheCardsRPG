@@ -1,10 +1,10 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import Card from './Card';
-import {resetDeck} from './store/actions'
-import NewCharacterModal from './NewCharacterModal';
-import LoadCharacterModal from './LoadCharacterModal';
-import EditCharacterModal from './EditCharacterModal';
+import NewCharacterModal from './characterOptionsModals/NewCharacterModal';
+import LoadCharacterModal from './characterOptionsModals/LoadCharacterModal';
+import EditCharacterModal from './characterOptionsModals/EditCharacterModal';
+import CardHandler from './cardHandler/CardHandler';
+import CharacterSheet from './characterSheet/CharacterSheet';
 import './style/DernCharacterCreator.scss'
 
 class DernCharacterCreator extends Component {
@@ -14,48 +14,72 @@ class DernCharacterCreator extends Component {
             showNewCharacter: false,
             showLoadCharacter: false,
             showEditCharacter: false,
-            selectedCardView: 0,
-            cardViewOrder: ['deck', 'hand', 'discard', 'burn']
+            characterSheet: true,
+            cardHandler:false,
+            inventory: false,
         }
     }
     
     render(){
         const {
-            deck,
-            hand,
-            discard,
-            burn,
-            resetDeck
-        } = this.props
-        
-        const {
             showNewCharacter,
             showLoadCharacter,
             showEditCharacter,
-            selectedCardView,
-            cardViewOrder
+            characterSheet,
+            cardHandler,
+            inventory,
         } = this.state
         
         const toggleNewCharacterModal = () => {
-            showLoadCharacter && this.setState({showLoadCharacter: false});
-            showEditCharacter && this.setState({showEditCharacter: false});
-            this.setState({showNewCharacter: !showNewCharacter});
+            this.setState({
+                showNewCharacter: !showNewCharacter,
+                showLoadCharacter: false,
+                showEditCharacter: false
+            });
         }
         
         const toggleLoadCharacterModal = () => {
-            showNewCharacter && this.setState({showNewCharacter: false});
-            showEditCharacter && this.setState({showEditCharacter: false});
-            this.setState({showLoadCharacter: !showLoadCharacter});
+            this.setState({
+                showLoadCharacter: !showLoadCharacter,
+                showNewCharacter: false,
+                showEditCharacter: false
+            });
         }
         
         const toggleEditCharacterModal = () => {
-            showNewCharacter && this.setState({showNewCharacter: false});
-            showLoadCharacter && this.setState({showLoadCharacter: false});
-            this.setState({showEditCharacter: !showEditCharacter});
+             this.setState({
+                showEditCharacter: !showEditCharacter,
+                showNewCharacter: false,
+                showLoadCharacter: false
+            });
+        }
+        
+        const selectCharacterSheet = () => {
+            !characterSheet && this.setState({
+                characterSheet: true,
+                cardHandler: false,
+                inventory: false,
+            })
+        }
+        
+        const selectCardHandler = () => {
+            !cardHandler && this.setState({
+                characterSheet: false,
+                cardHandler: true,
+                inventory: false,
+            })
+        }
+        
+        const selectInventory = () => {
+            !inventory && this.setState({
+                characterSheet: false,
+                cardHandler: false,
+                inventory: true,
+            })
         }
         
         return (
-            <div id="dernCharacterCreator">
+            <div id="dern-character-creator">
                <header>
                     <h1 className="title">Let Me Handle Your Deck</h1>
                     <div className="character-menu">
@@ -70,34 +94,22 @@ class DernCharacterCreator extends Component {
                         </div>
                     </div>
                 </header>
-                <main>
-                    <div className='card-options-menu'>
-                        {
-                            cardViewOrder.map((item, index) => 
-                                <div 
-                                    className={`card-option ${selectedCardView === index ? 'selected' : ''}`}
-                                    onClick={() => this.setState({selectedCardView: index})}
-                                    key={item}
-                                >
-                                    <span>{`${item} (${this.props[item].length})`}</span>
-                                </div>             
-                            )
-                        }
-                    </div>
-                    <div className='card-display'>
-                        {
-                            this.props[cardViewOrder[selectedCardView]].map(card =>
-                                card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                            )
-                        }
-                    </div>
-                    <div
-                        className='reset-deck'
-                        onClick={() => resetDeck()}
+                <div id='view-options-menu'>
+                    <div 
+                        className={`view-options-button ${characterSheet && 'selected'}`}
+                        onClick={() => selectCharacterSheet()}
                     >
-                        Reset Deck
+                        <span>Character Sheet</span>
                     </div>
-                </main>
+                    <div 
+                        className={`view-options-button ${cardHandler && 'selected'}`}
+                        onClick={() => selectCardHandler()}
+                    >
+                        <span>Card Handler</span>
+                    </div>
+                </div>
+                {cardHandler && <CardHandler />}
+                {characterSheet && <CharacterSheet />}
                 <div>
                     <NewCharacterModal
                         isOpen={showNewCharacter}
@@ -117,15 +129,4 @@ class DernCharacterCreator extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        deck: state.deck,
-        hand: state.hand,
-        discard: state.discard,
-        burn: state.burn
-    };
-};
-
-export default connect(mapStateToProps, {
-    resetDeck: resetDeck
-})(DernCharacterCreator);
+export default DernCharacterCreator;

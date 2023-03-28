@@ -1,8 +1,8 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
-import {createDeck, saveAttributes} from './store/actions'
-import './style/ModalStructure.scss'
-import './style/CharacterModal.scss'
+import {createDeck, saveAttributes} from '../store/actions'
+import '../style/ModalStructure.scss'
+import '../style/CharacterModal.scss'
 
 class NewCharacterModal extends Component {
     constructor(props) {

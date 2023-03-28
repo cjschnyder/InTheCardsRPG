@@ -785,7 +785,7 @@ export const allFiveSkillCards = {
     magic_school_creation: {
         cardName:'Basic Illusion',
         action: 'Active - Spell',
-        description: 'For the next 10 minutes you conjure an illusion within 10 yards of yourself. The illusion can take up an area of no larger than 2 yards in any dimension. If a creature comes within 3 yards of your illusion they make a “perception” roll against your “magic school: creation” roll. If they fail they don’t notice the illusion unless they move through it. If they succeed they see through the illusion.',
+        description: 'For the next 10 minutes you conjure an illusion within 10 yards of yourself. The illusion can take up an area of no larger than 3 yards in any dimension. If a creature comes within 3 yards of your illusion they make a “perception” roll against your “magic school: creation” roll. If they fail they don’t notice the illusion unless they move through it. If they succeed they see through the illusion.',
         from: 'magic school: creation',
         level: 5
     },
@@ -924,8 +924,7 @@ export const allTenSkillCards = {
     magic_school_creation: {
         cardName:'Conjure Object',
         action: 'Active - Spell',
-        description: 'You materialize an object out of thin air at your feet or in your hand. It is semi-translucent and has a dim purple glow to it. It can be no larger than 1 yard in any dimension. If the object has anything intricate involved, i.e. a clock or lamp, you must have some understanding on how it works. The object lasts 10 minutes.',
-        from: 'magic school: creation',
+        description: 'You materialize an object out of thin air at your feet or in your hand. It is semi-translucent and has a dim purple glow to it. It can be no larger than size 1. If the object has anything intricate involved, i.e. a clock or lamp, you must have a solid  understanding on how it works. The object lasts 10 minutes.',
         level: 10
     },
     magic_school_divine: {

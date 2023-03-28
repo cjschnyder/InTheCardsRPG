@@ -1,6 +1,6 @@
 @import 'variables';
 
-#dernCharacterCreator {
+#dern-character-creator {
     color: $dark;
 
     header {
@@ -38,6 +38,23 @@
                     padding-top: 17px;
                 }
             }      
+        }
+    }
+    #view-options-menu {
+        display: flex;
+        flex-direction: row;
+        height: 40px;
+        
+        .view-options-button {
+            flex-grow: 1;
+            text-align: center;
+            margin: 3px;
+            padding-top: 6px;
+            font-weight: bold;
+
+            &.selected {
+                background: $highlight
+            }
         }
     }
     main {
