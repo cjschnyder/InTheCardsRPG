@@ -23,9 +23,6 @@ class CardHandler extends Component {
         } = this.props
         
         const {
-            showNewCharacter,
-            showLoadCharacter,
-            showEditCharacter,
             selectedCardView,
             cardViewOrder
         } = this.state

@@ -3,7 +3,6 @@
 .modal-body {
         margin-left: 20px;
         margin-right: 50px;
-        font-weight: bold;
         
         .modal-option {
             margin-bottom: 10px;
@@ -19,7 +18,32 @@
                 justify-content: flex-end;
             }
         }
-        
+    
+        .traits {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 10px;
+
+            .trait {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+                align-items: center;
+                
+                span {
+                    font-weight: bold;
+                    text-transform: capitalize;
+                }
+                
+                input {
+                    display: inline-block;
+                    width: 25px;
+                    margin: auto;
+                    text-align: center;
+                }
+            }
+        }
+    
         .modal-option-multi-select {
             display: flex;
             margin-bottom: 10px;
@@ -61,8 +85,18 @@
                 }
                 
                 .skill {
-                    text-transform: capitalize;
-                    padding: 5px 5px;
+                    margin: 5px 0;
+                    
+                    span {
+                        padding: 0 5px;   
+                        text-transform: capitalize;
+                        display: inline-block;
+                    }
+                    
+                    input {
+                        width: 25px;
+                        text-align: center;
+                    }
                     
                     &.selected {
                         background: $highlight;

@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
-import {loadDeck} from '../store/actions'
+import {loadCharacter} from '../store/actions'
 import '../style/ModalStructure.scss'
 import '../style/LoadCharacterModal.scss'
 
@@ -16,7 +16,7 @@ class LoadCharacterModal extends Component {
         const {
             isOpen,
             close,
-            loadDeck
+            loadCharacter
         } = this.props
         const {
             cards
@@ -41,7 +41,7 @@ class LoadCharacterModal extends Component {
                                             className='button' 
                                             onClick={() => {
                                                 const selectedCharacter = JSON.parse(localStorage.getItem(character))
-                                                loadDeck(
+                                                loadCharacter(
                                                     selectedCharacter.deck,
                                                     character,
                                                     selectedCharacter.level,
@@ -49,8 +49,14 @@ class LoadCharacterModal extends Component {
                                                     selectedCharacter.classOne,
                                                     selectedCharacter.classTwo,
                                                     selectedCharacter.classThree,
-                                                    selectedCharacter.characterFiveSkills,
-                                                    selectedCharacter.characterTenSkills
+                                                    selectedCharacter.traits,
+                                                    selectedCharacter.skills,
+                                                    selectedCharacter.health,
+                                                    selectedCharacter.healingRate,
+                                                    selectedCharacter.currentHealth,
+                                                    selectedCharacter.movement,
+                                                    selectedCharacter.defense,
+                                                    selectedCharacter.damageReduce
                                                 );
                                                 close();
                                             }}
@@ -77,5 +83,5 @@ class LoadCharacterModal extends Component {
 }
 
 export default connect(null, {
-    loadDeck: loadDeck
+    loadCharacter: loadCharacter
 })(LoadCharacterModal);

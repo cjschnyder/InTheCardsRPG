@@ -1,11 +1,11 @@
 @import 'variables';
 
 #dern-character-creator {
+    width: 100vw;
     color: $dark;
 
     header {
         background-color: $dark;
-        width: 100%;
         height: 80px;
         padding: 5px; 
         display: flex;
@@ -105,8 +105,21 @@
 }
 
 @media only screen and (max-width: 600px) {
-    #dernCharacterCreator {
-        color: skyblue;
+    #dern-character-creator {
+        header {
+            .title {
+                margin-top: 0;
+            }
+            
+            .character-menu {
+                .option {
+                    margin-top: 0;
+                    span {
+                        padding-top: 5px;    
+                    }
+                }
+            }
+        }
     }
 }
 

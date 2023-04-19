@@ -2,8 +2,39 @@ export function saveAttributes() {
   return { type: 'SAVE_ATTRIBUTES'};
 }
 
-export function createDeck(name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills) {
-  return { type: 'CREATE_DECK', name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills};
+export function createCharacter(
+    name,
+    level,
+    ancestry,
+    classOne,
+    classTwo,
+    classThree,
+    traits,
+    skills,
+    currentHealth,
+    defense,
+    damageReduce,
+    priestDomain
+    ){
+    return { 
+        type: 'CREATE_CHARACTER',
+        name, 
+        level, 
+        ancestry, 
+        classOne, 
+        classTwo, 
+        classThree, 
+        traits, 
+        skills,
+        currentHealth,
+        defense,
+        damageReduce,
+        priestDomain
+    };
+}
+
+export function setCurrentHealth(currentHealth, equation, value) {
+  return { type: 'SET_CURRENT_HEALTH', currentHealth, equation, value};
 }
 
 export function transferToHand(card) {
@@ -26,6 +57,41 @@ export function resetDeck() {
     return {type: 'RESET_DECK'};
 }
 
-export function loadDeck(deck, name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills) {
-    return {type: 'LOAD_DECK', deck, name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills};
+export function loadCharacter(
+    deck,
+    name,
+    level,
+    ancestry,
+    classOne,
+    classTwo,
+    classThree,
+    traits,
+    skills,
+    health,
+    healingRate,
+    currentHealth,
+    movement,
+    defense,
+    damageReduce,
+    priestDomain
+){
+    return {
+        type: 'LOAD_CHARACTER',
+        deck,
+        name,
+        level,
+        ancestry,
+        classOne,
+        classTwo,
+        classThree,
+        traits,
+        skills,
+        health,
+        healingRate,
+        currentHealth,
+        movement,
+        defense,
+        damageReduce,
+        priestDomain
+    };
 }

@@ -1,6 +1,6 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
-import {createDeck, saveAttributes} from '../store/actions'
+import {createCharacter, saveAttributes} from '../store/actions'
 import '../style/ModalStructure.scss'
 import '../style/CharacterModal.scss'
 
@@ -14,10 +14,12 @@ class EditCharacterModal extends Component {
             classOne: this.props.classOne,
             classTwo: this.props.classTwo,
             classThree: this.props.classThree,
-            fiveSkills: this.props.characterFiveSkills,
-            fiveSkillsOpen: false,
-            tenSkills: this.props.characterTenSkills,
-            tenSkillsOpen: false
+            traits: this.props.traits,
+            skills: this.props.skills,
+            skillsOpen: false,
+            defense: this.props.defense,
+            damageReduce: this.props.damageReduce,
+            priestDomain: this.props.priestDomain
         }
     }
     
@@ -30,8 +32,11 @@ class EditCharacterModal extends Component {
             classOne: this.props.classOne,
             classTwo: this.props.classTwo,
             classThree: this.props.classThree,
-            fiveSkills: this.props.characterFiveSkills,
-            tenSkills: this.props.characterTenSkills
+            traits: this.props.traits,
+            skills: this.props.skills,
+            defense: this.props.defense,
+            damageReduce: this.props.damageReduce,
+            priestDomain: this.props.priestDomain
         });
     }
 }
@@ -40,8 +45,9 @@ class EditCharacterModal extends Component {
         const {
             isOpen,
             close,
-            createDeck,
-            saveAttributes
+            createCharacter,
+            saveAttributes,
+            currentHealth
         } = this.props
         const {
             name,
@@ -50,69 +56,16 @@ class EditCharacterModal extends Component {
             classOne,
             classTwo,
             classThree,
-            fiveSkills,
-            fiveSkillsOpen,
-            tenSkills,
-            tenSkillsOpen
+            traits,
+            skills,
+            skillsOpen,
+            defense,
+            damageReduce,
+            priestDomain
         } = this.state
         
-        const characterSkills = [
-            'animal_handling',
-            'appraise',
-            'athletics',
-            'history',
-            'magic_knowledge',
-            'magic_school_arcane',
-            'magic_school_creation',
-            'magic_school_divine',
-            'magic_school_elemental',
-            'manipulation',
-            'medicine',
-            'melee_attack',
-            'nature',
-            'perception',
-            'ranged_attack',
-            'read_intent',
-            'reflexes',
-            'resist_manipulation',
-            'resist_poison',
-            'slight_of_hand',
-            'social_knowledge',
-            'stealth',
-            'toughness'
-            
-        ];
-        
-        const toggleFivePtSkills = (skill) => {
-            if(fiveSkills.includes(skill))
-                {
-                    const skills = fiveSkills.filter(elem => elem != skill);
-                    this.setState({fiveSkills: skills});
-                }
-            else
-                {
-                    const skills = fiveSkills;
-                    skills.push(skill);
-                    this.setState({fiveSkills: skills});
-                }
-        };
-        
-        const toggleTenPtSkills = (skill) => {
-            if(tenSkills.includes(skill))
-                {
-                    const skills = tenSkills.filter(elem => elem != skill);
-                    this.setState({tenSkills: skills});
-                }
-            else
-                {
-                    const skills = tenSkills;
-                    skills.push(skill);
-                    this.setState({tenSkills: skills});
-                }
-        };
-        
         const saveCharacter = () => {
-            createDeck(name, level, ancestry, classOne, classTwo, classThree, fiveSkills, tenSkills);
+            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, currentHealth, defense, damageReduce, priestDomain);
             saveAttributes();
             close();
         };
@@ -186,6 +139,25 @@ class EditCharacterModal extends Component {
                             </select>
                         </div>
                     </div>
+                    {
+                        classOne === 'priest' &&
+                        <div className='modal-option'>
+                            <span>Diety's Domain: </span>
+                            <div className='modal-input'>
+                                <select 
+                                    value={priestDomain}
+                                    onChange={e => this.setState({priestDomain: event.target.value})}
+                                >
+                                    <option selected>-- Select an Ancestry --</option>
+                                    <option value='battle'>Battle</option>
+                                    <option value='righteousness'>Righteousness</option>
+                                    <option value='luck'>Luck</option>
+                                    <option value='nature'>Nature</option>
+                                    <option value='death'>Death</option>
+                                </select>
+                            </div>
+                        </div>
+                    }
                     <div className={`modal-option ${level >= 3 ? '' : 'hide'}`}>
                         <span>Level Three Class: </span>
                         <div className='modal-input'>
@@ -211,39 +183,62 @@ class EditCharacterModal extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className='modal-option-multi-select'>
-                        <div className='skill-dropdown-button' onClick={() => this.setState({fiveSkillsOpen: !fiveSkillsOpen}) }>
-                            <h3>5 Point Skills</h3>
-                            <span className={`arrow ${fiveSkillsOpen ? 'flip' : ''}`}>&#8249;</span>
-                        </div>
-                        <div className={`skills-list ${fiveSkillsOpen ? '' : 'hide'}`}>
-                            {
-                                characterSkills.map((skill) =>
-                                    <div 
-                                        className={`skill ${fiveSkills.includes(skill) ? 'selected' : ''}`} 
-                                        onClick={() => toggleFivePtSkills(skill)}
-                                        key={`5${skill}`}
-                                    >
-                                        {skill.replace(/_/g, " ")}
-                                    </div>
-                                )
-                            }
+                    <div className='modal-option'>
+                        <span>Defense: </span>
+                        <div className='modal-input'>
+                            <input
+                                value={defense}
+                                onChange={(e) => {this.setState({defense: e.target.value})}}
+                            />
                         </div>
                     </div>
-                    <div className='modal-option-multi-select'>
-                        <div className='skill-dropdown-button' onClick={() => this.setState({tenSkillsOpen: !tenSkillsOpen}) }>
-                            <h3>10 Point Skills</h3>
-                            <span className={`arrow ${tenSkillsOpen ? 'flip' : ''}`}>&#8249;</span>
+                    <div className='modal-option'>
+                        <span>Damage Resistance: </span>
+                        <div className='modal-input'>
+                            <input
+                                value={damageReduce}
+                                onChange={(e) => {this.setState({damageReduce: e.target.value})}}
+                            />
                         </div>
-                        <div className={`skills-list ${tenSkillsOpen ? '' : 'hide'}`}>
+                    </div>
+                    <div className='traits'>
+                        {
+                            Object.keys(traits).map(trait => 
+                                <div className='trait'>
+                                    <span>{trait}</span>
+                                    <input
+                                        value={traits[trait]}
+                                        onChange={e => this.setState({
+                                            traits: {
+                                                ...traits,
+                                                [trait]: parseInt(event.target.value || 0)
+                                            }
+                                        })}
+                                    />
+                                </div>
+                            )
+                        }
+                    </div>
+                    <div className='modal-option-multi-select'>
+                        <div className='skill-dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
+                            <h3>Skill Points</h3>
+                            <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
+                        </div>
+                        <div className={`skills-list ${skillsOpen ? '' : 'hide'}`}>
                             {
-                                characterSkills.map((skill) =>
-                                    <div 
-                                        className={`skill ${tenSkills.includes(skill) ? 'selected' : ''}`} 
-                                        onClick={() => toggleTenPtSkills(skill)}
-                                        key={`10${skill}`}
-                                    >
-                                        {skill.replace(/_/g, " ")}
+                                skills.map((skill, index) =>
+                                    <div className='skill'>
+                                        <input
+                                            value={skill.value}
+                                            onChange={e => this.setState({
+                                                skills: [
+                                                    ...skills.slice(0, index),
+                                                    {skillName: skill.skillName, value: parseInt(event.target.value || 0), trait: skill.trait},
+                                                    ...skills.slice(index + 1)
+                                                ]           
+                                            })}
+                                        />
+                                        <span>{skill.skillName.replace(/_/g, " ")}</span>
                                     </div>
                                 )
                             }
@@ -271,13 +266,17 @@ const mapStateToProps = (state) => {
         classOne: state.classOne, 
         classTwo: state.classTwo, 
         classThree: state.classThree, 
-        characterFiveSkills: state.characterFiveSkills, 
-        characterTenSkills: state.characterTenSkills
+        traits: state.traits, 
+        skills: state.skills,
+        currentHealth: state.currentHealth,
+        defense: state.defense,
+        damageReduce: state.damageReduce,
+        priestDomain: state.priestDomain
         
     };
 };
 
 export default connect(mapStateToProps,{
-    createDeck: createDeck,
+    createCharacter: createCharacter,
     saveAttributes: saveAttributes
 })(EditCharacterModal);

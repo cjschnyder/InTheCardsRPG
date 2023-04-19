@@ -469,7 +469,7 @@ export const allClassTwoCards = {
         {
             cardName:'Perfect Aim',
             action: 'Passive',
-            description: 'When you hit with a ranged weapon attack you deal an extra 1d3 + 1 physical damage.',
+            description: 'When you hit with a ranged weapon attack you deal an extra 1d3 physical damage.',
             from: 'armsman',
             level: 3
         },
@@ -534,7 +534,7 @@ export const allClassTwoCards = {
             level: 5
         }
     ],
-    beasttamer: [
+    beast_tamer: [
         {
             cardName:'Team Tactics',
             action: 'Passive',
@@ -901,6 +901,8 @@ export const allTenSkillCards = {
         cardName:'Trade In Value',
         action: 'Triggered - Burn',
         description: 'When you would discard or burn a card after use you can instead place this card in the burn pile and keep the triggering card in your deck or hand.',
+        from: 'appraise',
+        level: 10
     },
     athletics: {
         cardName:'Second Wind',
@@ -912,7 +914,9 @@ export const allTenSkillCards = {
     history: {
         cardName:'Doomed to Repeat it',
         action: 'Triggered',
-        description: 'If an enemy that attacked you last round or this round attacks you again, they roll their attack with minor disadvantage.'
+        description: 'If an enemy that attacked you last round or this round attacks you again, they roll their attack with minor disadvantage.',
+        from: 'history',
+        level: 10
     },
     magic_school_arcane: {
         cardName:'Arcane Displacement',
