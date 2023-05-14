@@ -55,7 +55,7 @@
                 background-color: $darkHover;
             }
             
-            .skill-dropdown-button {
+            .dropdown-button {
                 padding: 0 10px;
                 display: flex;
                 flex-direction: row;
@@ -76,13 +76,9 @@
                 }
             }
             
-            .skills-list {
+            .dropdown-list {
                 background-color: $light;
                 color: $dark;
-                
-                &.hide {
-                    display: none;
-                }
                 
                 .skill {
                     margin: 5px 0;
@@ -102,6 +98,10 @@
                         background: $highlight;
                     }
                 }
+                
+                .modal-option {
+                    margin: 5px 3px;
+                }
             }
         }
     .horizontal-buttons{
@@ -111,10 +111,12 @@
         .button {
             margin-right: 10px;
             text-align: center;
-            width: 60px;
+            min-width: 60px;
             padding: 5px;
             border: 2px solid $light;
-            border-radius: 3px;
+            border-radius: 5px;
+            background: $dark;
+            color: $light;
             
             &:active{
                 background-color: $light;
@@ -122,4 +124,8 @@
             }
         }
     }
+}
+
+.hide {
+    display: none;
 }

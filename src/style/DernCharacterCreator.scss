@@ -51,6 +51,7 @@
             margin: 3px;
             padding-top: 6px;
             font-weight: bold;
+            cursor: pointer;
 
             &.selected {
                 background: $highlight
@@ -93,6 +94,7 @@
             bottom: 10px;
             right: 10px;
             width: 60px;
+            cursor: pointer;
             padding: 20px 10px;
             border: 2px solid $light;
             color: $light;

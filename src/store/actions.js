@@ -14,6 +14,7 @@ export function createCharacter(
     currentHealth,
     defense,
     damageReduce,
+    customCards,
     priestDomain
     ){
     return { 
@@ -29,6 +30,7 @@ export function createCharacter(
         currentHealth,
         defense,
         damageReduce,
+        customCards,
         priestDomain
     };
 }

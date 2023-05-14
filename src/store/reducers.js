@@ -155,6 +155,7 @@ const rootReducer = (state = initialState, action) => {
                 ...classTwoCards,
                 ...classThreeCards,
                 ...skillCards,
+                ...action.customCards
             ];
                 
             return {

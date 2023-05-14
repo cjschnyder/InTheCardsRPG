@@ -19,7 +19,13 @@ class EditCharacterModal extends Component {
             skillsOpen: false,
             defense: this.props.defense,
             damageReduce: this.props.damageReduce,
-            priestDomain: this.props.priestDomain
+            priestDomain: this.props.priestDomain,
+            customCardSectionOpen: false,
+            cardName: '',
+            cardActionType: '',
+            cardDescription: '',
+            cardOrigin: '',
+            customCards: []
         }
     }
     
@@ -61,14 +67,38 @@ class EditCharacterModal extends Component {
             skillsOpen,
             defense,
             damageReduce,
-            priestDomain
+            priestDomain,
+            customCardSectionOpen,
+            cardName,
+            cardActionType,
+            cardDescription,
+            cardOrigin,
+            customCards
         } = this.state
         
         const saveCharacter = () => {
-            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, currentHealth, defense, damageReduce, priestDomain);
+            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, currentHealth, defense, damageReduce, customCards, priestDomain);
             saveAttributes();
             close();
         };
+        
+        const addCustomCard = () => {
+            this.setState({
+                customCards: [
+                    ...customCards,
+                    {
+                        "cardName": cardName,
+                        "action": cardActionType,
+                        "description": cardDescription,
+                        "from": cardOrigin
+                    }
+                ],
+                cardName: '',
+                cardActionType: '',
+                cardDescription: '',
+                cardOrigin: ''
+            });
+        }
         
         return(
             <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
@@ -220,11 +250,11 @@ class EditCharacterModal extends Component {
                         }
                     </div>
                     <div className='modal-option-multi-select'>
-                        <div className='skill-dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
+                        <div className='dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
                             <h3>Skill Points</h3>
                             <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
                         </div>
-                        <div className={`skills-list ${skillsOpen ? '' : 'hide'}`}>
+                        <div className={`dropdown-list ${skillsOpen ? '' : 'hide'}`}>
                             {
                                 skills.map((skill, index) =>
                                     <div className='skill'>
@@ -243,6 +273,62 @@ class EditCharacterModal extends Component {
                                 )
                             }
                         </div>
+                    </div>
+                     <div className='modal-option-multi-select'>
+                        <div className='dropdown-button' onClick={() => this.setState({customCardSectionOpen: !customCardSectionOpen}) }>
+                            <h3>Add Custom Card</h3>
+                            <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
+                        </div>
+                        <div className={`dropdown-list ${customCardSectionOpen ? '' : 'hide'}`}>
+                            <div className='modal-option'>
+                            <span>Card Name: </span>
+                            <div className='modal-input'>
+                                <input
+                                    value={cardName}
+                                    onChange={(e) => {this.setState({cardName: e.target.value})}}
+                                />
+                            </div>
+                            </div>
+                            <div className='modal-option'>
+                                <span>Action Type: </span>
+                                <div className='modal-input'>
+                                    <input
+                                        value={cardActionType}
+                                        onChange={(e) => {this.setState({cardActionType: e.target.value})}}
+                                    />
+                                </div>
+                            </div>
+                            <div className='modal-option'>
+                            <span>Card Origin: </span>
+                            <div className='modal-input'>
+                                <input
+                                    value={cardOrigin}
+                                    onChange={(e) => {this.setState({cardOrigin: e.target.value})}}
+                                />
+                            </div>
+                            </div>
+                            <div className='modal-option'>
+                                <span>Card Description: </span>
+                                <div className='modal-input'>
+                                    <textarea
+                                        value={cardDescription}
+                                        onChange={(e) => {this.setState({cardDescription: e.target.value})}}
+                                    />
+                                </div>
+                            </div>
+                            <div className='horizontal-buttons'>
+                                <div className='button' onClick={() => addCustomCard()}>
+                                    Add Card
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='added-cards'>
+                    {
+                        customCards.map(card => 
+                            <div>Custom Card: {card.cardName}</div>
+                        )
+                    }
                     </div>
                     <div className='horizontal-buttons'>
                         <div className='button' onClick={() => saveCharacter()}>

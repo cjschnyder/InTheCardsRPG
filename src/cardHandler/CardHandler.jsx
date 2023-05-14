@@ -9,7 +9,7 @@ class CardHandler extends Component {
         super(props);
         this.state = {
             selectedCardView: 0,
-            cardViewOrder: ['deck', 'hand', 'discard', 'burn']
+            cardViewOrder: ['deck', 'hand', 'discard', 'burn'],
         }
     }
     

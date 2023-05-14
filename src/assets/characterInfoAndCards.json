@@ -295,9 +295,9 @@
                   "level":1
                },
                {
-                  "cardName":"Precision Strike",
-                  "action":"Active",
-                  "description":"Make a weapon attack, on a hit deal +2d6 extra damage.",
+                  "cardName":"Pinning Strike",
+                  "action":"Triggered",
+                  "description":"When you hit an enemy with a free attack, they are immobilized until the end of their turn.",
                   "from":"fighter",
                   "level":1
                },
@@ -476,9 +476,9 @@
                   "level":1
                },
                {
-                  "cardName":"Heal",
+                  "cardName":"Cure",
                   "action":"Active - Spell",
-                  "description":"Heal one target up to 3 yards away from you by their healing rate.",
+                  "description":"You can cure an ally that is up to 5 yards away from one of the following conditions: Bleeding, Dazed, Frightened, Minor Poison, and Slowed. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
                   "from":"priest",
                   "level":1
                },
@@ -486,11 +486,11 @@
                   "cardName":"Divine Blessing",
                   "action":"Active - Spell",
                   "description":{
-                     "battle":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks.",
-                     "righteousness":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends.",
-                     "luck":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll.",
-                     "nature":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. ",
-                     "death":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health."
+                     "battle":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                     "righteousness":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                     "luck":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                     "nature":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                     "death":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate."
                   },
                   "from":"priest",
                   "level":1
@@ -774,7 +774,7 @@
             "abilities":[
                {
                   "abilityName":"Mighty Leap",
-                  "description":"As part of your move, You can discard a card to double your long jump and high jump.",
+                  "description":"As part of your move, You can discard a card to triple your long jump and high jump.",
                   "from":"barbarian",
                   "level":3
                }
@@ -1059,7 +1059,7 @@
                {
                   "cardName":"Shielded by Light",
                   "action":"Active - Spell ",
-                  "description":"Target an ally within 3 yards. For 1 minute they have DR/1. While under this effect,  when you deal damage with a spell they heal half your Will (rounded up).",
+                  "description":"Target an ally within 3 yards. For 1 minute they have DR/1. While under this effect, once per round you deal damage with a spell they heal half your Will (rounded up).",
                   "from":"faithful",
                   "level":3
                },
@@ -1171,7 +1171,7 @@
                {
                   "cardName":"Protection",
                   "action":"Triggered",
-                  "description":"When an adjacent ally is attacked, they can use your defense instead of their own.",
+                  "description":"When an adjacent ally is attacked, they can use your Damage Resist instead of their own.",
                   "from":"knight",
                   "level":3
                }

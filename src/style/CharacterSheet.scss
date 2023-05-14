@@ -179,6 +179,7 @@
                             font-weight: bold;
                             border: 2px solid #fff;
                             border-radius: 5px;
+                            cursor: pointer;
                         }
                         
                         .add-health {
@@ -233,7 +234,7 @@
             flex-direction: column;    
         }
         
-        .traits, .skills {
+        .traits, .skills, .combat-stats {
             flex-wrap: wrap;
         }
     }

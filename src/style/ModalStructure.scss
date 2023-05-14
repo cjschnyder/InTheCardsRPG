@@ -52,3 +52,10 @@
         background: $light; 
     }
 }
+
+@media only screen and (max-width: 720px) {
+    .modal-wrapper {
+        width: unset;
+        max-width: 500px;
+    }
+}

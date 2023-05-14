@@ -279,11 +279,11 @@ class NewCharacterModal extends Component {
                         }
                     </div>
                     <div className='modal-option-multi-select'>
-                        <div className='skill-dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
+                        <div className='dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
                             <h3>Skill Points</h3>
                             <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
                         </div>
-                        <div className={`skills-list ${skillsOpen ? '' : 'hide'}`}>
+                        <div className={`dropdown-list ${skillsOpen ? '' : 'hide'}`}>
                             {
                                 skills.map((skill, index) =>
                                     <div className='skill'>
