@@ -207,7 +207,10 @@ class EditCharacterModal extends Component {
                                 <option value='gunslinger'>Gunslinger</option>
                                 <option value='knight'>Knight</option>
                                 <option value='paladin'>Paladin</option>
+                                <option value='rifleman'>Rifleman</option>
                                 <option value='swashbuckler'>Swashbuckler</option>
+                                <option value='thief'>Thief</option>
+                                <option value='tunnel_gunner'>Tunnel Gunner</option>
                                 <option value='warlock'>Warlock</option>
                                 <option value='wizard'>Wizard</option>
                             </select>

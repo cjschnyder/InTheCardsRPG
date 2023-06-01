@@ -25,6 +25,7 @@ class NewCharacterModal extends Component {
                 {skillName: 'animal_handling', value: 0, trait: 'will'},
                 {skillName: 'appraise' , value: 0, trait: 'intelligence'},
                 {skillName: 'athletics' , value: 0, trait: 'strength'},
+                {skillName: 'finesse' , value: 0, trait: 'dexterity'},
                 {skillName: 'history' , value: 0, trait: 'intelligence'},
                 {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
                 {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
@@ -41,7 +42,6 @@ class NewCharacterModal extends Component {
                 {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
                 {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
                 {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-                {skillName: 'slight_of_hand' , value: 0, trait: 'dexterity'},
                 {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
                 {skillName: 'stealth' , value: 0, trait: 'dexterity'},
                 {skillName: 'toughness' , value: 0, trait: 'strength'}
@@ -49,6 +49,7 @@ class NewCharacterModal extends Component {
             skillsOpen: false,
             defense: 0,
             damageReduce: 0,
+            customCards: [],
             priestDomain: 'battle'
         }
     }
@@ -72,6 +73,7 @@ class NewCharacterModal extends Component {
             skillsOpen,
             defense,
             damageReduce,
+            customCards,
             priestDomain
         } = this.state
         
@@ -94,6 +96,7 @@ class NewCharacterModal extends Component {
                     {skillName: 'animal_handling', value: 0, trait: 'will'},
                     {skillName: 'appraise' , value: 0, trait: 'intelligence'},
                     {skillName: 'athletics' , value: 0, trait: 'strength'},
+                    {skillName: 'finesse' , value: 0, trait: 'dexterity'},
                     {skillName: 'history' , value: 0, trait: 'intelligence'},
                     {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
                     {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
@@ -110,7 +113,6 @@ class NewCharacterModal extends Component {
                     {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
                     {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
                     {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-                    {skillName: 'slight_of_hand' , value: 0, trait: 'dexterity'},
                     {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
                     {skillName: 'stealth' , value: 0, trait: 'dexterity'},
                     {skillName: 'toughness' , value: 0, trait: 'strength'}
@@ -118,12 +120,13 @@ class NewCharacterModal extends Component {
                 skillsOpen: false,
                 defense: 0,
                 damageReduce: 0,
+                customCards: [],
                 priestDomain: 'battle'
             })
         }
         
         const saveCharacter = () => {
-            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, false, defense, damageReduce, priestDomain);
+            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, false, defense, damageReduce, customCards, priestDomain);
             saveAttributes();
             clearState();
             close();
@@ -236,7 +239,10 @@ class NewCharacterModal extends Component {
                                 <option value='gunslinger'>Gunslinger</option>
                                 <option value='knight'>Knight</option>
                                 <option value='paladin'>Paladin</option>
+                                <option value='rifleman'>Rifleman</option>
                                 <option value='swashbuckler'>Swashbuckler</option>
+                                <option value='thief'>Thief</option>
+                                <option value='tunnel_gunner'>Tunnel Gunner</option>
                                 <option value='warlock'>Warlock</option>
                                 <option value='wizard'>Wizard</option>
                             </select>

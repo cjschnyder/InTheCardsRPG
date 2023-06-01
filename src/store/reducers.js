@@ -23,6 +23,7 @@ const initialState = {
         {skillName: 'animal_handling', value: 0, trait: 'will'},
         {skillName: 'appraise' , value: 0, trait: 'intelligence'},
         {skillName: 'athletics' , value: 0, trait: 'strength'},
+        {skillName: 'finesse' , value: 0, trait: 'dexterity'},
         {skillName: 'history' , value: 0, trait: 'intelligence'},
         {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
         {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
@@ -39,7 +40,6 @@ const initialState = {
         {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
         {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
         {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-        {skillName: 'slight_of_hand' , value: 0, trait: 'dexterity'},
         {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
         {skillName: 'stealth' , value: 0, trait: 'dexterity'},
         {skillName: 'toughness' , value: 0, trait: 'strength'}

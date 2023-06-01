@@ -178,7 +178,7 @@
             "traitBonus":"dexterity",
             "skillBonus":[
                {
-                  "skillName":"slight_of_hand",
+                  "skillName":"finesse",
                   "value":2
                },
                {
@@ -469,9 +469,9 @@
             "health":3,
             "cards":[
                {
-                  "cardName":"Rebuke",
+                  "cardName":"Altruism",
                   "action":"Passive - Spell",
-                  "description":"When an enemy attacks you, you can use your Free Attack against them using a “Magic School: Divine” against their defense. On a hit you deal 1d3 + Will divine damage.",
+                  "description":"When you help, heal, or remove a negative condition from an ally, you can use your Free Attack to make an attack against a target within 5 yards. Roll “Magic School: Divine” against their defense, on a hit you deal 1d3 + Will divine damage.",
                   "from":"priest",
                   "level":1
                },
@@ -528,9 +528,9 @@
             "health":3,
             "cards":[
                {
-                  "cardName":"Weak Points",
+                  "cardName":"Opportunist",
                   "action":"Passive",
-                  "description":"When you hit with an attack you have minor/major advantage on, or with a small weapon, deal an extra +1d3 damage.",
+                  "description":"When you attack a creature that has no allies adjacent to it you can either attack with minor advantage or deal an extra 1d3 damage if you hit.",
                   "from":"rogue",
                   "level":1
                },
@@ -643,7 +643,7 @@
             "abilities":[
                {
                   "abilityName":"Potion Injector",
-                  "description":"Once during your turn you can burn a card to drink a potion yourself or have an adjacent ally drink a potion on their turn without expending an action point.",
+                  "description":"Once during your turn you can discard a card to drink a potion yourself or have an adjacent ally drink a potion on their turn without expending an action point.",
                   "from":"alchemist",
                   "level":3
                }
@@ -1102,23 +1102,24 @@
             "health":2,
             "abilities":[
                {
-                  "abilityName":"Firearm Training",
-                  "description":"You are able to use Firearms.",
-                  "from":"gunslinger",
-                  "level":3
-               },
-               {
-                  "abilityName":"Quick Draw",
-                  "description":"You have Major Advantage when rolling for Initiative",
+                  "abilityName":"Magnum",
+                  "description":"Your revolver does 1d6 + Dexterity instead of 1d6 + 1.",
                   "from":"gunslinger",
                   "level":3
                }
             ],
             "cards":[
                {
-                  "cardName":"Fire-breath Powder Charge",
+                  "cardName":"Fan the Hammer",
                   "action":"Active",
-                  "description":"Make a ranged attack against a target. Additionally a burst of flames come out of your gun in a 3 yard cone. All targets within the cone make a “Reflexes” roll against your “Ranged Attack” roll. If they fail they take 3d6 fire damage, if they succeed they take half that.",
+                  "description":"Make 4 attacks with your revolver. On a hit the attacks do 1d6 damage.",
+                  "from":"gunslinger",
+                  "level":3
+               },
+                {
+                  "cardName":"Quick Draw",
+                  "action":"Triggered",
+                  "description":"At the top of the round you can make one ranged attack roll with your revolver.",
                   "from":"gunslinger",
                   "level":3
                }
@@ -1134,9 +1135,9 @@
             "health":3,
             "cards":[
                {
-                  "cardName":"Overheat",
-                  "action":"Triggered",
-                  "description":"When you hit with an attack your target takes an extra +2d6 fire damage. Additionally creatures within 2 yards of you must roll “Reflexes” vs your “Ranged Attack”. If they fail they take 2d6 fire damage, half as much on a success.",
+                  "cardName":"Duel at High Noon",
+                  "action":"Active",
+                  "description":"Pick a target within range of your revolver. Roll “Ranged Attack” vs their “Reflexes”. If you succeed, you deal an extra 2d6 damage and the target must make a “Toughness” roll against your “Ranged Attack” roll. If you succeed they are stunned.",
                   "from":"gunslinger",
                   "level":5
                }
@@ -1249,6 +1250,59 @@
             ]
          }
       },
+      "rifleman":{
+         "3":{
+            "skillBonus":[
+               {
+                  "skillName":"perception",
+                  "value":2
+               }
+            ],
+            "health":2,
+            "abilities":[
+               {
+                  "abilityName":"Sharpshooter",
+                  "description":"Your rifle’s range is increased by 10 yards and you ignore cover.",
+                  "from":"rifleman",
+                  "level":3
+               }
+            ],
+            "cards":[
+               {
+                  "cardName":"Countersniper",
+                  "action":"Triggered",
+                  "description":"When an enemy within range of your rifle makes a ranged attack, you can make a ranged attack against them.",
+                  "from":"rifleman",
+                  "level":3
+               },
+                {
+                  "cardName":"Phosphors Shot",
+                  "action":"Active",
+                  "description":"Make a “Ranged Attack” roll against a target within range of your rifle. On a hit you deal an extra 1d6 damage and attacks against the target have minor advantage for a minute.",
+                  "from":"rifleman",
+                  "level":3
+               }
+            ]
+         },
+         "5":{
+            "skillBonus":[
+               {
+                  "skillName":"ranged_attack",
+                  "value":2
+               }
+            ],
+            "health":3,
+            "cards":[
+               {
+                  "cardName":"Anti-Troll Round",
+                  "action":"Active",
+                  "description":"Make an attack roll against a target within range of your rifle. On a hit they take an extra 2d6 damage and have the burning condition for a minute.",
+                  "from":"rifleman",
+                  "level":5
+               }
+            ]
+         }
+      },
       "swashbuckler":{
          "3":{
             "skillBonus":[
@@ -1303,11 +1357,11 @@
             ]
          }
       },
-      "theif":{
+      "thief":{
          "3":{
             "skillBonus":[
                {
-                  "skillName":"slight_of_hand",
+                  "skillName":"finesse",
                   "value":2
                }
             ],
@@ -1352,6 +1406,59 @@
                   "action":"Active - Spell",
                   "description":"You or an ally become invisible for 1 minute. The invisibility breaks if you attack or cast a spell.",
                   "from":"theif",
+                  "level":5
+               }
+            ]
+         }
+      },
+      "tunnel_gunner":{
+         "3":{
+            "skillBonus":[
+               {
+                  "skillName":"reflexes",
+                  "value":2
+               }
+            ],
+            "health":2,
+            "abilities":[
+               {
+                  "abilityName":"Safety Rounds",
+                  "description":"You do not hit allies that are caught in your shotgun’s cone.",
+                  "from":"tunnel_gunner",
+                  "level":3
+               }
+            ],
+            "cards":[
+               {
+                  "cardName":"Fire-breath Powder Charge",
+                  "action":"Active",
+                  "description":"Make an attack roll with your shotgun. Targets hit by your attack are also burning for a number of rounds equal to your Dexterity (minimum 1).",
+                  "from":"tunnel_gunner",
+                  "level":3
+               },
+                {
+                  "cardName":"Forceful Shot",
+                  "action":"Active",
+                  "description":"Make an attack roll with your shotgun. Targets hit by your attack can be pushed back a number of yards equal to your Dexterity (minimum 1). Alternatively, you can use this card to gain a fly speed equal to 2d6 yards You fall at the end of your turn if still in the air.",
+                  "from":"tunnel_gunner",
+                  "level":3
+               }
+            ]
+         },
+         "5":{
+            "skillBonus":[
+               {
+                  "skillName":"ranged_attack",
+                  "value":2
+               }
+            ],
+            "health":3,
+            "cards":[
+               {
+                  "cardName":"Eye of the Storm",
+                  "action":"Passive",
+                  "description":"When using your shotgun you deal extra damage the closer an enemy is to you. An adjacent enemy takes an extra 8 damage. Subtract 2 from the extra damage for every yard away an enemy is.",
+                  "from":"tunnel_gunner",
                   "level":5
                }
             ]
@@ -1512,6 +1619,22 @@
             "action":"Active - Burn",
             "description":"You heal your healing rate and gain 1 card back from your burn pile.",
             "from":"athletics",
+            "level":10
+         }
+      ],
+      "finesse":[
+         {
+            "cardName":"Magic Pockets!",
+            "action":"Active - Spell",
+            "description":"You summon a small weapon or item that has a dim purple magic glow  into your hand. This weapon or item  lasts a number of rounds equal to your finesse skill.",
+            "from":"finesse",
+            "level":5
+         },
+         {
+            "cardName":"Butterfingers",
+            "action":"Active",
+            "description":"Target an adjacent creature holding a weapon, they roll “Reflexes” or “Athletics” against your “Finesse”. If you succeed, you take their weapon from them. If the creature is 2 sizes larger than you or more, you instead knock the weapon 1d6 yards away in a direction of your choice.",
+            "from":"finesse",
             "level":10
          }
       ],
@@ -1770,22 +1893,6 @@
             "action":"Active",
             "description":"If you are adjacent to an ally that is suffering from major or minor poison, you can take 1d3 damage to get rid of the poison status.",
             "from":"resist poison",
-            "level":10
-         }
-      ],
-      "slight_of_hand":[
-         {
-            "cardName":"Magic Pockets!",
-            "action":"Active - Spell",
-            "description":"You summon a small weapon or item that has a dim purple magic glow  into your hand. This weapon or item  lasts a number of rounds equal to your Sleight of Hand skill.",
-            "from":"slight of hand",
-            "level":5
-         },
-         {
-            "cardName":"Butterfingers",
-            "action":"Active",
-            "description":"Target an adjacent creature holding a weapon, they roll “Reflexes” or “Athletics” against your “Sleight of Hand”. If you succeed, you take their weapon from them. If the creature is 2 sizes larger than you or more, you instead knock the weapon 1d6 yards away in a direction of your choice.",
-            "from":"sleight of hand",
             "level":10
          }
       ],
