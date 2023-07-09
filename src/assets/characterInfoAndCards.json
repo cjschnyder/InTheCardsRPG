@@ -57,7 +57,7 @@
                {
                   "cardName":"Ballad of the Mountain King",
                   "action":"Active - Spell",
-                  "description":"For 10 minutes you sing of the triumphs of past kings. While you sing Allies within 10 yards that can hear the song cannot be moved by enemies, knocked prone, or be frightened. Additionally they deal an extra +1d6 damage with weapon attacks.",
+                  "description":"For 1 hour you sing of the triumphs of past kings. While you sing Allies within 10 yards that can hear the song cannot be moved by enemies, knocked prone, or be frightened. Additionally they deal an extra +1d6 damage with weapon attacks.",
                   "from":"dwarf",
                   "level":7
                }
@@ -282,7 +282,7 @@
          }
       }
    },
-   "levelOneclasses":{
+   "starterClasses":{
       "fighter":{
          "1":{
             "health":5,
@@ -483,26 +483,50 @@
                   "level":1
                },
                {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":{
-                     "battle":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                     "righteousness":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                     "luck":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                     "nature":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                     "death":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate."
-                  },
-                  "from":"priest",
-                  "level":1
-               },
-               {
                   "cardName":"Justice for the Wicked & Holy",
                   "action":"Active - Burn",
                   "description":"Make an attack against an enemy within 10 yards, rolling “Magic School: Divine” against their defense. Roll 2d6 + your Will, if you succeed they take that as damage. Additionally, an ally within 10 yards is also healed for their healing rate.",
                   "from":"priest",
                   "level":1
                }
-            ]
+            ],
+            "specials":{
+                "battle": {
+                  "cardName":"Divine Blessing",
+                  "action":"Active - Spell",
+                  "description":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                  "from":"priest",
+                  "level":1
+                },
+                "righteousness": {
+                  "cardName":"Divine Blessing",
+                  "action":"Active - Spell",
+                  "description":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                  "from":"priest",
+                  "level":1
+                },
+                "luck": {
+                  "cardName":"Divine Blessing",
+                  "action":"Active - Spell",
+                  "description":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                  "from":"priest",
+                  "level":1
+                },
+                "nature": {
+                  "cardName":"Divine Blessing",
+                  "action":"Active - Spell",
+                  "description":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                  "from":"priest",
+                  "level":1
+                },
+                "death": {
+                  "cardName":"Divine Blessing",
+                  "action":"Active - Spell",
+                  "description":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+                  "from":"priest",
+                  "level":1
+                }
+            }
          },
          "4":{
             "skillBonus":[
@@ -630,9 +654,9 @@
          }
       }
    },
-   "levelThreeClasses":{
+   "specialtyClasses":{
       "alchemist":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"medicine",
@@ -672,7 +696,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_arcane",
@@ -714,7 +738,7 @@
          }
       },
       "armsman":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"athletics",
@@ -748,7 +772,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "health":5,
             "cards":[
                {
@@ -762,7 +786,7 @@
          }
       },
       "barbarian":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"toughness",
@@ -796,7 +820,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"toughness",
@@ -816,7 +840,7 @@
          }
       },
       "bard":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"manipulation",
@@ -856,10 +880,17 @@
                   "description":"For 1 minute, You and all allies within 6 yards that can hear you are immune to the frightened condition and have minor advantage on “Resist Manipulation” rolls. Keep the beat: Action > Attack | Attack > Move => You can also add your Charm to your damage rolls and the damage rolls of  allies affected by the song.",
                   "from":"bard",
                   "level":3
+               },
+                {
+                  "cardName":"Dance Partner",
+                  "action":"Active",
+                  "description":"Target an ally within 10 yards, they can move towards you without provoking Free Attacks. Alternatively, you can play this as a burn card to heal yourself or an adjacent ally by their healing rate.",
+                  "from":"bard",
+                  "level":3
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_creation",
@@ -879,7 +910,7 @@
          }
       },
       "beast_tamer":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"animal_handling",
@@ -913,7 +944,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"animal_handling",
@@ -933,7 +964,7 @@
          }
       },
       "druid":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"nature",
@@ -967,7 +998,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_elemental",
@@ -987,7 +1018,7 @@
          }
       },
       "elementalist":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"nature",
@@ -1017,10 +1048,17 @@
                   "description":"For 10 minutes when you are hit by melee attacks your attacker takes damage equal to your Will.",
                   "from":"elementalist",
                   "level":3
+               },
+                {
+                  "cardName":"Water Spirits",
+                  "action":"Active - Spell",
+                  "description":"For 1 hour, increase your move by 2 and you can walk on water. Alternatively, you can play this as a burn card to heal yourself or an adjacent ally by their healing rate.",
+                  "from":"elementalist",
+                  "level":3
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_elemental",
@@ -1039,7 +1077,7 @@
          }
       },
       "faithful":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"read_intent",
@@ -1072,7 +1110,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_divine",
@@ -1092,7 +1130,7 @@
          }
       },
       "gunslinger":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"reflexes",
@@ -1122,10 +1160,17 @@
                   "description":"At the top of the round you can make one ranged attack roll with your revolver.",
                   "from":"gunslinger",
                   "level":3
+               },
+                {
+                  "cardName":"Pistol Whip",
+                  "action":"Active",
+                  "description":"Make a “Ranged Attack” against an adjacent target. On a hit deal 1d6 + Dexterity and the target is knocked back 3 yards. If the target is size 3 or larger they aren’t knocked back and instead take an extra 1d6 damage.",
+                  "from":"gunslinger",
+                  "level":3
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"ranged_attack",
@@ -1145,7 +1190,7 @@
          }
       },
       "knight":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"athletics",
@@ -1156,7 +1201,7 @@
             "abilities":[
                {
                   "abilityName":"Shore Up",
-                  "description":"You gain +1 Defense when wearing Heavy Armor. On your turn, you can discard a card to give adjacent allies +1 to their defense until the end of your next turn.",
+                  "description":"You gain +1 Defense when wearing Heavy Armor.",
                   "from":"knight",
                   "level":3
                }
@@ -1175,10 +1220,17 @@
                   "description":"When an adjacent ally is attacked, they can use your Damage Resist instead of their own.",
                   "from":"knight",
                   "level":3
+               },
+                {
+                  "cardName":"Hold the Line",
+                  "action":"Active - Burn",
+                  "description":"For 1 minute you don’t need to discard a card to gain extra Free Attacks, Your melee attack’s range increases by 1 yard, you can make Free Attacks when enemies move within your reach, and finally when you hit an enemy with an attack they have to roll “Toughness” vs your “Melee Attack” roll, if they fail they are immobilized.",
+                  "from":"knight",
+                  "level":3
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"melee_attack",
@@ -1198,7 +1250,7 @@
          }
       },
       "paladin":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"resist_manipulation",
@@ -1231,7 +1283,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"melee_attack",
@@ -1251,7 +1303,7 @@
          }
       },
       "rifleman":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"perception",
@@ -1284,7 +1336,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"ranged_attack",
@@ -1304,7 +1356,7 @@
          }
       },
       "swashbuckler":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"reflexes",
@@ -1338,7 +1390,66 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
+            "skillBonus":[
+               {
+                  "skillName":"melee_attack",
+                  "value":2
+               }
+            ],
+            "health":3,
+            "cards":[
+               {
+                  "cardName":"Roll with It",
+                  "action":"Triggered",
+                  "description":"When you’re hit by an attack or take fall damage you can half the damage you would normally have taken.",
+                  "from":"swashbuckler",
+                  "level":5
+               }
+            ]
+         }
+      },
+       "shadowmancer":{
+         "start":{
+            "skillBonus":[
+               {
+                  "skillName":"reflexes",
+                  "value":2
+               }
+            ],
+            "health":3,
+            "cards":[
+               {
+                  "cardName":"Quick Exit",
+                  "action":"Triggered - Spell",
+                  "description":"After you make an attack you can teleport to the nearest cover that breaks line of sight and make a “Stealth” roll to hide from your target.",
+                  "from":"shadowmancer",
+                  "level":3
+               },
+               {
+                  "cardName":"Shadow Knives",
+                  "action":"Triggered",
+                  "description":"When you hit with an attack while in darkness you deal an extra 2d6 damage.",
+                  "from":"shadowmancer",
+                  "level":3
+               },
+                {
+                  "cardName":"Shadow Vampirism",
+                  "action":"Active - Burn",
+                  "description":"You steal a target’s shadow, for 1 minute you gain minor advantage when rolling against them. Additionally at the end of the minute you consume their shadow and heal your healing rate.",
+                  "from":"shadowmancer",
+                  "level":3
+               },
+                 {
+                  "cardName":"Cloud of Darkness",
+                  "action":"Active",
+                  "description":"You summon a cloud of darkness that covers a 4 yard area as a sphere. Any creature in the cloud, other than you, is considered blind.",
+                  "from":"shadowmancer",
+                  "level":3
+               }
+            ]
+         },
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"melee_attack",
@@ -1358,7 +1469,7 @@
          }
       },
       "thief":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"finesse",
@@ -1392,7 +1503,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"stealth",
@@ -1412,7 +1523,7 @@
          }
       },
       "tunnel_gunner":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"reflexes",
@@ -1445,7 +1556,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"ranged_attack",
@@ -1465,7 +1576,7 @@
          }
       },
       "warlock":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"manipulation",
@@ -1498,7 +1609,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_arcane",
@@ -1518,7 +1629,7 @@
          }
       },
       "wizard":{
-         "3":{
+         "start":{
             "skillBonus":[
                {
                   "skillName":"magic_knowledge",
@@ -1551,7 +1662,7 @@
                }
             ]
          },
-         "5":{
+         "upgrade":{
             "skillBonus":[
                {
                   "skillName":"magic_school_arcane",
@@ -1569,9 +1680,6 @@
             ]
          }
       }
-   },
-   "levelSixClasses":{
-      
    },
    "skills":{
       "animal_handling":[

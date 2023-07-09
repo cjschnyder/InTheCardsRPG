@@ -1,86 +1,147 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
 import {createCharacter, saveAttributes} from '../store/actions'
+import characterInfo from '../assets/characterInfoAndCards.json'; 
 import '../style/ModalStructure.scss'
 import '../style/CharacterModal.scss'
 
-class EditCharacterModal extends Component {
+class CharacterModal extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            name: this.props.name,
-            level: this.props.level,
-            ancestry: this.props.ancestry,
-            classOne: this.props.classOne,
-            classTwo: this.props.classTwo,
-            classThree: this.props.classThree,
-            traits: this.props.traits,
-            skills: this.props.skills,
+            name: this.props.name || "",
+            level: this.props.level || 1,
+            ancestry: this.props.ancestry || "",
+            background: this.props.background || "",
+            starterClass: this.props.starterClass || "",
+            specialtyClassOne: this.props.specialtyClassOne || "",
+            specialtyClassTwo: this.props.ancestry || "",
+            traits: this.props.traits || {
+                strength: 0,
+                dexterity: 0,
+                intelligence: 0,
+                will: 0,
+                charm: 0
+            },
+            skills: this.props.skills || [
+                {skillName: 'animal_handling', value: 0, trait: 'will'},
+                {skillName: 'appraise' , value: 0, trait: 'intelligence'},
+                {skillName: 'athletics' , value: 0, trait: 'strength'},
+                {skillName: 'finesse' , value: 0, trait: 'dexterity'},
+                {skillName: 'history' , value: 0, trait: 'intelligence'},
+                {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
+                {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
+                {skillName: 'magic_school_creation' , value: 0, trait: 'charm'},
+                {skillName: 'magic_school_divine' , value: 0, trait: 'will'},
+                {skillName: 'magic_school_elemental' , value: 0, trait: 'will'},
+                {skillName: 'manipulation' , value: 0, trait: 'charm'},
+                {skillName: 'medicine' , value: 0, trait: 'intelligence'},
+                {skillName: 'melee_attack' , value: 0, trait: 'strength'},
+                {skillName: 'nature' , value: 0, trait: 'intelligence'},
+                {skillName: 'perception' , value: 0, trait: 'intelligence'},
+                {skillName: 'ranged_attack' , value: 0, trait: 'dexterity'},
+                {skillName: 'read_intent' , value: 0, trait: 'charm'},
+                {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
+                {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
+                {skillName: 'resist_poison' , value: 0, trait: 'strength'},
+                {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
+                {skillName: 'stealth' , value: 0, trait: 'dexterity'},
+                {skillName: 'toughness' , value: 0, trait: 'strength'}
+            ],
+            armor: "",
+            skillPoints: this.props.skillPoints || 0,
+            customCards: [],
             skillsOpen: false,
-            defense: this.props.defense,
-            damageReduce: this.props.damageReduce,
-            priestDomain: this.props.priestDomain,
+            priestDomain: "",
             customCardSectionOpen: false,
             cardName: '',
             cardActionType: '',
             cardDescription: '',
             cardOrigin: '',
-            customCards: []
         }
     }
-    
-    componentDidUpdate(prevProps){
-    if(prevProps !== this.props){
-        this.setState({
-            name: this.props.name,
-            level: this.props.level,
-            ancestry: this.props.ancestry,
-            classOne: this.props.classOne,
-            classTwo: this.props.classTwo,
-            classThree: this.props.classThree,
-            traits: this.props.traits,
-            skills: this.props.skills,
-            defense: this.props.defense,
-            damageReduce: this.props.damageReduce,
-            priestDomain: this.props.priestDomain
-        });
-    }
-}
     
     render(){
         const {
             isOpen,
             close,
             createCharacter,
-            saveAttributes,
-            currentHealth
+            saveAttributes
         } = this.props
         const {
             name,
             level,
             ancestry,
-            classOne,
-            classTwo,
-            classThree,
+            background,
+            starterClass,
+            specialtyClassOne,
+            specialtyClassTwo,
             traits,
             skills,
+            armor,
+            customCards,
             skillsOpen,
-            defense,
-            damageReduce,
             priestDomain,
             customCardSectionOpen,
             cardName,
             cardActionType,
             cardDescription,
             cardOrigin,
-            customCards
         } = this.state
         
-        const saveCharacter = () => {
-            createCharacter(name, level, ancestry, classOne, classTwo, classThree, traits, skills, currentHealth, defense, damageReduce, customCards, priestDomain);
-            saveAttributes();
-            close();
-        };
+        const clearState = () => {
+            this.setState({
+                name: "",
+                level: 1,
+                ancestry: "",
+                background: "",
+                starterClass: "",
+                specialtyClassOne: "",
+                specialtyClassTwo: "",
+                traits: {
+                    strength: 0,
+                    dexterity: 0,
+                    intelligence: 0,
+                    will: 0,
+                    charm: 0
+                },
+                skills: [
+                    {skillName: 'animal_handling', value: 0, trait: 'will'},
+                    {skillName: 'appraise' , value: 0, trait: 'intelligence'},
+                    {skillName: 'athletics' , value: 0, trait: 'strength'},
+                    {skillName: 'finesse' , value: 0, trait: 'dexterity'},
+                    {skillName: 'history' , value: 0, trait: 'intelligence'},
+                    {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
+                    {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
+                    {skillName: 'magic_school_creation' , value: 0, trait: 'charm'},
+                    {skillName: 'magic_school_divine' , value: 0, trait: 'will'},
+                    {skillName: 'magic_school_elemental' , value: 0, trait: 'will'},
+                    {skillName: 'manipulation' , value: 0, trait: 'charm'},
+                    {skillName: 'medicine' , value: 0, trait: 'intelligence'},
+                    {skillName: 'melee_attack' , value: 0, trait: 'strength'},
+                    {skillName: 'nature' , value: 0, trait: 'intelligence'},
+                    {skillName: 'perception' , value: 0, trait: 'intelligence'},
+                    {skillName: 'ranged_attack' , value: 0, trait: 'dexterity'},
+                    {skillName: 'read_intent' , value: 0, trait: 'charm'},
+                    {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
+                    {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
+                    {skillName: 'resist_poison' , value: 0, trait: 'strength'},
+                    {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
+                    {skillName: 'stealth' , value: 0, trait: 'dexterity'},
+                    {skillName: 'toughness' , value: 0, trait: 'strength'}
+                ],
+                armor: "",
+                skillPoints: 0,
+                customCards: [],
+                skillsOpen: false,
+                priestDomain: "",
+                customCardSectionOpen: false,
+                cardName: '',
+                cardActionType: '',
+                cardDescription: '',
+                cardOrigin: '',
+            })
+        }
         
         const addCustomCard = () => {
             this.setState({
@@ -100,10 +161,26 @@ class EditCharacterModal extends Component {
             });
         }
         
+        const saveCharacter = () => {
+            (starterClass === 'priest' & priestDomain) && (
+                this.setState({
+                    cardName: characterInfo.starterClasses.priest.specials[priestDomain].cardName,
+                    cardActionType: characterInfo.starterClasses.priest.specials[priestDomain].action,
+                    cardDescription: characterInfo.starterClasses.priest.specials[priestDomain].description,
+                    cardOrigin: `${characterInfo.starterClasses.priest.specials[priestDomain].from} ${characterInfo.starterClasses.priest.specials[priestDomain].level}`
+                }),
+                addCustomCard()
+            )
+            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, armor, skillPoints, customCards);
+            saveAttributes();
+            clearState();
+            close();
+        };
+        
         return(
             <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
                 <div className='modal-title'>
-                    <h2>Edit Character</h2>
+                    <h2>{this.props.name ? 'Edit Character' : 'Create a New Character'}</h2>
                     <div className='close-button' onClick={() => close()}>
                         <span>X</span>
                     </div>
@@ -144,33 +221,28 @@ class EditCharacterModal extends Component {
                                 onChange={e => this.setState({ancestry: event.target.value})}
                             >
                                 <option selected>-- Select an Ancestry --</option>
-                                <option value='dwarf'>Dwarf</option>
-                                <option value='elf'>Elf</option>
-                                <option value='faeling'>Faeling</option>
-                                <option value='goblin'>Goblin</option>
-                                <option value='human'>Human</option>
+                                {Object.keys(characterInfo.ancestries).map(ancestryOption => 
+                                    <option value={`${ancestryOption}`}>{ancestryOption.replace(/_/g, " ")}</option>
+                                )}
                             </select>
                         </div>
                     </div>
                     <div className='modal-option'>
-                        <span>Level One Class: </span>
+                        <span>Starter Class: </span>
                         <div className='modal-input'>
                             <select 
-                                value={classOne}
-                                onChange={e => this.setState({classOne: event.target.value})}
+                                value={starterClass}
+                                onChange={e => this.setState({starterClass: event.target.value})}
                             >
                                 <option selected>-- Select a Class --</option>
-                                <option value='fighter'>Fighter</option>
-                                <option value='mage'>Mage</option>
-                                <option value='nomad'>Nomad</option>
-                                <option value='priest'>Priest</option>
-                                <option value='rogue'>Rogue</option>
-                                <option value='socialite'>Socialite</option>
+                                {Object.keys(characterInfo.starterClasses).map(starterClassOption => 
+                                    <option value={`${starterClassOption}`}>{starterClassOption.replace(/_/g, " ")}</option>
+                                )}
                             </select>
                         </div>
                     </div>
                     {
-                        classOne === 'priest' &&
+                        starterClass === 'priest' &&
                         <div className='modal-option'>
                             <span>Diety's Domain: </span>
                             <div className='modal-input'>
@@ -189,49 +261,45 @@ class EditCharacterModal extends Component {
                         </div>
                     }
                     <div className={`modal-option ${level >= 3 ? '' : 'hide'}`}>
-                        <span>Level Three Class: </span>
+                        <span>First Specialty Class: </span>
                         <div className='modal-input'>
                             <select 
-                                value={classTwo}
-                                onChange={e => this.setState({classTwo: event.target.value})}
+                                value={specialtyClassOne}
+                                onChange={e => this.setState({specialtyClassOne: event.target.value})}
                             >
                                 <option selected>-- Select a Class --</option>
-                                <option value='alchemist'>Alchemist</option>
-                                <option value='armsman'>Armsman</option>
-                                <option value='barbarian'>Barbarian</option>
-                                <option value='bard'>Bard</option>
-                                <option value='beast-tamer'>Beast Tamer</option>
-                                <option value='druid'>Druid</option>
-                                <option value='elementalist'>Elementalist</option>
-                                <option value='faithful'>Faithful</option>
-                                <option value='gunslinger'>Gunslinger</option>
-                                <option value='knight'>Knight</option>
-                                <option value='paladin'>Paladin</option>
-                                <option value='rifleman'>Rifleman</option>
-                                <option value='swashbuckler'>Swashbuckler</option>
-                                <option value='thief'>Thief</option>
-                                <option value='tunnel_gunner'>Tunnel Gunner</option>
-                                <option value='warlock'>Warlock</option>
-                                <option value='wizard'>Wizard</option>
+                                {Object.keys(characterInfo.specialtyClasses).map(specialtyClassOption => 
+                                    <option value={`${specialtyClassOption}`}>{specialtyClassOption.replace(/_/g, " ")}</option>
+                                )}
+                            </select>
+                        </div>
+                    </div>
+                    <div className={`modal-option ${level >= 5 ? '' : 'hide'}`}>
+                        <span>Second Specialty Class: </span>
+                        <div className='modal-input'>
+                            <select 
+                                value={specialtyClassTwo}
+                                onChange={e => this.setState({specialtyClassTwo: event.target.value})}
+                            >
+                                <option selected>-- Select a Class --</option>
+                                {Object.keys(characterInfo.specialtyClasses).map(specialtyClassOption => 
+                                    <option value={`${specialtyClassOption}`}>{specialtyClassOption.replace(/_/g, " ")}</option>
+                                )}
                             </select>
                         </div>
                     </div>
                     <div className='modal-option'>
-                        <span>Defense: </span>
+                        <span>Armor: </span>
                         <div className='modal-input'>
-                            <input
-                                value={defense}
-                                onChange={(e) => {this.setState({defense: e.target.value})}}
-                            />
-                        </div>
-                    </div>
-                    <div className='modal-option'>
-                        <span>Damage Resistance: </span>
-                        <div className='modal-input'>
-                            <input
-                                value={damageReduce}
-                                onChange={(e) => {this.setState({damageReduce: e.target.value})}}
-                            />
+                            <select 
+                                value={armor}
+                                onChange={e => this.setState({armor: event.target.value})}
+                            >
+                                <option selected>-- Select an Armor Type --</option>
+                                <option value='light'>Hardened Leather Jacket (light)</option>
+                                <option value='medium'>Coat with Metal Inserts (medium)</option>
+                                <option value='heavy'>Breast Plate with Grieves (heavy)</option>
+                            </select>
                         </div>
                     </div>
                     <div className='traits'>
@@ -277,7 +345,7 @@ class EditCharacterModal extends Component {
                             }
                         </div>
                     </div>
-                     <div className='modal-option-multi-select'>
+                    <div className='modal-option-multi-select'>
                         <div className='dropdown-button' onClick={() => this.setState({customCardSectionOpen: !customCardSectionOpen}) }>
                             <h3>Add Custom Card</h3>
                             <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
@@ -295,10 +363,26 @@ class EditCharacterModal extends Component {
                             <div className='modal-option'>
                                 <span>Action Type: </span>
                                 <div className='modal-input'>
-                                    <input
+                                    <select 
                                         value={cardActionType}
-                                        onChange={(e) => {this.setState({cardActionType: e.target.value})}}
-                                    />
+                                        onChange={e => this.setState({cardActionType: event.target.value})}
+                                    >
+                                        <option selected>-- Select Action Type --</option>
+                                        <option value='Active'>Active</option>
+                                        <option value='Active - Burn'>Active - Burn</option>
+                                        <option value='Active - One Use'>Active - One Use</option>
+                                        <option value='Active - Spell'>Active - Spell</option>
+                                        <option value='Active - Spell - Burn'>Active - Spell - Burn</option>
+                                        <option value='Active - Spell - One Use'>Active - Spell - One Use</option>
+                                        <option value='Triggered'>Triggered</option>
+                                        <option value='Triggered - Burn'>Triggered - Burn</option>
+                                        <option value='Triggered - One Use'>Triggered - One Use</option>
+                                        <option value='Triggered - Spell'>Triggered - Spell</option>
+                                        <option value='Triggered - Spell - Burn'>Triggered - Spell - Burn</option>
+                                        <option value='Triggered - Spell - One Use'>Triggered - Spell - One Use</option>
+                                        <option value='Passive'>Passive</option>
+                                        <option value='Passive - Spell'>Passive - Spell</option>
+                                    </select>
                                 </div>
                             </div>
                             <div className='modal-option'>
@@ -347,25 +431,7 @@ class EditCharacterModal extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        name: state.name,
-        level: state.level,
-        ancestry: state.ancestry,
-        classOne: state.classOne, 
-        classTwo: state.classTwo, 
-        classThree: state.classThree, 
-        traits: state.traits, 
-        skills: state.skills,
-        currentHealth: state.currentHealth,
-        defense: state.defense,
-        damageReduce: state.damageReduce,
-        priestDomain: state.priestDomain
-        
-    };
-};
-
-export default connect(mapStateToProps,{
+export default connect(null,{
     createCharacter: createCharacter,
     saveAttributes: saveAttributes
-})(EditCharacterModal);
+})(CharacterModal);

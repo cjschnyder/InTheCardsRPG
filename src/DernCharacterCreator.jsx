@@ -1,8 +1,7 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import NewCharacterModal from './characterOptionsModals/NewCharacterModal';
+import CharacterModal from './characterOptionsModals/CharacterModal';
 import LoadCharacterModal from './characterOptionsModals/LoadCharacterModal';
-import EditCharacterModal from './characterOptionsModals/EditCharacterModal';
 import CardHandler from './cardHandler/CardHandler';
 import CharacterSheet from './characterSheet/CharacterSheet';
 import './style/DernCharacterCreator.scss'
@@ -86,11 +85,11 @@ class DernCharacterCreator extends Component {
                         <div className="option" onClick={() => toggleNewCharacterModal()}>
                             <span>Create New Character</span>
                         </div>
-                        <div className="option" onClick={() => toggleLoadCharacterModal()}>
-                            <span>Load Character</span>
-                        </div>
                         <div className="option" onClick={() => toggleEditCharacterModal()}>
                             <span>Edit Character</span>
+                        </div>
+                        <div className="option" onClick={() => toggleLoadCharacterModal()}>
+                            <span>Load Character</span>
                         </div>
                     </div>
                 </header>
@@ -111,7 +110,7 @@ class DernCharacterCreator extends Component {
                 {cardHandler && <CardHandler />}
                 {characterSheet && <CharacterSheet />}
                 <div>
-                    <NewCharacterModal
+                    <CharacterModal
                         isOpen={showNewCharacter}
                         close={() => toggleNewCharacterModal()}
                     />
@@ -119,9 +118,10 @@ class DernCharacterCreator extends Component {
                         isOpen={showLoadCharacter}
                         close={() => toggleLoadCharacterModal()}
                     />
-                    <EditCharacterModal 
+                    <CharacterModal 
                         isOpen={showEditCharacter}
                         close={() => toggleEditCharacterModal()}
+                        name = "Bean"
                     />
                 </div>
             </div>

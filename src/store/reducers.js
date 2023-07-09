@@ -1,17 +1,13 @@
 import characterInfo from '../assets/characterInfoAndCards.json'; 
 
 const initialState = {
-    burn: [],
-    deck: [],
-    discard: [],
-    handFull: false,
-    hand: [],
     name: "",
     level: 1,
     ancestry: "",
-    classOne: "",
-    classTwo: "",
-    classThree: "",
+    background: "",
+    starterClass: "",
+    specialtyClassOne: "",
+    specialtyClassTwo: "",
     traits: {
         strength: 0,
         dexterity: 0,
@@ -49,8 +45,12 @@ const initialState = {
     currentHealth: 0,
     movement: 0,
     defense: 0,
-    damageReduce: 0,
-    priestDomain: ""
+    damageResist: 0,
+    burn: [],
+    deck: [],
+    discard: [],
+    hand: [],
+    skillPoints: 0
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -94,7 +94,7 @@ const rootReducer = (state = initialState, action) => {
                 if (action.level >= ancestryLevel) {
                     characterHealth = characterHealth + info.health;
                     info.movement && (characterMovement = characterMovement + info.movement);
-                    ancestryCards.push(...info.cards);
+                    info.cards && ancestryCards.push(...info.cards);
                 }
             });
             
