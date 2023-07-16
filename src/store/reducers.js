@@ -63,9 +63,10 @@ const rootReducer = (state = initialState, action) => {
                         name: state.name, 
                         level: state.level,
                         ancestry: state.ancestry,
-                        classOne: state.classOne, 
-                        classTwo: state.classTwo, 
-                        classThree: state.classThree, 
+                        background: state.background,
+                        starterClass: state.starterClass, 
+                        specialtyClassOne: state.specialtyClassOne, 
+                        specialtyClassTwo: state.specialtyClassTwo, 
                         traits: state.traits, 
                         skills: state.skills,
                         health: state.health,
@@ -84,13 +85,13 @@ const rootReducer = (state = initialState, action) => {
             let characterHealth = 0;
             let characterMovement = 0;
             const ancestryCards = [];
-            const classOneCards = [];
-            const classTwoCards = [];
-            const classThreeCards = [];
+            const starterClassCards = [];
+            const specialtyClassOneCards = [];
+            const specialtyClassTwoCards = [];
             const skillCards = [];
             
             action.ancestry && Object.entries(characterInfo.ancestries[action.ancestry]).forEach(entry => {
-                const [ancestryLevel, info] = entry;                                                                                
+                const [ancestryLevel, info] = entry;
                 if (action.level >= ancestryLevel) {
                     characterHealth = characterHealth + info.health;
                     info.movement && (characterMovement = characterMovement + info.movement);
@@ -98,44 +99,46 @@ const rootReducer = (state = initialState, action) => {
                 }
             });
             
-            action.classOne && Object.entries(characterInfo.levelOneclasses[action.classOne]).forEach(entry => {
+            action.starterClass && Object.entries(characterInfo.starterClasses[action.starterClass]).forEach(entry => {
                 const [classLevel, info] = entry;                                                                                
                 if (action.level >= classLevel) {
                     characterHealth = characterHealth + info.health;
                     info.movement && (characterMovement = characterMovement + info.movement);
-                    action.classOne === 'priest' ?
-                    info.cards.map(card => {
-                        card.cardName === "Divine Blessing" ?
-                            classOneCards.push({
-                                cardName: card.cardName,
-                                action: card.action,
-                                description: card.description[action.priestDomain],
-                                from: card.from,
-                                level: card.level
-                            }):
-                            classOneCards.push(card);
-                    }):
-                    classOneCards.push(...info.cards);
+                    starterClassCards.push(...info.cards);
                 }
             })
                 
-            action.classTwo && Object.entries(characterInfo.levelThreeClasses[action.classTwo]).forEach(entry => {
-                const [classLevel, info] = entry;                                                                                
-                if (action.level >= classLevel) {
-                    characterHealth = characterHealth + info.health;
-                    info.movement && (characterMovement = characterMovement + info.movement);
-                    classTwoCards.push(...info.cards);
+            if(action.specialtyClassOne) {
+                const classTwo = Object.values(characterInfo.specialtyClasses[action.specialtyClassOne]);
+                
+                if (action.level >= 3) {
+                    characterHealth = characterHealth + classTwo[0].health;
+                    classTwo[0].movement && (characterMovement = characterMovement + classTwo[0].movement);
+                    classTwo[0].cards && specialtyClassOneCards.push(...classTwo[0].cards);
                 }
-            })
             
-            action.classThree && Object.entries(characterInfo.skills).forEach(entry => {
-                const [skillName, info] = entry;                                                                                
-                if (action.level >= classLevel) {
-                    characterHealth = characterHealth + info.health;
-                    info.movement && (characterMovement = characterMovement + info.movement);
-                    classThreeCards.push(...info.cards);
+                if (action.level >= 6) {
+                    characterHealth = characterHealth + classTwo[1].health;
+                    classTwo[1].movement && (characterMovement = characterMovement + classTwo[1].movement);
+                    classTwo[1].cards && specialtyClassOneCards.push(...classTwo[1].cards);
                 }
-            })
+            }
+            
+            if (action.specialtyClassTwo) {
+                const classThree = Object.values(characterInfo.specialtyClasses[action.specialtyClassTwo]);
+                
+                if (action.level >= 5) {
+                    characterHealth = characterHealth + classThree[0].health;
+                    classThree[0].movement && (characterMovement = characterMovement + classThree[0].movement);
+                    classThree[0].cards && specialtyClassOneCards.push(...classThree[0].cards);
+                }
+            
+                if (action.level >= 8) {
+                    characterHealth = characterHealth + classThree[1].health;
+                    classThree[1].movement && (characterMovement = characterMovement + classThree[1].movement);
+                    classThree[1].cards && specialtyClassOneCards.push(...classThree[1].cards);
+                }
+            }
             
             action.skills.map(skill => {
                 if (parseInt(skill.value) + parseInt(action.traits[skill.trait]) >= 5) {
@@ -151,9 +154,9 @@ const rootReducer = (state = initialState, action) => {
             
             const fullDeck = [
                 ...ancestryCards,
-                ...classOneCards,
-                ...classTwoCards,
-                ...classThreeCards,
+                ...starterClassCards,
+                ...specialtyClassOneCards,
+                ...specialtyClassTwoCards,
                 ...skillCards,
                 ...action.customCards
             ];
@@ -164,19 +167,17 @@ const rootReducer = (state = initialState, action) => {
                 burn: initialState.burn,
                 name: action.name,
                 level: action.level,
+                background: action.background,
                 ancestry: action.ancestry,
-                classOne: action.classOne,
-                classTwo: action.classTwo,
-                classThree: action.classThree,
+                starterClass: action.starterClass, 
+                specialtyClassOne: action.specialtyClassOne, 
+                specialtyClassTwo: action.specialtyClassTwo,
                 traits: action.traits,
                 skills: action.skills,
                 health: characterHealth,
                 healingRate: Math.floor(characterHealth/4),
                 currentHealth: action.currentHealth ? action.currentHealth : characterHealth,
                 movement: characterMovement,
-                defense: action.defense,
-                damageReduce: action.damageReduce,
-                priestDomain: action.priestDomain,
                 deck: fullDeck
             }
         case 'SET_CURRENT_HEALTH':

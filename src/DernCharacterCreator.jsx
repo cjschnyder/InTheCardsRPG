@@ -4,6 +4,7 @@ import CharacterModal from './characterOptionsModals/CharacterModal';
 import LoadCharacterModal from './characterOptionsModals/LoadCharacterModal';
 import CardHandler from './cardHandler/CardHandler';
 import CharacterSheet from './characterSheet/CharacterSheet';
+import Inventory from './inventory/Inventory';
 import './style/DernCharacterCreator.scss'
 
 class DernCharacterCreator extends Component {
@@ -20,6 +21,18 @@ class DernCharacterCreator extends Component {
     }
     
     render(){
+        const {
+            name,
+            level,
+            ancestry,
+            background,
+            starterClass,
+            specialtyClassOne,
+            specialtyClassTwo,
+            traits,
+            skills,
+            skillPoints
+        } = this.props
         const {
             showNewCharacter,
             showLoadCharacter,
@@ -106,9 +119,16 @@ class DernCharacterCreator extends Component {
                     >
                         <span>Card Handler</span>
                     </div>
+                    <div 
+                        className={`view-options-button ${inventory && 'selected'}`}
+                        onClick={() => selectInventory()}
+                    >
+                        <span>Inventory</span>
+                    </div>
                 </div>
                 {cardHandler && <CardHandler />}
                 {characterSheet && <CharacterSheet />}
+                {inventory && <Inventory />}
                 <div>
                     <CharacterModal
                         isOpen={showNewCharacter}
@@ -121,7 +141,16 @@ class DernCharacterCreator extends Component {
                     <CharacterModal 
                         isOpen={showEditCharacter}
                         close={() => toggleEditCharacterModal()}
-                        name = "Bean"
+                        name={name}
+                        level={level}
+                        ancestry={ancestry}
+                        background={background}
+                        starterClass={starterClass}
+                        specialtyClassOne={specialtyClassOne}
+                        specialtyClassTwo={specialtyClassTwo}
+                        traits={traits}
+                        skills={skills}
+                        skillPoints={skillPoints}
                     />
                 </div>
             </div>
@@ -129,4 +158,20 @@ class DernCharacterCreator extends Component {
     }
 }
 
-export default DernCharacterCreator;
+const mapStateToProps = (state) => {
+    return {
+        name: state.name,
+        level: state.level,
+        ancestry: state.ancestry,
+        background: state.background,
+        starterClass: state.classOne,
+        specialtyClassOne: state.classTwo,
+        specialtyClassTwo: state.classThree,
+        traits: state.traits,
+        skills: state.skills,
+        skillPoints: state.skillPoints
+        
+    };
+};
+
+export default connect(mapStateToProps, {})(DernCharacterCreator);

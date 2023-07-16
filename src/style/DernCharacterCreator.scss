@@ -89,7 +89,7 @@
             flex-wrap: wrap;
         }
         
-        .reset-deck {
+        .reset-deck, .open-add-item-modal {
             position: fixed;
             bottom: 10px;
             right: 10px;
@@ -101,7 +101,14 @@
             font-weight: bold;
             text-align: center;
             border-radius: 10px;
+        }
+        
+        .reset-deck {
             background: $deleteRed;
+        }
+        
+        .open-add-item-modal {
+            background: $dark;
         }
     }
 }

@@ -48,7 +48,6 @@ class CharacterModal extends Component {
                 {skillName: 'stealth' , value: 0, trait: 'dexterity'},
                 {skillName: 'toughness' , value: 0, trait: 'strength'}
             ],
-            armor: "",
             skillPoints: this.props.skillPoints || 0,
             customCards: [],
             skillsOpen: false,
@@ -78,7 +77,7 @@ class CharacterModal extends Component {
             specialtyClassTwo,
             traits,
             skills,
-            armor,
+            skillPoints,
             customCards,
             skillsOpen,
             priestDomain,
@@ -130,7 +129,6 @@ class CharacterModal extends Component {
                     {skillName: 'stealth' , value: 0, trait: 'dexterity'},
                     {skillName: 'toughness' , value: 0, trait: 'strength'}
                 ],
-                armor: "",
                 skillPoints: 0,
                 customCards: [],
                 skillsOpen: false,
@@ -171,7 +169,7 @@ class CharacterModal extends Component {
                 }),
                 addCustomCard()
             )
-            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, armor, skillPoints, customCards);
+            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, customCards);
             saveAttributes();
             clearState();
             close();
@@ -214,7 +212,21 @@ class CharacterModal extends Component {
                         </div>
                     </div>
                     <div className='modal-option'>
-                        <span>Character Ancestry: </span>
+                        <span>Backgrounds: </span>
+                        <div className='modal-input'>
+                            <select 
+                                value={background}
+                                onChange={e => this.setState({background: event.target.value})}
+                            >
+                                <option selected>-- Select a Background --</option>
+                                {Object.keys(characterInfo.background).map(backgroundOption => 
+                                    <option value={`${backgroundOption}`}>{backgroundOption.replace(/_/g, " ")}</option>
+                                )}
+                            </select>
+                        </div>
+                    </div>
+                    <div className='modal-option'>
+                        <span>Ancestry: </span>
                         <div className='modal-input'>
                             <select 
                                 value={ancestry}
@@ -250,12 +262,10 @@ class CharacterModal extends Component {
                                     value={priestDomain}
                                     onChange={e => this.setState({priestDomain: event.target.value})}
                                 >
-                                    <option selected>-- Select an Ancestry --</option>
-                                    <option value='battle'>Battle</option>
-                                    <option value='righteousness'>Righteousness</option>
-                                    <option value='luck'>Luck</option>
-                                    <option value='nature'>Nature</option>
-                                    <option value='death'>Death</option>
+                                    <option selected>-- Select your Diety's Domain --</option>
+                                    {Object.keys(characterInfo.starterClasses.priest.specials).map(priestOption => 
+                                        <option value={`${priestOption}`}>{priestOption.replace(/_/g, " ")}</option>
+                                    )}
                                 </select>
                             </div>
                         </div>
@@ -285,20 +295,6 @@ class CharacterModal extends Component {
                                 {Object.keys(characterInfo.specialtyClasses).map(specialtyClassOption => 
                                     <option value={`${specialtyClassOption}`}>{specialtyClassOption.replace(/_/g, " ")}</option>
                                 )}
-                            </select>
-                        </div>
-                    </div>
-                    <div className='modal-option'>
-                        <span>Armor: </span>
-                        <div className='modal-input'>
-                            <select 
-                                value={armor}
-                                onChange={e => this.setState({armor: event.target.value})}
-                            >
-                                <option selected>-- Select an Armor Type --</option>
-                                <option value='light'>Hardened Leather Jacket (light)</option>
-                                <option value='medium'>Coat with Metal Inserts (medium)</option>
-                                <option value='heavy'>Breast Plate with Grieves (heavy)</option>
                             </select>
                         </div>
                     </div>

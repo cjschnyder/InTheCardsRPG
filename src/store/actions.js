@@ -6,32 +6,26 @@ export function createCharacter(
     name,
     level,
     ancestry,
-    classOne,
-    classTwo,
-    classThree,
+    background,
+    starterClass,
+    specialtyClassOne,
+    specialtyClassTwo,
     traits,
     skills,
-    currentHealth,
-    defense,
-    damageReduce,
-    customCards,
-    priestDomain
+    customCards
     ){
     return { 
         type: 'CREATE_CHARACTER',
-        name, 
-        level, 
-        ancestry, 
-        classOne, 
-        classTwo, 
-        classThree, 
-        traits, 
+        name,
+        level,
+        ancestry,
+        background,
+        starterClass,
+        specialtyClassOne,
+        specialtyClassTwo,
+        traits,
         skills,
-        currentHealth,
-        defense,
-        damageReduce,
-        customCards,
-        priestDomain
+        customCards
     };
 }
 
@@ -64,18 +58,16 @@ export function loadCharacter(
     name,
     level,
     ancestry,
-    classOne,
-    classTwo,
-    classThree,
+    background,
+    starterClass,
+    specialtyClassOne,
+    specialtyClassTwo,
     traits,
     skills,
     health,
     healingRate,
     currentHealth,
-    movement,
-    defense,
-    damageReduce,
-    priestDomain
+    movement
 ){
     return {
         type: 'LOAD_CHARACTER',
@@ -83,17 +75,15 @@ export function loadCharacter(
         name,
         level,
         ancestry,
-        classOne,
-        classTwo,
-        classThree,
+        background,
+        starterClass,
+        specialtyClassOne,
+        specialtyClassTwo,
         traits,
         skills,
         health,
         healingRate,
         currentHealth,
-        movement,
-        defense,
-        damageReduce,
-        priestDomain
+        movement
     };
 }

@@ -29,13 +29,6 @@
                   "description":"When 3 or more enemies are adjacent to you, you have minor advantage on all attacks.",
                   "from":"dwarf",
                   "level":1
-               },
-               {
-                  "cardName":"Ballad of the Mountain King",
-                  "action":"Active - Spell",
-                  "description":"For 10 minutes you sing of the triumphs of past kings. While you sing Allies within 10 yards that can hear the song cannot be moved by enemies, knocked prone, or be frightened. Additionally they deal an extra +1d6 damage with weapon attacks.",
-                  "from":"dwarf",
-                  "level":7
                }
             ]
          },
@@ -282,6 +275,56 @@
          }
       }
    },
+   "background": {
+       "craftsman": {
+           "skillBonus":[
+               {
+                  "skillName":"appraise",
+                  "value":1
+               }
+            ]
+       },
+       "farmer": {
+           "skillBonus":[
+               {
+                  "skillName":"toughness",
+                  "value":1
+               }
+            ]
+       },
+       "noble": {
+           "skillBonus":[
+               {
+                  "skillName":"social_knowledge",
+                  "value":1
+               }
+            ]
+       },
+       "outlaw": {
+           "skillBonus":[
+               {
+                  "skillName":"stealth",
+                  "value":1
+               }
+            ]
+       },
+       "soldier": {
+           "skillBonus":[
+               {
+                  "skillName":"athletics",
+                  "value":1
+               }
+            ]
+       },
+       "wanderer": {
+           "skillBonus":[
+               {
+                  "skillName":"nature",
+                  "value":1
+               }
+            ]
+       }
+   },
    "starterClasses":{
       "fighter":{
          "1":{
@@ -489,44 +532,7 @@
                   "from":"priest",
                   "level":1
                }
-            ],
-            "specials":{
-                "battle": {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                  "from":"priest",
-                  "level":1
-                },
-                "righteousness": {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                  "from":"priest",
-                  "level":1
-                },
-                "luck": {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                  "from":"priest",
-                  "level":1
-                },
-                "nature": {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                  "from":"priest",
-                  "level":1
-                },
-                "death": {
-                  "cardName":"Divine Blessing",
-                  "action":"Active - Spell",
-                  "description":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
-                  "from":"priest",
-                  "level":1
-                }
-            }
+            ]
          },
          "4":{
             "skillBonus":[
@@ -545,7 +551,44 @@
                   "level":4
                }
             ]
-         }
+         },
+        "specials":{
+            "battle": {
+              "cardName":"Divine Blessing",
+              "action":"Active - Spell",
+              "description":"For one minute, an ally within 5 yards adds your Will to their damage rolls. While this prayer is active you can use “Magic School: Divine” to make basic attacks. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+              "from":"priest",
+              "level":1
+            },
+            "righteousness": {
+              "cardName":"Divine Blessing",
+              "action":"Active - Spell",
+              "description":"For one hour you and an ally within 5 yards can choose to reroll a failed skill check. Once the reroll is used the effect of this spell ends. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+              "from":"priest",
+              "level":1
+            },
+            "luck": {
+              "cardName":"Divine Blessing",
+              "action":"Active - Spell",
+              "description":"Pick a creature within 5 yards, for the next minute you can flip a coin once per turn. Heads: You gain minor advantage on your next roll. Tails: The target gains disadvantage on their next roll. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+              "from":"priest",
+              "level":1
+            },
+            "nature": {
+              "cardName":"Divine Blessing",
+              "action":"Active - Spell",
+              "description":"For one hour you and an ally within 5 yards cannot gain any negative conditions from natural causes. (can’t be slowed by steep terrain, poisoned by plants, or immobilized by mud) Additionally you can see in total darkness up to 10 yards. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+              "from":"priest",
+              "level":1
+            },
+            "death": {
+              "cardName":"Divine Blessing",
+              "action":"Active - Spell",
+              "description":"For one minute you and an ally within 5 yards make attacks  with minor advantage and deal +1d6 extra damage if you are below half health. Alternatively, you can burn this card to heal an ally within 5 yards by their healing rate.",
+              "from":"priest",
+              "level":1
+            }
+            }
       },
       "rogue":{
          "1":{
