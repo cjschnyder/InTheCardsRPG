@@ -1,4 +1,5 @@
-import characterInfo from '../assets/characterInfoAndCards.json'; 
+import characterInfo from '../assets/characterInfoAndCards.json';
+import itemsList from '../assets/items.json';
 
 const initialState = {
     name: "",
@@ -44,13 +45,15 @@ const initialState = {
     healingRate: 0,
     currentHealth: 0,
     movement: 0,
-    defense: 0,
-    damageResist: 0,
     burn: [],
     deck: [],
     discard: [],
     hand: [],
-    skillPoints: 0
+    skillPoints: 0,
+    inventory: [],
+    equippedArmor: {},
+    shield: false,
+    equippedWeapon: {}
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -59,23 +62,21 @@ const rootReducer = (state = initialState, action) => {
             localStorage.setItem(
                 state.name, 
                 JSON.stringify({
-                        deck: state.deck,
-                        name: state.name, 
-                        level: state.level,
-                        ancestry: state.ancestry,
-                        background: state.background,
-                        starterClass: state.starterClass, 
-                        specialtyClassOne: state.specialtyClassOne, 
-                        specialtyClassTwo: state.specialtyClassTwo, 
-                        traits: state.traits, 
-                        skills: state.skills,
-                        health: state.health,
-                        healingRate: state.healingRate,
-                        currentHealth: state.currentHealth,
-                        movement: state.movement,
-                        defense: state.defense,
-                        damageReduce: state.damageReduce,
-                        priestDomain: state.priestDomain
+                    deck: state.deck,
+                    name: state.name, 
+                    level: state.level,
+                    ancestry: state.ancestry,
+                    background: state.background,
+                    starterClass: state.starterClass, 
+                    specialtyClassOne: state.specialtyClassOne, 
+                    specialtyClassTwo: state.specialtyClassTwo, 
+                    traits: state.traits, 
+                    skills: state.skills,
+                    health: state.health,
+                    healingRate: state.healingRate,
+                    currentHealth: state.currentHealth,
+                    movement: state.movement,
+                    inventory: state.inventory
                 })
             );
             return {
@@ -180,8 +181,24 @@ const rootReducer = (state = initialState, action) => {
                 movement: characterMovement,
                 deck: fullDeck
             }
+        case 'SET_INVENTORY':
+            const equipment = action.items.map(item => 
+                ({...itemsList.items.find(selected => selected.name === item.value), quantity: 1})
+            );
+            const filteredEquipment = equipment.filter(item => !state.inventory.some(object => item.name === object.name))
+            
+            return {
+                ...state,
+                inventory: [...state.inventory, ...filteredEquipment]
+            }
+        case 'REMOVE_ITEM':
+            const updatedInventory = state.inventory.filter(item => item !== action.item);
+            
+            return {
+                ...state,
+                inventory: updatedInventory
+            }
         case 'SET_CURRENT_HEALTH':
-            console.log(action)
             let newCurrentHealth = action.currentHealth;
             action.equation === 'add' ?
                 newCurrentHealth = newCurrentHealth + parseInt(action.value) :

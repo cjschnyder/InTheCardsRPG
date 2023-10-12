@@ -2,7 +2,7 @@ import { Component } from 'react';
 import { connect } from 'react-redux';
 import Card from './Card';
 import {resetDeck} from '../store/actions'
-import '../style/DernCharacterCreator.scss'
+import '../style/InTheCards.scss'
 
 class CardHandler extends Component {
     constructor(props) {

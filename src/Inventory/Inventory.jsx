@@ -1,7 +1,8 @@
 import { Component } from 'react';
 import { connect } from 'react-redux';
-import '../style/Inventory.scss';
+import {removeItem} from '../store/actions'
 import AddItemModal from './AddItemModal';
+import '../style/Inventory.scss';
 
 class Inventory extends Component {
     constructor(props) {
@@ -14,8 +15,12 @@ class Inventory extends Component {
     
     render(){
         const {
-            showAddItemModal,
-            armor
+            inventory,
+            armor,
+            removeItem
+        } = this.props
+        const {
+            showAddItemModal
         } = this.state
         
         const toggleInventoryModal = () => {
@@ -27,9 +32,77 @@ class Inventory extends Component {
         return (
             <main>
                 <div className='inventory'>
-                    <div className='display-armor'></div>
-                    <div className='display-weapons'></div>
-                    <div className='display-gear'></div>
+                    <div className='display-armor'>
+                        <h2>Armor</h2>
+                        <div className='item-display'>
+                            {inventory.map(item =>
+                                (item.type === 'armor' &&
+                                    <div className='item'>
+                                        <div className='name'>{item.name}</div>
+                                        <div className='buttons quantity'>
+                                            <div className='button add'>+</div>
+                                            <span className='quantity-text'>Quantity: {item.quantity}</span>
+                                            <div className='button subtract'>-</div>
+                                        </div>
+                                        <div className='buttons'>
+                                            <div className='button equip'>Equip</div>
+                                            <div className='button remove' onClick={() => removeItem(item)}>Remove</div>
+                                            <div className='button extend'>
+                                                <span className={`arrow`}>&#8249;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+                    <div className='display-weapons'>
+                        <h2>Weapons</h2>
+                        <div className='item-display'>
+                            {inventory.map(item =>
+                                (item.type === 'weapon' &&
+                                    <div className='item'>
+                                        <div className='name'>{item.name}</div>
+                                        <div className='buttons quantity'>
+                                            <div className='button add'>+</div>
+                                            <span className='quantity-text'>Quantity: {item.quantity}</span>
+                                            <div className='button subtract'>-</div>
+                                        </div>
+                                        <div className='buttons'>
+                                            <div className='button equip'>Equip</div>
+                                            <div className='button remove' onClick={() => removeItem(item)}>Remove</div>
+                                            <div className='button extend'>
+                                                <span className={`arrow`}>&#8249;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
+                    <div className='display-gear'>
+                        <h2>Equipment</h2>
+                        <div className='item-display'>
+                            {inventory.map(item =>
+                                (item.type === 'item' &&
+                                    <div className='item'>
+                                        <div className='name'>{item.name}</div>
+                                        <div className='buttons quantity'>
+                                            <div className='button add'>+</div>
+                                            <span className='quantity-text'>Quantity: {item.quantity}</span>
+                                            <div className='button subtract'>-</div>
+                                        </div>
+                                        <div className='buttons'>
+                                            <div className='button remove' onClick={() => removeItem(item)}>Remove</div>
+                                            <div className='button extend'>
+                                                <span className={`arrow`}>&#8249;</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            )}
+                        </div>
+                    </div>
                 </div>
                 <div
                     className='open-add-item-modal'
@@ -46,4 +119,13 @@ class Inventory extends Component {
     }
 }
 
-export default Inventory;
+const mapStateToProps = (state) => {
+    return {
+        inventory: state.inventory,
+        armor: state.armor
+    };
+};
+
+export default connect(mapStateToProps, {
+    removeItem: removeItem
+})(Inventory);

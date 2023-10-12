@@ -29,6 +29,14 @@ export function createCharacter(
     };
 }
 
+export function setInventory(items) {
+  return { type: 'SET_INVENTORY', items};
+}
+
+export function removeItem(item) {
+    return { type: 'REMOVE_ITEM', item};
+}
+
 export function setCurrentHealth(currentHealth, equation, value) {
   return { type: 'SET_CURRENT_HEALTH', currentHealth, equation, value};
 }

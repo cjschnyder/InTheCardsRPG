@@ -1,0 +1,100 @@
+@import 'variables';
+
+#in-the-cards {
+    width: 100vw;
+    height: 100vh;
+    font-family: 'Roboto';
+    background-color: $lightTan;
+
+    header {
+        background-color: $lightTan;
+        height: 60px;
+        padding: 5px; 
+        display: flex;
+        color: $light;
+
+        #menu-icon {
+            margin: 10px;
+            margin-right: 25px;
+            
+            svg {
+                fill: #051326;
+            }
+        }
+        
+        #in-the-cards-banner {
+            margin-top: 7px;
+            img {
+                width:400px;
+            }
+        }
+    }
+    #itc-menu-container {
+        background-color: $lightTan;
+        padding: 0 10px;
+        position: absolute;
+        height: calc(100vh - 70px);
+        z-index: 10;
+        
+        .itc-menu, .itc-rules-submenu{
+            list-style: none;
+            padding-left: 10px;
+            color: $darkBlue;
+            
+            
+            .itc-menu-item {
+                font-family: 'Abril Fatface';
+                font-size: 26px;
+                margin-bottom: 10px;
+                margin-right:10px;
+            }
+            
+            .itc-submenu-item {
+                font-size: 18px;
+                padding: 5px 0;
+            }
+            
+            a {
+                color: unset;
+                text-decoration: none;
+                cursor: pointer;
+            }
+        }
+    }
+    
+    .cover {
+        z-index: 2;
+        background: #000;
+        width: 100%;
+        height: calc(100vh - 70px);
+        opacity: 30%;
+        position: absolute;
+    }
+    
+    .blur {
+        z-index: 1;
+        filter:blur(3px);
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    #in-the-cards {
+        header {
+            position: fixed;
+            top: 0px;
+            width: 100vw;
+            
+            #in-the-cards-banner {
+                margin-top: 10px;
+                img {
+                    width:300px;
+                }
+            }
+        }
+        
+        .itc-container {
+            margin-top: 70px;
+        }
+    }
+}
+

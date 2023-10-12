@@ -113,6 +113,11 @@
     .horizontal-buttons{
         display: flex;
         flex-direction: row;
+        
+        &.bottom {
+            position: absolute;
+            bottom: 10px;
+        }
     
         .button {
             margin-right: 10px;
