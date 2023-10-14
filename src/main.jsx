@@ -5,6 +5,10 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { InTheCards } from './InTheCards';
 import './style/main.scss';
 import {persistor, store} from './store/store';
+import { Amplify } from 'aws-amplify';
+import awsExports from './aws-exports';
+
+Amplify.configure(awsExports);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
