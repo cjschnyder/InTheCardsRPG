@@ -2,7 +2,7 @@ import { useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import CardHandler from './cardHandler/CardHandler';
 import CharacterSheet from './characterSheet/CharacterSheet';
-import Inventory from './inventory/Inventory';
+import Inventory from './Inventory/Inventory';
 import './style/InTheCards.scss'
 
 export const InTheCards = () => {
