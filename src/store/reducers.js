@@ -138,7 +138,6 @@ const rootReducer = (state = initialState, action) => {
             
             const characterSkillCards = action.skills.reduce((skillCards, skill) => {
                 if (skill.value === "novice") {
-                    console.log(skillCards)
                     return (characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice") && 
                         [...skillCards, ...characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice")]
                     )
@@ -150,7 +149,6 @@ const rootReducer = (state = initialState, action) => {
                     return [...skillCards]
                 }
             }, []);
-            console.log(action.customCards);
             
             const fullDeck = [
                 ...ancestryCards,
@@ -265,7 +263,7 @@ const rootReducer = (state = initialState, action) => {
                 discard: initialState.deck,
                 burn: initialState.burn
             }
-        case 'LOAD_CHARACTER':
+        case 'LOAD_CHARACTER': //Only take in name and pull info from Store, no need to take all info in
             return {
                 hand: initialState.hand,
                 discard: initialState.deck,

@@ -143,7 +143,6 @@ class CharacterModal extends Component {
         // }
         
         const saveCharacter = () => {
-            console.log(characterInfo.starterClasses.priest.specials[priestDomain].cardName);
             const priestDomainCard = [];
             (starterClass === 'priest' && priestDomain) && (
                 priestDomainCard.push(
@@ -155,7 +154,7 @@ class CharacterModal extends Component {
                     }
                 )
             );
-            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, priestDomainCard);
+            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, priestDomainCard); //Replace priestDomain Card with Custom eventually
             saveAttributes();
             clearState();
             location.replace("/character-sheet");

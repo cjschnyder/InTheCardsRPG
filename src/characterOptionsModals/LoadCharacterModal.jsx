@@ -55,7 +55,7 @@ class LoadCharacterModal extends Component {
                                                     selectedCharacter.defense,
                                                     selectedCharacter.damageReduce
                                                 );
-                                                setTimeout(()=>{location.replace("/character-sheet")}, 500)
+                                                setTimeout(()=>{location.replace("/character-sheet")}, 500) //Bad, replace timeout in future
                                             }}
                                         >
                                             Load
