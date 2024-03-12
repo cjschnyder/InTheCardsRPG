@@ -69,7 +69,7 @@ export const InTheCards = () => {
                 <div className={isMenuOpen ? 'cover' : ''} />
                 <div className={`itc-container ${isMenuOpen ? 'blur' : ''}`}>
                     <Routes>
-                        <Route path='/' element={<CharacterSheet />} />
+                        <Route path='/' element={<LoadCharacterModal />} />
                         <Route path='/create' element={<CharacterModal />} />
                         <Route path='/characters' element={<LoadCharacterModal />} />
                         <Route path='/character-sheet' element={<CardHandler />} />
