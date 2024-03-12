@@ -23,13 +23,10 @@ class LoadCharacterModal extends Component {
         } = this.state
         
         return(
-            <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
+            <div className={`modal-wrapper`}>
                 <div className='modal-body'>
                     <div className='modal-title'>
                         <h2>Load a Character</h2>
-                        <div className="close-button" onClick={() => close()}>
-                            <span>X</span>
-                        </div>
                     </div>
                     <div className='load-deck-wrapper'>
                             {
@@ -58,7 +55,7 @@ class LoadCharacterModal extends Component {
                                                     selectedCharacter.defense,
                                                     selectedCharacter.damageReduce
                                                 );
-                                                close();
+                                                setTimeout(()=>{location.replace("/character-sheet")}, 500)
                                             }}
                                         >
                                             Load
@@ -67,7 +64,7 @@ class LoadCharacterModal extends Component {
                                             className='button delete' 
                                             onClick={() => {
                                                 localStorage.removeItem(character);
-                                                close();
+                                                location.reload();
                                             }}
                                         >
                                             Delete

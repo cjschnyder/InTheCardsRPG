@@ -2,8 +2,9 @@ import { useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import CardHandler from './cardHandler/CardHandler';
 import CharacterSheet from './characterSheet/CharacterSheet';
-import Inventory from './Inventory/Inventory';
-import './style/InTheCards.scss'
+import CharacterModal from './characterOptionsModals/CharacterModal';
+import LoadCharacterModal from './characterOptionsModals/LoadCharacterModal';
+// import Inventory from './Inventory/Inventory';
 
 export const InTheCards = () => {
     
@@ -28,8 +29,8 @@ export const InTheCards = () => {
                         <a href='/characters'>
                             <li className='itc-menu-item'>Your Characters</li>
                         </a>
-                        <a href='/quick-start'>
-                            <li className='itc-menu-item'>Quick Start</li>
+                        {/* <a href='/quick-start'>
+                            <li className='itc-menu-item'>Quick Start Rules</li>
                         </a>
                         <a href='/rules'>
                             <li className='itc-menu-item'>Rules</li>
@@ -62,20 +63,20 @@ export const InTheCards = () => {
                             <a href='/rules#skill'>
                                 <li className='itc-submenu-item'>Equipment</li>
                             </a>
-                        </ul>
+                        </ul> */}
                     </ul>
                 </div>
                 <div className={isMenuOpen ? 'cover' : ''} />
                 <div className={`itc-container ${isMenuOpen ? 'blur' : ''}`}>
                     <Routes>
                         <Route path='/' element={<CharacterSheet />} />
-                        <Route path='/create' element={<CharacterSheet />} />
-                        <Route path='/characters' element={<CharacterSheet />} />
-                        <Route path='/character-sheet' element={<CharacterSheet />} />
-                        <Route path='/cardhandler' element={<CardHandler />} />
+                        <Route path='/create' element={<CharacterModal />} />
+                        <Route path='/characters' element={<LoadCharacterModal />} />
+                        <Route path='/character-sheet' element={<CardHandler />} />
+                        {/* <Route path='/cardhandler' element={<CardHandler />} />
                         <Route path='/inventory' element={<Inventory />} />
                         <Route path='/quick-start' element={<Inventory />} />
-                        <Route path='/rules' element={<Inventory />} />
+                        <Route path='/rules' element={<Inventory />} /> */}
                     </Routes>
                 </div>
             </BrowserRouter>

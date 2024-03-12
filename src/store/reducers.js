@@ -17,29 +17,25 @@ const initialState = {
         charm: 0
     },
     skills: [
-        {skillName: 'animal_handling', value: 0, trait: 'will'},
-        {skillName: 'appraise' , value: 0, trait: 'intelligence'},
-        {skillName: 'athletics' , value: 0, trait: 'strength'},
-        {skillName: 'finesse' , value: 0, trait: 'dexterity'},
-        {skillName: 'history' , value: 0, trait: 'intelligence'},
-        {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
-        {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
-        {skillName: 'magic_school_creation' , value: 0, trait: 'charm'},
-        {skillName: 'magic_school_divine' , value: 0, trait: 'will'},
-        {skillName: 'magic_school_elemental' , value: 0, trait: 'will'},
-        {skillName: 'manipulation' , value: 0, trait: 'charm'},
-        {skillName: 'medicine' , value: 0, trait: 'intelligence'},
-        {skillName: 'melee_attack' , value: 0, trait: 'strength'},
-        {skillName: 'nature' , value: 0, trait: 'intelligence'},
-        {skillName: 'perception' , value: 0, trait: 'intelligence'},
-        {skillName: 'ranged_attack' , value: 0, trait: 'dexterity'},
-        {skillName: 'read_intent' , value: 0, trait: 'charm'},
-        {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
-        {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
-        {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-        {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
-        {skillName: 'stealth' , value: 0, trait: 'dexterity'},
-        {skillName: 'toughness' , value: 0, trait: 'strength'}
+        {skillName: 'appraise' , value: "", trait: 'intelligence'},
+        {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
+        {skillName: 'athletics' , value: "", trait: 'strength'},
+        {skillName: 'elemental_magic' , value: "", trait: 'will'},
+        {skillName: 'finesse' , value: "", trait: 'dexterity'},
+        {skillName: 'history' , value: "", trait: 'intelligence'},
+        {skillName: 'manipulation' , value: "", trait: 'charm'},
+        {skillName: 'medicine' , value: "", trait: 'intelligence'},
+        {skillName: 'melee_attack' , value: "", trait: 'strength'},
+        {skillName: 'nature' , value: "", trait: 'intelligence'},
+        {skillName: 'perception' , value: "", trait: 'intelligence'},
+        {skillName: 'ranged_attack' , value: "", trait: 'dexterity'},
+        {skillName: 'read_intent' , value: "", trait: 'charm'},
+        {skillName: 'reflexes' , value: "", trait: 'dexterity'},
+        {skillName: 'resist_manipulation' , value: "", trait: 'will'},
+        {skillName: 'social_knowledge' , value: "", trait: 'charm'},
+        {skillName: 'spiritual_magic' , value: "", trait: 'will'},
+        {skillName: 'stealth' , value: "", trait: 'dexterity'},
+        {skillName: 'toughness' , value: "", trait: 'strength'}
     ],
     health: 0,
     healingRate: 0,
@@ -89,7 +85,6 @@ const rootReducer = (state = initialState, action) => {
             const starterClassCards = [];
             const specialtyClassOneCards = [];
             const specialtyClassTwoCards = [];
-            const skillCards = [];
             
             action.ancestry && Object.entries(characterInfo.ancestries[action.ancestry]).forEach(entry => {
                 const [ancestryLevel, info] = entry;
@@ -141,24 +136,28 @@ const rootReducer = (state = initialState, action) => {
                 }
             }
             
-            action.skills.map(skill => {
-                if (parseInt(skill.value) + parseInt(action.traits[skill.trait]) >= 5) {
-                   characterInfo.skills[skill.skillName][0].cardName && skillCards.push(characterInfo.skills[skill.skillName][0])
+            const characterSkillCards = action.skills.reduce((skillCards, skill) => {
+                if (skill.value === "novice") {
+                    console.log(skillCards)
+                    return (characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice") && 
+                        [...skillCards, ...characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice")]
+                    )
+                } else if (skill.value === "journeyman") {
+                    return [...skillCards, ...characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice" || card.level === "journeyman")]
+                } else if (skill.value === "master") {
+                    return [...skillCards, ...characterInfo.skills[skill.skillName].cards]
+                } else {
+                    return [...skillCards]
                 }
-                if (parseInt(skill.value) + parseInt(action.traits[skill.trait]) >= 10) {
-                    characterInfo.skills[skill.skillName][1].cardName && skillCards.push(characterInfo.skills[skill.skillName][1])
-                }
-                if (skill.skillName === 'toughness') {
-                    characterHealth = characterHealth + parseInt(skill.value) + parseInt(action.traits[skill.trait]);
-                }
-            });
+            }, []);
+            console.log(action.customCards);
             
             const fullDeck = [
                 ...ancestryCards,
                 ...starterClassCards,
                 ...specialtyClassOneCards,
                 ...specialtyClassTwoCards,
-                ...skillCards,
+                ...characterSkillCards,
                 ...action.customCards
             ];
                 

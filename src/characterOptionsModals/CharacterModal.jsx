@@ -24,33 +24,29 @@ class CharacterModal extends Component {
                 charm: 0
             },
             skills: this.props.skills || [
-                {skillName: 'animal_handling', value: 0, trait: 'will'},
-                {skillName: 'appraise' , value: 0, trait: 'intelligence'},
-                {skillName: 'athletics' , value: 0, trait: 'strength'},
-                {skillName: 'finesse' , value: 0, trait: 'dexterity'},
-                {skillName: 'history' , value: 0, trait: 'intelligence'},
-                {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
-                {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
-                {skillName: 'magic_school_creation' , value: 0, trait: 'charm'},
-                {skillName: 'magic_school_divine' , value: 0, trait: 'will'},
-                {skillName: 'magic_school_elemental' , value: 0, trait: 'will'},
-                {skillName: 'manipulation' , value: 0, trait: 'charm'},
-                {skillName: 'medicine' , value: 0, trait: 'intelligence'},
-                {skillName: 'melee_attack' , value: 0, trait: 'strength'},
-                {skillName: 'nature' , value: 0, trait: 'intelligence'},
-                {skillName: 'perception' , value: 0, trait: 'intelligence'},
-                {skillName: 'ranged_attack' , value: 0, trait: 'dexterity'},
-                {skillName: 'read_intent' , value: 0, trait: 'charm'},
-                {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
-                {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
-                {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-                {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
-                {skillName: 'stealth' , value: 0, trait: 'dexterity'},
-                {skillName: 'toughness' , value: 0, trait: 'strength'}
+                {skillName: 'appraise' , value: "", trait: 'intelligence'},
+                {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
+                {skillName: 'athletics' , value: "", trait: 'strength'},
+                {skillName: 'elemental_magic' , value: "", trait: 'will'},
+                {skillName: 'finesse' , value: "", trait: 'dexterity'},
+                {skillName: 'history' , value: "", trait: 'intelligence'},
+                {skillName: 'manipulation' , value: "", trait: 'charm'},
+                {skillName: 'medicine' , value: "", trait: 'intelligence'},
+                {skillName: 'melee_attack' , value: "", trait: 'strength'},
+                {skillName: 'nature' , value: "", trait: 'intelligence'},
+                {skillName: 'perception' , value: "", trait: 'intelligence'},
+                {skillName: 'ranged_attack' , value: "", trait: 'dexterity'},
+                {skillName: 'read_intent' , value: "", trait: 'charm'},
+                {skillName: 'reflexes' , value: "", trait: 'dexterity'},
+                {skillName: 'resist_manipulation' , value: "", trait: 'will'},
+                {skillName: 'social_knowledge' , value: "", trait: 'charm'},
+                {skillName: 'spiritual_magic' , value: "", trait: 'will'},
+                {skillName: 'stealth' , value: "", trait: 'dexterity'},
+                {skillName: 'toughness' , value: "", trait: 'strength'}
             ],
             skillPoints: this.props.skillPoints || 0,
             customCards: [],
-            skillsOpen: false,
+            skillsOpen: true,
             priestDomain: "",
             customCardSectionOpen: false,
             cardName: '',
@@ -62,8 +58,8 @@ class CharacterModal extends Component {
     
     render(){
         const {
-            isOpen,
-            close,
+            // isOpen,
+            // close,
             createCharacter,
             saveAttributes
         } = this.props
@@ -77,17 +73,16 @@ class CharacterModal extends Component {
             specialtyClassTwo,
             traits,
             skills,
-            skillPoints,
             customCards,
             skillsOpen,
             priestDomain,
-            customCardSectionOpen,
+            // customCardSectionOpen,
             cardName,
             cardActionType,
             cardDescription,
             cardOrigin,
         } = this.state
-        
+
         const clearState = () => {
             this.setState({
                 name: "",
@@ -105,83 +100,71 @@ class CharacterModal extends Component {
                     charm: 0
                 },
                 skills: [
-                    {skillName: 'animal_handling', value: 0, trait: 'will'},
-                    {skillName: 'appraise' , value: 0, trait: 'intelligence'},
-                    {skillName: 'athletics' , value: 0, trait: 'strength'},
-                    {skillName: 'finesse' , value: 0, trait: 'dexterity'},
-                    {skillName: 'history' , value: 0, trait: 'intelligence'},
-                    {skillName: 'magic_knowledge' , value: 0, trait: 'intelligence'},
-                    {skillName: 'magic_school_arcane' , value: 0, trait: 'intelligence'},
-                    {skillName: 'magic_school_creation' , value: 0, trait: 'charm'},
-                    {skillName: 'magic_school_divine' , value: 0, trait: 'will'},
-                    {skillName: 'magic_school_elemental' , value: 0, trait: 'will'},
-                    {skillName: 'manipulation' , value: 0, trait: 'charm'},
-                    {skillName: 'medicine' , value: 0, trait: 'intelligence'},
-                    {skillName: 'melee_attack' , value: 0, trait: 'strength'},
-                    {skillName: 'nature' , value: 0, trait: 'intelligence'},
-                    {skillName: 'perception' , value: 0, trait: 'intelligence'},
-                    {skillName: 'ranged_attack' , value: 0, trait: 'dexterity'},
-                    {skillName: 'read_intent' , value: 0, trait: 'charm'},
-                    {skillName: 'reflexes' , value: 0, trait: 'dexterity'},
-                    {skillName: 'resist_manipulation' , value: 0, trait: 'will'},
-                    {skillName: 'resist_poison' , value: 0, trait: 'strength'},
-                    {skillName: 'social_knowledge' , value: 0, trait: 'charm'},
-                    {skillName: 'stealth' , value: 0, trait: 'dexterity'},
-                    {skillName: 'toughness' , value: 0, trait: 'strength'}
+                    {skillName: 'appraise' , value: "", trait: 'intelligence'},
+                    {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
+                    {skillName: 'athletics' , value: "", trait: 'strength'},
+                    {skillName: 'elemental_magic' , value: "", trait: 'will'},
+                    {skillName: 'finesse' , value: "", trait: 'dexterity'},
+                    {skillName: 'history' , value: "", trait: 'intelligence'},
+                    {skillName: 'manipulation' , value: "", trait: 'charm'},
+                    {skillName: 'medicine' , value: "", trait: 'intelligence'},
+                    {skillName: 'melee_attack' , value: "", trait: 'strength'},
+                    {skillName: 'nature' , value: "", trait: 'intelligence'},
+                    {skillName: 'perception' , value: "", trait: 'intelligence'},
+                    {skillName: 'ranged_attack' , value: "", trait: 'dexterity'},
+                    {skillName: 'read_intent' , value: "", trait: 'charm'},
+                    {skillName: 'reflexes' , value: "", trait: 'dexterity'},
+                    {skillName: 'resist_manipulation' , value: "", trait: 'will'},
+                    {skillName: 'social_knowledge' , value: "", trait: 'charm'},
+                    {skillName: 'spiritual_magic' , value: "", trait: 'will'},
+                    {skillName: 'stealth' , value: "", trait: 'dexterity'},
+                    {skillName: 'toughness' , value: "", trait: 'strength'}
                 ],
-                skillPoints: 0,
                 customCards: [],
-                skillsOpen: false,
+                skillsOpen: true,
                 priestDomain: "",
-                customCardSectionOpen: false,
-                cardName: '',
-                cardActionType: '',
-                cardDescription: '',
-                cardOrigin: '',
+                customCardSectionOpen: false
             })
         }
         
-        const addCustomCard = () => {
-            this.setState({
-                customCards: [
-                    ...customCards,
-                    {
-                        "cardName": cardName,
-                        "action": cardActionType,
-                        "description": cardDescription,
-                        "from": cardOrigin
-                    }
-                ],
-                cardName: '',
-                cardActionType: '',
-                cardDescription: '',
-                cardOrigin: ''
-            });
-        }
+        // const addCustomCard = (cardName, cardActionType, cardDescription, cardOrigin) => {
+        //     this.setState({
+        //         customCards: [
+        //             ...customCards,
+        //             {
+        //                 "cardName": cardName,
+        //                 "action": cardActionType,
+        //                 "description": cardDescription,
+        //                 "from": cardOrigin
+        //             }
+        //         ]
+        //     });
+        //     console.log(customCards);
+        // }
         
         const saveCharacter = () => {
-            (starterClass === 'priest' & priestDomain) && (
-                this.setState({
-                    cardName: characterInfo.starterClasses.priest.specials[priestDomain].cardName,
-                    cardActionType: characterInfo.starterClasses.priest.specials[priestDomain].action,
-                    cardDescription: characterInfo.starterClasses.priest.specials[priestDomain].description,
-                    cardOrigin: `${characterInfo.starterClasses.priest.specials[priestDomain].from} ${characterInfo.starterClasses.priest.specials[priestDomain].level}`
-                }),
-                addCustomCard()
-            )
-            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, customCards);
+            console.log(characterInfo.starterClasses.priest.specials[priestDomain].cardName);
+            const priestDomainCard = [];
+            (starterClass === 'priest' && priestDomain) && (
+                priestDomainCard.push(
+                    {
+                        "cardName":characterInfo.starterClasses.priest.specials[priestDomain].cardName,
+                        "action": characterInfo.starterClasses.priest.specials[priestDomain].action,
+                        "description": characterInfo.starterClasses.priest.specials[priestDomain].description,
+                        "from": `${characterInfo.starterClasses.priest.specials[priestDomain].from} ${characterInfo.starterClasses.priest.specials[priestDomain].level}`
+                    }
+                )
+            );
+            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, priestDomainCard);
             saveAttributes();
             clearState();
-            close();
+            location.replace("/character-sheet");
         };
         
         return(
-            <div className={`modal-wrapper ${isOpen ? 'show' : ''}`}>
+            <div className={`modal-wrapper`}>
                 <div className='modal-title'>
                     <h2>{this.props.name ? 'Edit Character' : 'Create a New Character'}</h2>
-                    <div className='close-button' onClick={() => close()}>
-                        <span>X</span>
-                    </div>
                 </div>
                 <div className='modal-body'>
                     <div className='modal-option'>
@@ -208,20 +191,6 @@ class CharacterModal extends Component {
                                 <option value='6'>Six</option>
                                 <option value='7'>Seven</option>
                                 <option value='8'>Eight</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className='modal-option'>
-                        <span>Backgrounds: </span>
-                        <div className='modal-input'>
-                            <select 
-                                value={background}
-                                onChange={e => this.setState({background: event.target.value})}
-                            >
-                                <option selected>-- Select a Background --</option>
-                                {Object.keys(characterInfo.background).map(backgroundOption => 
-                                    <option value={`${backgroundOption}`}>{backgroundOption.replace(/_/g, " ")}</option>
-                                )}
                             </select>
                         </div>
                     </div>
@@ -298,7 +267,7 @@ class CharacterModal extends Component {
                             </select>
                         </div>
                     </div>
-                    <div className='traits'>
+                    {/* <div className='traits'>
                         {
                             Object.keys(traits).map(trait => 
                                 <div className='trait'>
@@ -315,33 +284,38 @@ class CharacterModal extends Component {
                                 </div>
                             )
                         }
-                    </div>
+                    </div> */}
                     <div className='modal-option-multi-select'>
                         <div className='dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
-                            <h3>Skill Points</h3>
+                            <h3>Skills</h3>
                             <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
                         </div>
                         <div className={`dropdown-list ${skillsOpen ? '' : 'hide'}`}>
                             {
                                 skills.map((skill, index) =>
                                     <div className='skill'>
-                                        <input
+                                        <span>{skill.skillName.replace(/_/g, " ")}</span>
+                                        <select
                                             value={skill.value}
                                             onChange={e => this.setState({
                                                 skills: [
                                                     ...skills.slice(0, index),
-                                                    {skillName: skill.skillName, value: parseInt(event.target.value || 0), trait: skill.trait},
+                                                    {skillName: skill.skillName, value: event.target.value, trait: skill.trait},
                                                     ...skills.slice(index + 1)
                                                 ]           
                                             })}
-                                        />
-                                        <span>{skill.skillName.replace(/_/g, " ")}</span>
+                                        >
+                                            <option value="" selected>-- Untrained --</option>
+                                            <option value="novice">Novice</option>
+                                            <option value="journeyman">Journeyman</option>
+                                            <option value="master">Master</option>
+                                        </select>
                                     </div>
                                 )
                             }
                         </div>
                     </div>
-                    <div className='modal-option-multi-select'>
+                    {/* <div className='modal-option-multi-select'>
                         <div className='dropdown-button' onClick={() => this.setState({customCardSectionOpen: !customCardSectionOpen}) }>
                             <h3>Add Custom Card</h3>
                             <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
@@ -405,7 +379,7 @@ class CharacterModal extends Component {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                     <div className='added-cards'>
                     {
                         customCards.map(card => 
@@ -417,8 +391,8 @@ class CharacterModal extends Component {
                         <div className='button' onClick={() => saveCharacter()}>
                             Save
                         </div>
-                        <div className='button' onClick={() => close()}>
-                            Cancel
+                        <div className='button' onClick={() => clearState()}>
+                            Clear
                         </div>
                     </div>
                 </div>

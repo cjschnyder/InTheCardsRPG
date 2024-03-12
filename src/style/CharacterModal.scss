@@ -2,7 +2,7 @@
 
 .modal-body {
         margin-left: 20px;
-        margin-right: 50px;
+        margin-right: 20px;
         
         .modal-option {
             margin-bottom: 10px;
@@ -113,6 +113,7 @@
     .horizontal-buttons{
         display: flex;
         flex-direction: row;
+        margin-bottom: 10px;
         
         &.bottom {
             position: absolute;
