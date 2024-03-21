@@ -1,5 +1,4 @@
 import characterInfo from '../assets/characterInfoAndCards.json';
-import itemsList from '../assets/items.json';
 
 const initialState = {
     name: "",
