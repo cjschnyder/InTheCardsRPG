@@ -1,7 +1,7 @@
 import {Component} from 'react';
 import { connect } from 'react-redux';
 import {transferToHand, transferToDiscard, transferToBurnPile, transferToDeck} from '../store/actions'
-import '../style/Card.scss'
+import './Card.scss'
 
 class Card extends Component {
     constructor(props) {

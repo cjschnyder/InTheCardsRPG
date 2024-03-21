@@ -5,22 +5,15 @@ const initialState = {
     name: "",
     level: 1,
     ancestry: "",
-    background: "",
     starterClass: "",
     specialtyClassOne: "",
     specialtyClassTwo: "",
-    traits: {
-        strength: 0,
-        dexterity: 0,
-        intelligence: 0,
-        will: 0,
-        charm: 0
-    },
     skills: [
         {skillName: 'appraise' , value: "", trait: 'intelligence'},
         {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
         {skillName: 'athletics' , value: "", trait: 'strength'},
         {skillName: 'elemental_magic' , value: "", trait: 'will'},
+        {skillName: 'engineering' , value: "", trait: 'intelligence'},
         {skillName: 'finesse' , value: "", trait: 'dexterity'},
         {skillName: 'history' , value: "", trait: 'intelligence'},
         {skillName: 'manipulation' , value: "", trait: 'charm'},
@@ -37,19 +30,10 @@ const initialState = {
         {skillName: 'stealth' , value: "", trait: 'dexterity'},
         {skillName: 'toughness' , value: "", trait: 'strength'}
     ],
-    health: 0,
-    healingRate: 0,
-    currentHealth: 0,
-    movement: 0,
     burn: [],
     deck: [],
     discard: [],
-    hand: [],
-    skillPoints: 0,
-    inventory: [],
-    equippedArmor: {},
-    shield: false,
-    equippedWeapon: {}
+    hand: []
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -62,25 +46,16 @@ const rootReducer = (state = initialState, action) => {
                     name: state.name, 
                     level: state.level,
                     ancestry: state.ancestry,
-                    background: state.background,
                     starterClass: state.starterClass, 
                     specialtyClassOne: state.specialtyClassOne, 
                     specialtyClassTwo: state.specialtyClassTwo, 
-                    traits: state.traits, 
                     skills: state.skills,
-                    health: state.health,
-                    healingRate: state.healingRate,
-                    currentHealth: state.currentHealth,
-                    movement: state.movement,
-                    inventory: state.inventory
                 })
             );
             return {
                 ...state
             }
         case 'CREATE_CHARACTER':
-            let characterHealth = 0;
-            let characterMovement = 0;
             const ancestryCards = [];
             const starterClassCards = [];
             const specialtyClassOneCards = [];
@@ -89,8 +64,6 @@ const rootReducer = (state = initialState, action) => {
             action.ancestry && Object.entries(characterInfo.ancestries[action.ancestry]).forEach(entry => {
                 const [ancestryLevel, info] = entry;
                 if (action.level >= ancestryLevel) {
-                    characterHealth = characterHealth + info.health;
-                    info.movement && (characterMovement = characterMovement + info.movement);
                     info.cards && ancestryCards.push(...info.cards);
                 }
             });
@@ -98,8 +71,6 @@ const rootReducer = (state = initialState, action) => {
             action.starterClass && Object.entries(characterInfo.starterClasses[action.starterClass]).forEach(entry => {
                 const [classLevel, info] = entry;                                                                                
                 if (action.level >= classLevel) {
-                    characterHealth = characterHealth + info.health;
-                    info.movement && (characterMovement = characterMovement + info.movement);
                     starterClassCards.push(...info.cards);
                 }
             })
@@ -108,14 +79,10 @@ const rootReducer = (state = initialState, action) => {
                 const classTwo = Object.values(characterInfo.specialtyClasses[action.specialtyClassOne]);
                 
                 if (action.level >= 3) {
-                    characterHealth = characterHealth + classTwo[0].health;
-                    classTwo[0].movement && (characterMovement = characterMovement + classTwo[0].movement);
                     classTwo[0].cards && specialtyClassOneCards.push(...classTwo[0].cards);
                 }
             
                 if (action.level >= 6) {
-                    characterHealth = characterHealth + classTwo[1].health;
-                    classTwo[1].movement && (characterMovement = characterMovement + classTwo[1].movement);
                     classTwo[1].cards && specialtyClassOneCards.push(...classTwo[1].cards);
                 }
             }
@@ -124,14 +91,10 @@ const rootReducer = (state = initialState, action) => {
                 const classThree = Object.values(characterInfo.specialtyClasses[action.specialtyClassTwo]);
                 
                 if (action.level >= 5) {
-                    characterHealth = characterHealth + classThree[0].health;
-                    classThree[0].movement && (characterMovement = characterMovement + classThree[0].movement);
                     classThree[0].cards && specialtyClassOneCards.push(...classThree[0].cards);
                 }
             
                 if (action.level >= 8) {
-                    characterHealth = characterHealth + classThree[1].health;
-                    classThree[1].movement && (characterMovement = characterMovement + classThree[1].movement);
                     classThree[1].cards && specialtyClassOneCards.push(...classThree[1].cards);
                 }
             }
@@ -165,44 +128,12 @@ const rootReducer = (state = initialState, action) => {
                 burn: initialState.burn,
                 name: action.name,
                 level: action.level,
-                background: action.background,
                 ancestry: action.ancestry,
                 starterClass: action.starterClass, 
                 specialtyClassOne: action.specialtyClassOne, 
                 specialtyClassTwo: action.specialtyClassTwo,
-                traits: action.traits,
                 skills: action.skills,
-                health: characterHealth,
-                healingRate: Math.floor(characterHealth/4),
-                currentHealth: action.currentHealth ? action.currentHealth : characterHealth,
-                movement: characterMovement,
                 deck: fullDeck
-            }
-        case 'SET_INVENTORY':
-            const equipment = action.items.map(item => 
-                ({...itemsList.items.find(selected => selected.name === item.value), quantity: 1})
-            );
-            const filteredEquipment = equipment.filter(item => !state.inventory.some(object => item.name === object.name))
-            
-            return {
-                ...state,
-                inventory: [...state.inventory, ...filteredEquipment]
-            }
-        case 'REMOVE_ITEM':
-            const updatedInventory = state.inventory.filter(item => item !== action.item);
-            
-            return {
-                ...state,
-                inventory: updatedInventory
-            }
-        case 'SET_CURRENT_HEALTH':
-            let newCurrentHealth = action.currentHealth;
-            action.equation === 'add' ?
-                newCurrentHealth = newCurrentHealth + parseInt(action.value) :
-                newCurrentHealth = newCurrentHealth - parseInt(action.value)
-            return {
-                ...state,
-                currentHealth: newCurrentHealth
             }
         case 'TRANSFER_HAND':
             return {
@@ -274,14 +205,7 @@ const rootReducer = (state = initialState, action) => {
                 classOne: action.classOne,
                 classTwo: action.classTwo,
                 classThree: action.classThree,
-                traits: action.traits,
                 skills: action.skills,
-                health: action.health,
-                healingRate: action.healingRate,
-                currentHealth: action.currentHealth,
-                movement: action.movement,
-                defense: action.defense,
-                damageReduce: action.damageReduce,
                 priestDomain: action.priestDomain,
                 deck: action.deck
             }

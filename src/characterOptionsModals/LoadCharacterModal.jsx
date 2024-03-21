@@ -2,7 +2,7 @@ import {Component} from 'react';
 import { connect } from 'react-redux';
 import {loadCharacter} from '../store/actions'
 import '../style/ModalStructure.scss'
-import '../style/LoadCharacterModal.scss'
+import './LoadCharacterModal.scss'
 
 class LoadCharacterModal extends Component {
     constructor(props) {
@@ -14,13 +14,8 @@ class LoadCharacterModal extends Component {
     
     render(){
         const {
-            isOpen,
-            close,
             loadCharacter
         } = this.props
-        const {
-            cards
-        } = this.state
         
         return(
             <div className={`modal-wrapper`}>
@@ -46,14 +41,7 @@ class LoadCharacterModal extends Component {
                                                     selectedCharacter.classOne,
                                                     selectedCharacter.classTwo,
                                                     selectedCharacter.classThree,
-                                                    selectedCharacter.traits,
-                                                    selectedCharacter.skills,
-                                                    selectedCharacter.health,
-                                                    selectedCharacter.healingRate,
-                                                    selectedCharacter.currentHealth,
-                                                    selectedCharacter.movement,
-                                                    selectedCharacter.defense,
-                                                    selectedCharacter.damageReduce
+                                                    selectedCharacter.skills
                                                 );
                                                 setTimeout(()=>{location.replace("/character-sheet")}, 500) //Bad, replace timeout in future
                                             }}

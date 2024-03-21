@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import CardHandler from './cardHandler/CardHandler';
-import CharacterSheet from './characterSheet/CharacterSheet';
 import CharacterModal from './characterOptionsModals/CharacterModal';
 import LoadCharacterModal from './characterOptionsModals/LoadCharacterModal';
 // import Inventory from './Inventory/Inventory';
@@ -18,7 +17,7 @@ export const InTheCards = () => {
                         <svg width="40px" height="40px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg" fill="none"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path fill="#051326" fill-rule="evenodd" d="M19 4a1 1 0 01-1 1H2a1 1 0 010-2h16a1 1 0 011 1zm0 6a1 1 0 01-1 1H2a1 1 0 110-2h16a1 1 0 011 1zm-1 7a1 1 0 100-2H2a1 1 0 100 2h16z"></path> </g></svg>
                     </div>
                     <div id="in-the-cards-banner">
-                        <img src="src/assets/InTheCardsLabelSmall.png" />
+                        <img src="assets/InTheCardsLabelSmall.png" />
                     </div>
                 </header>
                 <div id='itc-menu-container' className={isMenuOpen ? '' : 'hide'}>
@@ -73,10 +72,6 @@ export const InTheCards = () => {
                         <Route path='/create' element={<CharacterModal />} />
                         <Route path='/characters' element={<LoadCharacterModal />} />
                         <Route path='/character-sheet' element={<CardHandler />} />
-                        {/* <Route path='/cardhandler' element={<CardHandler />} />
-                        <Route path='/inventory' element={<Inventory />} />
-                        <Route path='/quick-start' element={<Inventory />} />
-                        <Route path='/rules' element={<Inventory />} /> */}
                     </Routes>
                 </div>
             </BrowserRouter>

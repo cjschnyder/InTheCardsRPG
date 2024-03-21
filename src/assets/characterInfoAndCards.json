@@ -2894,7 +2894,7 @@
             {
                "cardName":"Pneumatic Propulsion",
                "action":"Active",
-               "description":"You active a special harness that pushes you forward at extreme speeds, albiet after a small warm up. 1 round after this card is activated you gain double your speed for 1d6 rounds.",
+               "description":"You activate a special harness that pushes you forward at extreme speeds, albeit after a small warm up. 1 round after this card is activated you gain double your speed for 1d6 rounds.",
                "from":"engineering",
                "level":"journeyman"
             },

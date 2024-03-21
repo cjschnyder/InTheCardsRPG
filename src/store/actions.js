@@ -6,11 +6,9 @@ export function createCharacter(
     name,
     level,
     ancestry,
-    background,
     starterClass,
     specialtyClassOne,
     specialtyClassTwo,
-    traits,
     skills,
     customCards
     ){
@@ -19,26 +17,12 @@ export function createCharacter(
         name,
         level,
         ancestry,
-        background,
         starterClass,
         specialtyClassOne,
         specialtyClassTwo,
-        traits,
         skills,
         customCards
     };
-}
-
-export function setInventory(items) {
-  return { type: 'SET_INVENTORY', items};
-}
-
-export function removeItem(item) {
-    return { type: 'REMOVE_ITEM', item};
-}
-
-export function setCurrentHealth(currentHealth, equation, value) {
-  return { type: 'SET_CURRENT_HEALTH', currentHealth, equation, value};
 }
 
 export function transferToHand(card) {
@@ -66,16 +50,10 @@ export function loadCharacter(
     name,
     level,
     ancestry,
-    background,
     starterClass,
     specialtyClassOne,
     specialtyClassTwo,
-    traits,
-    skills,
-    health,
-    healingRate,
-    currentHealth,
-    movement
+    skills
 ){
     return {
         type: 'LOAD_CHARACTER',
@@ -83,15 +61,9 @@ export function loadCharacter(
         name,
         level,
         ancestry,
-        background,
         starterClass,
         specialtyClassOne,
         specialtyClassTwo,
-        traits,
-        skills,
-        health,
-        healingRate,
-        currentHealth,
-        movement
+        skills
     };
 }

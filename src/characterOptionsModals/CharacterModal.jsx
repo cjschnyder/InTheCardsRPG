@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import {createCharacter, saveAttributes} from '../store/actions'
 import characterInfo from '../assets/characterInfoAndCards.json'; 
 import '../style/ModalStructure.scss'
-import '../style/CharacterModal.scss'
+import './CharacterModal.scss'
 
 class CharacterModal extends Component {
     constructor(props) {
@@ -12,22 +12,15 @@ class CharacterModal extends Component {
             name: this.props.name || "",
             level: this.props.level || 1,
             ancestry: this.props.ancestry || "",
-            background: this.props.background || "",
             starterClass: this.props.starterClass || "",
             specialtyClassOne: this.props.specialtyClassOne || "",
             specialtyClassTwo: this.props.ancestry || "",
-            traits: this.props.traits || {
-                strength: 0,
-                dexterity: 0,
-                intelligence: 0,
-                will: 0,
-                charm: 0
-            },
             skills: this.props.skills || [
                 {skillName: 'appraise' , value: "", trait: 'intelligence'},
                 {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
                 {skillName: 'athletics' , value: "", trait: 'strength'},
                 {skillName: 'elemental_magic' , value: "", trait: 'will'},
+                {skillName: 'engineering' , value: "", trait: 'intelligence'},
                 {skillName: 'finesse' , value: "", trait: 'dexterity'},
                 {skillName: 'history' , value: "", trait: 'intelligence'},
                 {skillName: 'manipulation' , value: "", trait: 'charm'},
@@ -44,22 +37,13 @@ class CharacterModal extends Component {
                 {skillName: 'stealth' , value: "", trait: 'dexterity'},
                 {skillName: 'toughness' , value: "", trait: 'strength'}
             ],
-            skillPoints: this.props.skillPoints || 0,
-            customCards: [],
             skillsOpen: true,
-            priestDomain: "",
-            customCardSectionOpen: false,
-            cardName: '',
-            cardActionType: '',
-            cardDescription: '',
-            cardOrigin: '',
+            priestDomain: ""
         }
     }
     
     render(){
         const {
-            // isOpen,
-            // close,
             createCharacter,
             saveAttributes
         } = this.props
@@ -67,20 +51,12 @@ class CharacterModal extends Component {
             name,
             level,
             ancestry,
-            background,
             starterClass,
             specialtyClassOne,
             specialtyClassTwo,
-            traits,
             skills,
-            customCards,
             skillsOpen,
             priestDomain,
-            // customCardSectionOpen,
-            cardName,
-            cardActionType,
-            cardDescription,
-            cardOrigin,
         } = this.state
 
         const clearState = () => {
@@ -88,22 +64,15 @@ class CharacterModal extends Component {
                 name: "",
                 level: 1,
                 ancestry: "",
-                background: "",
                 starterClass: "",
                 specialtyClassOne: "",
                 specialtyClassTwo: "",
-                traits: {
-                    strength: 0,
-                    dexterity: 0,
-                    intelligence: 0,
-                    will: 0,
-                    charm: 0
-                },
                 skills: [
                     {skillName: 'appraise' , value: "", trait: 'intelligence'},
                     {skillName: 'arcane_magic' , value: "", trait: 'intelligence'},
                     {skillName: 'athletics' , value: "", trait: 'strength'},
                     {skillName: 'elemental_magic' , value: "", trait: 'will'},
+                    {skillName: 'engineering' , value: "", trait: 'intelligence'},
                     {skillName: 'finesse' , value: "", trait: 'dexterity'},
                     {skillName: 'history' , value: "", trait: 'intelligence'},
                     {skillName: 'manipulation' , value: "", trait: 'charm'},
@@ -120,27 +89,10 @@ class CharacterModal extends Component {
                     {skillName: 'stealth' , value: "", trait: 'dexterity'},
                     {skillName: 'toughness' , value: "", trait: 'strength'}
                 ],
-                customCards: [],
                 skillsOpen: true,
                 priestDomain: "",
-                customCardSectionOpen: false
             })
         }
-        
-        // const addCustomCard = (cardName, cardActionType, cardDescription, cardOrigin) => {
-        //     this.setState({
-        //         customCards: [
-        //             ...customCards,
-        //             {
-        //                 "cardName": cardName,
-        //                 "action": cardActionType,
-        //                 "description": cardDescription,
-        //                 "from": cardOrigin
-        //             }
-        //         ]
-        //     });
-        //     console.log(customCards);
-        // }
         
         const saveCharacter = () => {
             const priestDomainCard = [];
@@ -154,7 +106,7 @@ class CharacterModal extends Component {
                     }
                 )
             );
-            createCharacter(name, level, ancestry, background, starterClass, specialtyClassOne, specialtyClassTwo, traits, skills, priestDomainCard); //Replace priestDomain Card with Custom eventually
+            createCharacter(name, level, ancestry, starterClass, specialtyClassOne, specialtyClassTwo, skills, priestDomainCard); //Replace priestDomain Card with Custom eventually
             saveAttributes();
             clearState();
             location.replace("/character-sheet");
@@ -266,24 +218,6 @@ class CharacterModal extends Component {
                             </select>
                         </div>
                     </div>
-                    {/* <div className='traits'>
-                        {
-                            Object.keys(traits).map(trait => 
-                                <div className='trait'>
-                                    <span>{trait}</span>
-                                    <input
-                                        value={traits[trait]}
-                                        onChange={e => this.setState({
-                                            traits: {
-                                                ...traits,
-                                                [trait]: parseInt(event.target.value || 0)
-                                            }
-                                        })}
-                                    />
-                                </div>
-                            )
-                        }
-                    </div> */}
                     <div className='modal-option-multi-select'>
                         <div className='dropdown-button' onClick={() => this.setState({skillsOpen: !skillsOpen}) }>
                             <h3>Skills</h3>
@@ -313,78 +247,6 @@ class CharacterModal extends Component {
                                 )
                             }
                         </div>
-                    </div>
-                    {/* <div className='modal-option-multi-select'>
-                        <div className='dropdown-button' onClick={() => this.setState({customCardSectionOpen: !customCardSectionOpen}) }>
-                            <h3>Add Custom Card</h3>
-                            <span className={`arrow ${skillsOpen ? 'flip' : ''}`}>&#8249;</span>
-                        </div>
-                        <div className={`dropdown-list ${customCardSectionOpen ? '' : 'hide'}`}>
-                            <div className='modal-option'>
-                            <span>Card Name: </span>
-                            <div className='modal-input'>
-                                <input
-                                    value={cardName}
-                                    onChange={(e) => {this.setState({cardName: e.target.value})}}
-                                />
-                            </div>
-                            </div>
-                            <div className='modal-option'>
-                                <span>Action Type: </span>
-                                <div className='modal-input'>
-                                    <select 
-                                        value={cardActionType}
-                                        onChange={e => this.setState({cardActionType: event.target.value})}
-                                    >
-                                        <option selected>-- Select Action Type --</option>
-                                        <option value='Active'>Active</option>
-                                        <option value='Active - Burn'>Active - Burn</option>
-                                        <option value='Active - One Use'>Active - One Use</option>
-                                        <option value='Active - Spell'>Active - Spell</option>
-                                        <option value='Active - Spell - Burn'>Active - Spell - Burn</option>
-                                        <option value='Active - Spell - One Use'>Active - Spell - One Use</option>
-                                        <option value='Triggered'>Triggered</option>
-                                        <option value='Triggered - Burn'>Triggered - Burn</option>
-                                        <option value='Triggered - One Use'>Triggered - One Use</option>
-                                        <option value='Triggered - Spell'>Triggered - Spell</option>
-                                        <option value='Triggered - Spell - Burn'>Triggered - Spell - Burn</option>
-                                        <option value='Triggered - Spell - One Use'>Triggered - Spell - One Use</option>
-                                        <option value='Passive'>Passive</option>
-                                        <option value='Passive - Spell'>Passive - Spell</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div className='modal-option'>
-                            <span>Card Origin: </span>
-                            <div className='modal-input'>
-                                <input
-                                    value={cardOrigin}
-                                    onChange={(e) => {this.setState({cardOrigin: e.target.value})}}
-                                />
-                            </div>
-                            </div>
-                            <div className='modal-option'>
-                                <span>Card Description: </span>
-                                <div className='modal-input'>
-                                    <textarea
-                                        value={cardDescription}
-                                        onChange={(e) => {this.setState({cardDescription: e.target.value})}}
-                                    />
-                                </div>
-                            </div>
-                            <div className='horizontal-buttons'>
-                                <div className='button' onClick={() => addCustomCard()}>
-                                    Add Card
-                                </div>
-                            </div>
-                        </div>
-                    </div> */}
-                    <div className='added-cards'>
-                    {
-                        customCards.map(card => 
-                            <div>Custom Card: {card.cardName}</div>
-                        )
-                    }
                     </div>
                     <div className='horizontal-buttons'>
                         <div className='button' onClick={() => saveCharacter()}>
