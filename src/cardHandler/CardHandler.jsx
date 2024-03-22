@@ -1,74 +1,62 @@
-import { Component } from 'react';
-import { connect } from 'react-redux';
+import { useState } from 'react';
+import { useDispatch, shallowEqual, useSelector} from 'react-redux';
 import Card from './Card';
-import {resetDeck} from '../store/actions'
 import '../style/InTheCards.scss'
 
-class CardHandler extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            selectedCardView: 0,
-            cardViewOrder: ['deck', 'hand', 'discard', 'burn'],
-        }
-    }
-    
-    render(){
-        const {
-            deck,
-            hand,
-            discard,
-            burn,
-            resetDeck
-        } = this.props
-        
-        const {
-            selectedCardView,
-            cardViewOrder
-        } = this.state
-        
-        return (
-            <main>
-                <div className='card-options-menu'>
-                    {
-                        cardViewOrder.map((item, index) => 
-                            <div 
-                                className={`card-option ${selectedCardView === index ? 'selected' : ''}`}
-                                onClick={() => this.setState({selectedCardView: index})}
-                                key={item}
-                            >
-                                <span>{`${item} (${this.props[item].length})`}</span>
-                            </div>             
-                        )
-                    }
-                </div>
-                <div className='card-display'>
-                    {
-                        this.props[cardViewOrder[selectedCardView]].map(card =>
-                            card && <Card cardInfo={card} cardView={cardViewOrder[selectedCardView]}/>
-                        )
-                    }
-                </div>
-                <div
-                    className='reset-deck'
-                    onClick={() => resetDeck()}
-                >
-                    Reset Deck
-                </div>
-            </main>
-        )
-    }
-}
+export default function CardHandler() {
 
-const mapStateToProps = (state) => {
-    return {
+    const useAction = useDispatch();
+
+    const views = useSelector(state => ({
         deck: state.deck,
         hand: state.hand,
         discard: state.discard,
         burn: state.burn
-    };
-};
+    }), shallowEqual);
 
-export default connect(mapStateToProps, {
-    resetDeck: resetDeck
-})(CardHandler);
+    const [selectedCardView, setSelectedCardView] = useState('deck');
+
+    return (
+        <main>
+            <div className='card-options-menu'>
+                <div 
+                    className={`card-option ${selectedCardView === 'deck' ? 'selected' : ''}`}
+                    onClick={() => setSelectedCardView('deck')}
+                >
+                    <span>{`Deck (${views.deck.length})`}</span>
+                </div>
+                <div 
+                    className={`card-option ${selectedCardView === 'hand' ? 'selected' : ''}`}
+                    onClick={() => setSelectedCardView('hand')}
+                >
+                    <span>{`Hand (${views.hand.length})`}</span>
+                </div>
+                <div 
+                    className={`card-option ${selectedCardView === 'discard' ? 'selected' : ''}`}
+                    onClick={() => setSelectedCardView('discard')}
+                >
+                    <span>{`Discard (${views.discard.length})`}</span>
+                </div>
+                <div 
+                    className={`card-option ${selectedCardView === 'burn' ? 'selected' : ''}`}
+                    onClick={() => setSelectedCardView('burn')}
+                >
+                    <span>{`Burn (${views.burn.length})`}</span>
+                </div>
+            </div>
+            <div className='card-display'>
+                {
+                    views[selectedCardView].map(card =>
+                        card && <Card cardInfo={card} cardView={selectedCardView}/>
+                    )
+                }
+            </div>
+            <div
+                className='reset-deck'
+                onClick={() => useAction({type: 'RESET_DECK'})}
+            >
+                Reset Deck
+            </div>
+        </main>
+    )
+}

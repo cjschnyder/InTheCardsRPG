@@ -25,7 +25,6 @@ class LoadCharacterModal extends Component {
                     </div>
                     <div className='load-deck-wrapper'>
                             {
-                                
                                 Object.keys(JSON.parse(JSON.stringify(localStorage))).filter(deck => !deck.includes('persist')).map(character =>
                                     <div className='load-deck'>
                                         <h3>{character}:</h3>
