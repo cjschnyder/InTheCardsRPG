@@ -138,7 +138,7 @@ const rootReducer = (state = initialState, action) => {
             console.log(action.card);
             return {
                 ...state,
-                deck: state.deck.filter(card => card != action.card),
+                deck: state.deck.filter(card => card != action.card), //this is going to cause an issue when decks have duplicate cards it them
                 discard: state.discard.filter(card => card != action.card),
                 burn: state.burn.filter(card => card != action.card),
                 hand: [
