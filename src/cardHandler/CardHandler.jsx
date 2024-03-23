@@ -47,7 +47,7 @@ export default function CardHandler() {
             <div className='card-display'>
                 {
                     views[selectedCardView].map(card =>
-                        card && <Card cardInfo={card} cardView={selectedCardView}/>
+                        <Card cardInfo={card} cardView={selectedCardView}/>
                     )
                 }
             </div>

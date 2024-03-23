@@ -45,25 +45,6 @@ export function resetDeck() {
     return {type: 'RESET_DECK'};
 }
 
-export function loadCharacter(
-    deck,
-    name,
-    level,
-    ancestry,
-    starterClass,
-    specialtyClassOne,
-    specialtyClassTwo,
-    skills
-){
-    return {
-        type: 'LOAD_CHARACTER',
-        deck,
-        name,
-        level,
-        ancestry,
-        starterClass,
-        specialtyClassOne,
-        specialtyClassTwo,
-        skills
-    };
+export function loadCharacter(character){
+  return {type: 'LOAD_CHARACTER', character};
 }

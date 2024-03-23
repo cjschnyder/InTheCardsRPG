@@ -194,20 +194,20 @@ const rootReducer = (state = initialState, action) => {
                 discard: initialState.deck,
                 burn: initialState.burn
             }
-        case 'LOAD_CHARACTER': //Only take in name and pull info from Store, no need to take all info in
+        case 'LOAD_CHARACTER': 
             return {
                 hand: initialState.hand,
                 discard: initialState.deck,
                 burn: initialState.burn,
-                name: action.name,
-                level: action.level,
-                ancestry: action.ancestry,
-                classOne: action.classOne,
-                classTwo: action.classTwo,
-                classThree: action.classThree,
-                skills: action.skills,
-                priestDomain: action.priestDomain,
-                deck: action.deck
+                name: action.character.name,
+                level: action.character.level,
+                ancestry: action.character.ancestry,
+                starterClass: action.character.starterClass,
+                specialtyClassOne: action.character.specialtyClassOne,
+                specialtyClassTwo: action.character.specialtyClassTwo,
+                skills: action.character.skills,
+                priestDomain: action.character.priestDomain,
+                deck: action.character.deck
             }
         default:
             return state;
