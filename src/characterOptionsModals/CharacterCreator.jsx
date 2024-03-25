@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import { connect } from 'react-redux';
+import {useParams} from 'react-router-dom';
 import {createCharacter, saveAttributes} from '../store/actions'
 import characterInfo from '../assets/characterInfoAndCards.json'; 
 import '../style/ModalStructure.scss'
@@ -9,10 +10,12 @@ export function CharacterCreator(props) {
 
     const {
         createCharacter,
-        saveAttributes,
-        character
+        saveAttributes
     } = props
-        
+
+    const characterName = location.search.replace("?", "");
+    const character = JSON.parse(localStorage.getItem(characterName))
+
     const [name, setName] = useState(character && character.name ? character.name : "");
     const [level, setLevel] = useState(character && character.level ? character.level : 1);
     const [ancestry, setAncestry] = useState(character && character.ancestry ? character.ancestry : "");

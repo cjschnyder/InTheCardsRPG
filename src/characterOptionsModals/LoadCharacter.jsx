@@ -32,6 +32,14 @@ export function LoadCharacter(props) {
                                         Load
                                     </div>
                                     <div 
+                                        className='button' 
+                                        onClick={() => {
+                                            location.replace(`/create?${character}`)
+                                        }}
+                                    >
+                                        Edit
+                                    </div>
+                                    <div 
                                         className='button delete' 
                                         onClick={() => {
                                             localStorage.removeItem(character);
