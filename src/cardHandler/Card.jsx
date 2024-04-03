@@ -1,17 +1,20 @@
-import { connect } from 'react-redux';
-import {transferToHand, transferToDiscard, transferToBurnPile, transferToDeck} from '../store/actions'
+import { useDispatch } from 'react-redux';
+import {
+    transferDeck,
+    transferHand,
+    transferDiscard,
+    transferBurn
+} from '../store/characterReducer'
 import './Card.scss'
 
-export function Card(props) {
+export const Card = (props) => {
+
+    const useAction = useDispatch();
     const {
         cardInfo,
-        cardView,
-        transferToHand,
-        transferToDiscard,
-        transferToBurnPile,
-        transferToDeck
+        cardView
     } = props
-    
+
     return(
         <div className='card-wrapper'>
             <div className='card-title'>
@@ -29,19 +32,19 @@ export function Card(props) {
             <div className='card-actions'>
                 <div 
                     className='action'
-                    onClick={() => cardView == 'hand' ? transferToDeck(cardInfo) : transferToHand(cardInfo)}
+                    onClick={() => cardView == 'hand' ? useAction(transferDeck(cardInfo)) : useAction(transferHand(cardInfo))}
                 >
                     {cardView == 'hand' ? 'Deck' : 'Hand'}
                 </div>
                 <div 
                     className='action'
-                    onClick={() => cardView == 'discard' ? transferToDeck(cardInfo) : transferToDiscard(cardInfo)}
+                    onClick={() => cardView == 'discard' ? useAction(transferDeck(cardInfo)) : useAction(transferDiscard(cardInfo))}
                 >
                     {cardView == 'discard' ? 'Deck' : 'Discard'}
                 </div>
                 <div
                     className='action'
-                    onClick={() => cardView == 'burn' ? transferToDeck(cardInfo) : transferToBurnPile(cardInfo)}
+                    onClick={() => cardView == 'burn' ? useAction(transferDeck(cardInfo)) : useAction(transferBurn(cardInfo))}
                 >
                     {cardView == 'burn' ? 'Deck' : 'Burn'}
                 </div>
@@ -49,10 +52,3 @@ export function Card(props) {
         </div>
     )
 }
-
-export default connect(null, {
-    transferToHand: transferToHand,
-    transferToDiscard: transferToDiscard,
-    transferToBurnPile: transferToBurnPile,
-    transferToDeck: transferToDeck
-})(Card);

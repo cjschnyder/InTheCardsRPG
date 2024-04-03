@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import {BrowserRouter, Routes, Route} from 'react-router-dom';
-import CardHandler from './cardHandler/CardHandler';
-import CharacterCreator from './characterOptionsModals/CharacterCreator';
-import LoadCharacter from './characterOptionsModals/LoadCharacter';
+import { CardHandler } from './cardHandler/CardHandler';
+import { CharacterCreator } from './characterOptionsModals/CharacterCreator';
+import { LoadCharacter } from './characterOptionsModals/LoadCharacter';
 
 export const InTheCards = () => {
     

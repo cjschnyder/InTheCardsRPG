@@ -1,12 +1,11 @@
-import { connect } from 'react-redux';
-import {loadCharacter} from '../store/actions'
+import { useDispatch } from 'react-redux';
+import { loadCharacter } from '../store/characterReducer'
 import '../style/ModalStructure.scss'
 import './LoadCharacter.scss'
 
-export function LoadCharacter(props) {
-    const {
-        loadCharacter
-    } = props
+export const LoadCharacter = () => {
+
+    const useAction = useDispatch();
     
     return(
         <div className={`modal-wrapper`}>
@@ -23,9 +22,7 @@ export function LoadCharacter(props) {
                                         className='button' 
                                         onClick={() => {
                                             const selectedCharacter = JSON.parse(localStorage.getItem(character))
-                                            loadCharacter(
-                                                selectedCharacter
-                                            );
+                                            useAction(loadCharacter(selectedCharacter));
                                             setTimeout(()=>{location.replace("/character-sheet")}, 500) //Bad, replace timeout in future
                                         }}
                                     >
@@ -56,7 +53,3 @@ export function LoadCharacter(props) {
         </div>
     )
 }
-
-export default connect(null, {
-    loadCharacter: loadCharacter
-})(LoadCharacter);

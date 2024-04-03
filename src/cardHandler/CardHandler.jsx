@@ -1,18 +1,19 @@
 import { useState } from 'react';
-import { useDispatch, shallowEqual, useSelector} from 'react-redux';
-import Card from './Card';
+import { useDispatch, useSelector} from 'react-redux';
+import { resetDeck } from '../store/characterReducer';
+import { Card } from './Card';
 import '../style/InTheCards.scss'
 
-export default function CardHandler() {
+export const CardHandler = () => {
 
     const useAction = useDispatch();
 
     const views = useSelector(state => ({
-        deck: state.deck,
-        hand: state.hand,
-        discard: state.discard,
-        burn: state.burn
-    }), shallowEqual);
+        deck: state.character.deck,
+        hand: state.character.hand,
+        discard: state.character.discard,
+        burn: state.character.burn
+    }));
 
     const [selectedCardView, setSelectedCardView] = useState('deck');
 
@@ -51,11 +52,13 @@ export default function CardHandler() {
                     )
                 }
             </div>
-            <div
-                className='reset-deck'
-                onClick={() => useAction({type: 'RESET_DECK'})}
-            >
-                Reset Deck
+            <div className = "card-functions">
+                <div
+                    className='reset-deck'
+                    onClick={() => useAction(resetDeck())}
+                >
+                    Reset Deck
+                </div>
             </div>
         </main>
     )

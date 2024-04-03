@@ -1,17 +1,13 @@
 import {useState} from 'react';
-import { connect } from 'react-redux';
-import {useParams} from 'react-router-dom';
-import {createCharacter, saveAttributes} from '../store/actions'
 import characterInfo from '../assets/characterInfoAndCards.json'; 
+import { createCharacter, saveCharacter } from '../store/characterReducer';
+import { useDispatch } from 'react-redux';
 import '../style/ModalStructure.scss'
 import './CharacterCreator.scss'
 
-export function CharacterCreator(props) {
+export const CharacterCreator = (props) => {
 
-    const {
-        createCharacter,
-        saveAttributes
-    } = props
+    const useAction = useDispatch();
 
     const characterName = location.search.replace("?", "");
     const character = JSON.parse(localStorage.getItem(characterName))
@@ -78,20 +74,17 @@ export function CharacterCreator(props) {
         setPriestDomain("");
     };
         
-    const saveCharacter = () => {
-        const priestDomainCard = [];
-        (starterClass === 'priest' && priestDomain) && (
-            priestDomainCard.push(
-                {
-                    "cardName":characterInfo.starterClasses.priest.specials[priestDomain].cardName,
-                    "action": characterInfo.starterClasses.priest.specials[priestDomain].action,
-                    "description": characterInfo.starterClasses.priest.specials[priestDomain].description,
-                    "from": `${characterInfo.starterClasses.priest.specials[priestDomain].from} ${characterInfo.starterClasses.priest.specials[priestDomain].level}`
-                }
-            )
-        );
-        createCharacter(name, level, ancestry, starterClass, specialtyClassOne, specialtyClassTwo, skills, priestDomainCard);
-        saveAttributes();
+    const saveCharacterValues = () => {
+        const priestDomainCard = (starterClass === 'priest' && priestDomain) &&
+            {
+                "cardName":characterInfo.starterClasses.priest.specials[priestDomain].cardName,
+                "action": characterInfo.starterClasses.priest.specials[priestDomain].action,
+                "description": characterInfo.starterClasses.priest.specials[priestDomain].description,
+                "from": `${characterInfo.starterClasses.priest.specials[priestDomain].from} ${characterInfo.starterClasses.priest.specials[priestDomain].level}`
+            }
+        
+        useAction(createCharacter({name, level, ancestry, starterClass, specialtyClassOne, specialtyClassTwo, skills, priestDomainCard}));
+        useAction(saveCharacter());
         clearState();
         location.replace("/character-sheet");
     };
@@ -232,7 +225,7 @@ export function CharacterCreator(props) {
                     </div>
                 </div>
                 <div className='horizontal-buttons'>
-                    <div className='button' onClick={() => saveCharacter()}>
+                    <div className='button' onClick={() => saveCharacterValues()}>
                         Save
                     </div>
                     <div className='button' onClick={() => clearState()}>
@@ -242,9 +235,4 @@ export function CharacterCreator(props) {
             </div>
         </div>
     )
-};
-
-export default connect(null,{
-    createCharacter: createCharacter,
-    saveAttributes: saveAttributes
-})(CharacterCreator);
+}

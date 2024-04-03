@@ -1,8 +1,18 @@
-export function saveAttributes() {
-  return { type: 'SAVE_ATTRIBUTES'};
-}
+export const saveAttributes = () => ({
+  type: 'SAVE_ATTRIBUTES'
+});
 
-export function createCharacter(
+export const createCharacter = (
+  name,
+  level,
+  ancestry,
+  starterClass,
+  specialtyClassOne,
+  specialtyClassTwo,
+  skills,
+  customCards
+    ) => ({
+    type: 'CREATE_CHARACTER',
     name,
     level,
     ancestry,
@@ -11,40 +21,33 @@ export function createCharacter(
     specialtyClassTwo,
     skills,
     customCards
-    ){
-    return { 
-        type: 'CREATE_CHARACTER',
-        name,
-        level,
-        ancestry,
-        starterClass,
-        specialtyClassOne,
-        specialtyClassTwo,
-        skills,
-        customCards
-    };
-}
+});
 
-export function transferToHand(card) {
-  return { type: 'TRANSFER_HAND', card};
-}
+export const transferToHand = (card) => ({
+  type: 'TRANSFER_HAND', 
+  card
+});
 
-export function transferToDiscard(card) {
-  return { type: 'TRANSFER_DISCARD', card};
-}
+export const transferToDiscard = (card) => ({
+  type: 'TRANSFER_DISCARD',
+  card
+});
 
-export function transferToBurnPile(card) {
-  return { type: 'TRANSFER_BURN', card};
-}
+export const transferToBurnPile = (card) => ({
+  type: 'TRANSFER_BURN',
+  card
+});
 
-export function transferToDeck(card) {
-  return { type: 'TRANSFER_DECK', card};
-}
+export const transferToDeck = (card) => ({
+  type: 'TRANSFER_DECK',
+  card
+});
 
-export function resetDeck() {
-    return {type: 'RESET_DECK'};
-}
+export const resetDeck = () => ({
+    type: 'RESET_DECK'
+});
 
-export function loadCharacter(character){
-  return {type: 'LOAD_CHARACTER', character};
-}
+export const loadCharacter = (character) => ({
+  type: 'LOAD_CHARACTER',
+  character
+});
