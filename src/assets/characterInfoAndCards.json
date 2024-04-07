@@ -408,7 +408,7 @@
                {
                   "cardName":"Magical Shards",
                   "action":"Active - Spell - Burn",
-                  "description":"In a 5 meter wide circle within 10 meters of you, all creatures must make a “Toughness” roll against any of your “Magic School” skills. If they fail they take 2d6 arcane damage and have major disadvantage on their next attack. If they succeed they take half the damage. Finally, the affected area is difficult terrain for a number of rounds equal to your intelligence trait.",
+                  "description":"In a 5 meter wide circle within 10 meters of you, all creatures must make a “Toughness” roll against any of your “Magic School” skills. If they fail they take 2d6 damage and have major disadvantage on their next attack. If they succeed they take half the damage. Finally, the affected area is difficult terrain for a number of rounds equal to your intelligence trait.",
                   "from":"mage",
                   "level":1
                }

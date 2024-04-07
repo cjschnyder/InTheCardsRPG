@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import characterInfo from '../assets/characterInfoAndCards.json'; 
 import { createCharacter, saveCharacter } from '../store/characterReducer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import '../style/ModalStructure.scss'
 import './CharacterCreator.scss'
 

@@ -23,7 +23,7 @@ export const LoadCharacter = () => {
                                         onClick={() => {
                                             const selectedCharacter = JSON.parse(localStorage.getItem(character))
                                             useAction(loadCharacter(selectedCharacter));
-                                            setTimeout(()=>{location.replace("/character-sheet")}, 500) //Bad, replace timeout in future
+                                            location.replace("/character-sheet");
                                         }}
                                     >
                                         Load
