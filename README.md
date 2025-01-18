@@ -1,2 +1,1 @@
-# DernCharacterCreator
-Dern Character Creator
+# In The Cards RPG Character Creator
