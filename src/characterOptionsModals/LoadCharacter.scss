@@ -1,9 +1,10 @@
-@import 'variables';
+@import '../style/variables.scss';
 
 .load-deck-wrapper {
     background: $light;
     color: $dark;
     border-radius: 5px;
+    margin-bottom: 15px;
     
     .load-deck {
         padding: 7px;

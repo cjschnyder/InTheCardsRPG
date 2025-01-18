@@ -5,6 +5,7 @@
     height: 100vh;
     font-family: 'Roboto';
     background-color: $lightTan;
+    overflow-y: scroll;
 
     header {
         background-color: $lightTan;
@@ -12,6 +13,7 @@
         padding: 5px; 
         display: flex;
         color: $light;
+        z-index: 3;
 
         #menu-icon {
             margin: 10px;
@@ -43,7 +45,7 @@
             
             
             .itc-menu-item {
-                font-family: 'Abril Fatface';
+                font-family: 'Rokkitt';
                 font-size: 26px;
                 margin-bottom: 10px;
                 margin-right:10px;
@@ -61,7 +63,56 @@
             }
         }
     }
-    
+
+    .itc-container {
+        .card-options-menu {
+            display: flex;
+            flex-direction: row;
+            height: 40px;
+
+            .card-option {
+                flex-grow: 1;
+                text-align: center;
+                border: 2px solid #242528;
+                border-radius: 3px;
+                margin: 3px;
+                padding-top: 6px;
+                font-weight: 700;
+                text-transform: capitalize;
+
+                &.selected {
+                    background-color: $darkBlue;
+                    color: $lightTan;
+                }
+            }
+            
+        }
+
+        .card-display {
+            display: flex;
+            justify-content: center;
+            padding: 0 20px;
+            margin: 20px 0;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+
+        .reset-deck {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            width: 60px;
+            cursor: pointer;
+            padding: 20px 10px;
+            border: 2px solid $light;
+            color: $light;
+            font-weight: 700;
+            text-align: center;
+            border-radius: 10px;
+            background: $deleteRed;
+        }
+    }
+
     .cover {
         z-index: 2;
         background: #000;
@@ -92,8 +143,13 @@
             }
         }
         
-        .itc-container {
+        .itc-container, .cover {
             margin-top: 70px;
+        }
+
+        #itc-menu-container {
+            top:70px;
+            position: fixed;
         }
     }
 }

@@ -1,97 +1,53 @@
-export function saveAttributes() {
-  return { type: 'SAVE_ATTRIBUTES'};
-}
+export const saveAttributes = () => ({
+  type: 'SAVE_ATTRIBUTES'
+});
 
-export function createCharacter(
+export const createCharacter = (
+  name,
+  level,
+  ancestry,
+  starterClass,
+  specialtyClassOne,
+  specialtyClassTwo,
+  skills,
+  customCards
+    ) => ({
+    type: 'CREATE_CHARACTER',
     name,
     level,
     ancestry,
-    background,
     starterClass,
     specialtyClassOne,
     specialtyClassTwo,
-    traits,
     skills,
     customCards
-    ){
-    return { 
-        type: 'CREATE_CHARACTER',
-        name,
-        level,
-        ancestry,
-        background,
-        starterClass,
-        specialtyClassOne,
-        specialtyClassTwo,
-        traits,
-        skills,
-        customCards
-    };
-}
+});
 
-export function setInventory(items) {
-  return { type: 'SET_INVENTORY', items};
-}
+export const transferToHand = (card) => ({
+  type: 'TRANSFER_HAND', 
+  card
+});
 
-export function removeItem(item) {
-    return { type: 'REMOVE_ITEM', item};
-}
+export const transferToDiscard = (card) => ({
+  type: 'TRANSFER_DISCARD',
+  card
+});
 
-export function setCurrentHealth(currentHealth, equation, value) {
-  return { type: 'SET_CURRENT_HEALTH', currentHealth, equation, value};
-}
+export const transferToBurnPile = (card) => ({
+  type: 'TRANSFER_BURN',
+  card
+});
 
-export function transferToHand(card) {
-  return { type: 'TRANSFER_HAND', card};
-}
+export const transferToDeck = (card) => ({
+  type: 'TRANSFER_DECK',
+  card
+});
 
-export function transferToDiscard(card) {
-  return { type: 'TRANSFER_DISCARD', card};
-}
+export const resetDeck = () => ({
+    type: 'RESET_DECK'
+});
 
-export function transferToBurnPile(card) {
-  return { type: 'TRANSFER_BURN', card};
-}
-
-export function transferToDeck(card) {
-  return { type: 'TRANSFER_DECK', card};
-}
-
-export function resetDeck() {
-    return {type: 'RESET_DECK'};
-}
-
-export function loadCharacter(
-    deck,
-    name,
-    level,
-    ancestry,
-    background,
-    starterClass,
-    specialtyClassOne,
-    specialtyClassTwo,
-    traits,
-    skills,
-    health,
-    healingRate,
-    currentHealth,
-    movement
-){
-    return {
-        type: 'LOAD_CHARACTER',
-        deck,
-        name,
-        level,
-        ancestry,
-        background,
-        starterClass,
-        specialtyClassOne,
-        specialtyClassTwo,
-        traits,
-        skills,
-        health,
-        healingRate,
-        currentHealth,
-        movement
-    };
-}
+export const loadCharacter = (character) => ({
+  type: 'LOAD_CHARACTER',
+  character
+});
