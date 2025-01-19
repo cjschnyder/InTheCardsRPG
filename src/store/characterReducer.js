@@ -6,6 +6,8 @@ const initialState = {
     level: 1,
     species: "",
     starterClass: "",
+    priestOption: "",
+    gear: [],
     hand: [],
     discard: []
 };
@@ -19,9 +21,10 @@ const characterReducer = createSlice({
                 state.name, 
                 JSON.stringify({
                     name: state.name, 
-                    level: state.level,
                     species: state.species,
-                    starterClass: state.starterClass, 
+                    starterClass: state.starterClass,
+                    priestOption: state.priestOption,
+                    gear: state.gear,
                     hand: state.hand,
                     discard: state.discard
                 })
@@ -30,37 +33,20 @@ const characterReducer = createSlice({
         createCharacter(state, action) {
             const {
                 name,
-                level,
                 species,
                 starterClass,
+                priestOption,
+                gear
             } = action.payload;
 
-            state.hand = [];
-            
-            ancestry && Object.entries(characterInfo.species[species]).forEach(entry => {
-                const [ancestryLevel, info] = entry;
-                if (level >= ancestryLevel) {
-                    info.cards && state.deck.push(...info.cards);
-                }
-            });
-            
-            starterClass && Object.entries(characterInfo.starterClasses[starterClass]).forEach(entry => {
-                const [classLevel, info] = entry;                                                                                
-                if (level >= classLevel) {
-                    info.cards && state.deck.push(...info.cards);
-                }
-            })
-                
             state.name = name;
-            state.level = level;
             state.species = species;
             state.starterClass = starterClass; 
-            state.hand =  initialState.hand;
-            state.discard =  initialState.deck;
+            state.discard = initialState.discard;
         },
         transferHand(state, action) {
             const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName); //this is going to cause an issue when decks have duplicate cards it them
+            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName); 
             state.discard = state.discard.filter(card => card.cardName != transferedCard.cardName);
             state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
             state.hand.push(transferedCard);
@@ -82,17 +68,19 @@ const characterReducer = createSlice({
         loadCharacter(state, action) {
             const {
                 name,
-                level,
                 species,
                 starterClass,
+                priestOption,
+                gear,
                 hand,
                 discard
             } = action.payload;
 
             state.name = name;
-            state.level = level;
             state.species = species;
             state.starterClass = starterClass;
+            state.priestOption = priestOption;
+            state.gear = gear;
             state.hand = hand;
             state.discard = discard;
         }

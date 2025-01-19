@@ -242,7 +242,7 @@
       },
       {
          "id": 16,
-         "source": "priest",
+         "source": "healing",
          "abilities":[
             {
                "name":"Prayer for Aliments",
@@ -258,7 +258,7 @@
       },
       {
          "id": 17,
-         "source": "priest",
+         "source": "righteousness",
          "abilities":[
             {
                "name":"Prayer of Divine Power",
@@ -274,7 +274,7 @@
       },
       {
          "id": 18,
-         "source": "priest",
+         "source": "shadows",
          "abilities":[
             {
                "name":"Prayer of the Coming Dark",
