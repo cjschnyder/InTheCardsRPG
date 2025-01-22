@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { loadCharacter } from '../store/characterReducer'
-import '../style/ModalStructure.scss'
+import '../style/PageStructure.scss'
 import './LoadCharacter.scss'
 
 export const LoadCharacter = () => {

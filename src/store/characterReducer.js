@@ -3,13 +3,13 @@ import characterInfo from '../assets/characterInfoAndCards.json';
 
 const initialState = {
     name: "",
-    level: 1,
     species: "",
     starterClass: "",
     priestOption: "",
     gear: [],
     hand: [],
-    discard: []
+    discard: [],
+    discardRest: []
 };
 
 const characterReducer = createSlice({
@@ -26,7 +26,8 @@ const characterReducer = createSlice({
                     priestOption: state.priestOption,
                     gear: state.gear,
                     hand: state.hand,
-                    discard: state.discard
+                    discard: state.discard,
+                    discardRest: state.discardRest
                 })
             );
         },
@@ -41,29 +42,49 @@ const characterReducer = createSlice({
 
             state.name = name;
             state.species = species;
-            state.starterClass = starterClass; 
+            state.starterClass = starterClass;
+            state.priestOption = priestOption;
+            state.gear = gear;
+            state.discard = initialState.discard;
+            state.discardRest = initialState.discardRest;
+
+            const seperatedCard = characterInfo.cards.filter(
+                card => (card.source === species || card.source === starterClass || card.source === priestOption || gear.includes(card.source))
+            );
+
+            state.hand = seperatedCard.map(card => card.id)
+        },
+        transferToHand(state, action) {
+            const transferedCardId = action.payload;
+            state.discard = state.discard.filter(cardId => cardId !== transferedCardId);
+            state.discardRest = state.discardRest.filter(cardId => cardId !== transferedCardId);
+            state.hand.push(transferedCardId);
+        },
+        transferToDiscard(state, action) {
+            const transferedCardId = action.payload;
+            state.hand = state.hand.filter(cardId => cardId !== transferedCardId);
+            state.discard.push(transferedCardId);
+        },
+        transferToDiscardRest(state, action) {
+            const transferedCardId = action.payload;
+            state.hand = state.hand.filter(cardId => cardId !== transferedCardId);
+            state.discardRest.push(transferedCardId);
+        },
+        newScene(state) {
+            state.hand = [
+                ...state.hand,
+                ...state.discard
+            ];
             state.discard = initialState.discard;
         },
-        transferHand(state, action) {
-            const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName); 
-            state.discard = state.discard.filter(card => card.cardName != transferedCard.cardName);
-            state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
-            state.hand.push(transferedCard);
-        },
-        transferDiscard(state, action) {
-            const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName);
-            state.hand = state.hand.filter(card => card.cardName != transferedCard.cardName);
-            state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
-            state.discard.push(transferedCard);
-        },
-        resetDeck(state) {
+        rest(state) {
             state.hand = [
                 ...state.hand,
                 ...state.discard,
+                ...state.discardRest
             ];
             state.discard = initialState.discard;
+            state.discardRest = initialState.discardRest;
         },
         loadCharacter(state, action) {
             const {
@@ -73,7 +94,8 @@ const characterReducer = createSlice({
                 priestOption,
                 gear,
                 hand,
-                discard
+                discard,
+                discardRest
             } = action.payload;
 
             state.name = name;
@@ -83,6 +105,7 @@ const characterReducer = createSlice({
             state.gear = gear;
             state.hand = hand;
             state.discard = discard;
+            state.discardRest = discardRest;
         }
     }
 });
@@ -90,9 +113,11 @@ const characterReducer = createSlice({
 export const {
     saveCharacter,
     createCharacter,
-    transferHand,
-    transferDiscard,
-    resetDeck,
+    transferToHand,
+    transferToDiscard,
+    transferToDiscardRest,
+    newScene,
+    rest,
     loadCharacter
 } = characterReducer.actions
 

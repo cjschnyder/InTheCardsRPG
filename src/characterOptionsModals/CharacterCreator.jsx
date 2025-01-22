@@ -1,9 +1,8 @@
 import { useState } from 'react';
-import characterInfo from '../assets/characterInfoAndCards.json'; 
 import { createCharacter, saveCharacter } from '../store/characterReducer';
 import { useDispatch } from 'react-redux';
 import Select from 'react-select';
-import '../style/ModalStructure.scss'
+import '../style/PageStructure.scss'
 import './CharacterCreator.scss'
 
 export const CharacterCreator = () => {
@@ -11,7 +10,7 @@ export const CharacterCreator = () => {
     const useAction = useDispatch();
     const characterName = location.search.replace("?", "");
     const character = JSON.parse(localStorage.getItem(characterName));
-    const species = [
+    const speciesList = [
         {value: "dwarf", label: "Dwarf"},
         {value: "faeling", label: "Faeling"},
         {value: "goblin", label: "Goblin"},
@@ -48,10 +47,25 @@ export const CharacterCreator = () => {
     ];
 
     const [name, setName] = useState(character && character.name ? character.name : "");
-    const [characterSpecies, setSpecies] = useState(character && character.species ? character.species : "");
+    const [species, setSpecies] = useState(character && character.species ? character.species : "");
     const [starterClass, setStarterClass] = useState(character && character.starterClass ? character.starterClass : "");
-    const [priestOption, setPriestOption] = useState(character && character.priestOption ? character.priestOption : []);
+    const [priestOption, setPriestOption] = useState(character && character.priestOption ? character.priestOption : "");
     const [gear, setGear] = useState(character && character.cards ? character.cards : []);
+
+    const updateSpecies = (selected) => {
+        setSpecies(selected.value);
+    };
+    const updateStarterClass = (selected) => {
+        setStarterClass(selected.value);
+    };
+    const updatePriestOption = (selected) => {
+        setPriestOption(selected.value);
+    };
+    const updateGear = (selected) => {
+        setGear(selected.map(item => {
+            return item.value
+        }));
+    };
 
     const clearState = () => {
         setName("");
@@ -62,14 +76,14 @@ export const CharacterCreator = () => {
     };
         
     const saveCharacterValues = () => {        
-        useAction(createCharacter({name, characterSpecies, starterClass, priestOption, gear}));
+        useAction(createCharacter({name, species, starterClass, priestOption, gear}));
         useAction(saveCharacter());
         clearState();
-        location.replace("/character-sheet");
+        // location.replace("/character-sheet");
     };
     
     return(
-        <div className={`modal-wrapper`}>
+        <div className={`content-wrapper`}>
             <div className='modal-title'>
                 <h2>{character && character.name ? 'Edit Character' : 'Create a New Character'}</h2>
             </div>
@@ -84,22 +98,22 @@ export const CharacterCreator = () => {
                     </div>
                 </div>
                 <div className='modal-option'>
-                    <span>Starter Class: </span>
+                    <span>Species: </span>
                     <div className='modal-input'>
                         <Select 
-                            options={species}
-                            value={characterSpecies}
-                            onChange={setSpecies}
+                            options={speciesList}
+                            value={speciesList.filter(item => item.value === species)}
+                            onChange={updateSpecies}
                         />
                     </div>
                 </div>
                 <div className='modal-option'>
-                    <span>Species: </span>
+                    <span>Starter Class: </span>
                     <div className='modal-input'>
                         <Select 
                             options={classes}
-                            value={starterClass}
-                            onChange={setStarterClass}
+                            value={classes.filter(item => item.value === starterClass)}
+                            onChange={updateStarterClass}
                         />
                     </div>
                 </div>
@@ -110,8 +124,8 @@ export const CharacterCreator = () => {
                         <div className='modal-input'>
                             <Select 
                                 options={priestOptions}
-                                value={priestOption}
-                                onChange={setPriestOption}
+                                value={priestOptions.filter(item => item.value === priestOption)}
+                                onChange={updatePriestOption}
                             />
                         </div>
                     </div>
@@ -122,8 +136,8 @@ export const CharacterCreator = () => {
                         <Select 
                             isMulti
                             options={gearAndWeapons}
-                            value={gear}
-                            onChange={setGear}
+                            value={gearAndWeapons.filter(item => gear.includes(item.value))}
+                            onChange={updateGear}
                         />
                     </div>
                 </div>

@@ -1,7 +1,8 @@
 import { useDispatch } from 'react-redux';
 import {
-    transferHand,
-    transferDiscard
+    transferToHand,
+    transferToDiscard,
+    transferToDiscardRest
 } from '../store/characterReducer'
 import './Card.scss'
 
@@ -27,16 +28,18 @@ export const Card = (props) => {
             <div className='card-actions'>
                 <div 
                     className='action'
-                    onClick={() => cardView == 'hand' ? useAction(transferDeck(cardInfo)) : useAction(transferHand(cardInfo))}
+                    onClick={() => cardView == 'hand' ? useAction(transferToDiscard(cardInfo)) : useAction(transferToHand(cardInfo))}
                 >
-                    {cardView == 'hand' ? 'Deck' : 'Hand'}
+                    {cardView == 'hand' ? 'Discard' : 'Hand'}
                 </div>
-                <div 
-                    className='action'
-                    onClick={() => cardView == 'discard' ? useAction(transferDeck(cardInfo)) : useAction(transferDiscard(cardInfo))}
-                >
-                    {cardView == 'discard' ? 'Deck' : 'Discard'}
-                </div>
+                { cardView === 'hand' &&
+                    <div 
+                        className='action'
+                        onClick={() => useAction(transferToDiscardRest(cardInfo))}
+                    >
+                        Discard (Rest)
+                    </div>
+                }
             </div>
         </div>
     )
