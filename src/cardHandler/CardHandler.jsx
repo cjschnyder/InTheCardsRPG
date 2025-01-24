@@ -37,11 +37,11 @@ export const CardHandler = () => {
                 {
                     selectedCardView === 'hand' ?
                         views.hand.map(card =>
-                            <Card cardInfo={card} cardView={selectedCardView}/>
+                            <Card cardId={card} cardView={selectedCardView}/>
                         )
                     :
                         totalDiscard.map(card =>
-                            <Card cardInfo={card} cardView={selectedCardView}/>
+                            <Card cardId={card} cardView={selectedCardView}/>
                         )
                 }
             </div>

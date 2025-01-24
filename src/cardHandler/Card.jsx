@@ -4,38 +4,47 @@ import {
     transferToDiscard,
     transferToDiscardRest
 } from '../store/characterReducer'
+import cardInfo from '../assets/characterInfoAndCards.json';
 import './Card.scss'
 
 export const Card = (props) => {
 
     const useAction = useDispatch();
     const {
-        cardInfo,
+        cardId,
         cardView
     } = props
 
+    const card = cardInfo.cards.find((card) => card.id === cardId);
+
     return(
         <div className='card-wrapper'>
-            <div className='card-title'>
-                <span>{cardInfo.cardName}</span>
-            </div>
-            <div className='card-type'>
-                <span>{cardInfo.action}</span>
-            </div>
-            <div className='card-description'>
-                <span>{cardInfo.description}</span>
-            </div>
+            {
+                card.abilities.map(ability => (
+                    <div className='ability-wrapper' key={ability.name}>
+                        <div className='card-title'>
+                            <span>{ability.name}</span>
+                        </div>
+                        <div className='card-type'>
+                            <span>{ability.type}</span>
+                        </div>
+                        <div className='card-description'>
+                            <span>{ability.description}</span>
+                        </div>
+                    </div>
+                ))
+            }
             <div className='card-actions'>
                 <div 
                     className='action'
-                    onClick={() => cardView == 'hand' ? useAction(transferToDiscard(cardInfo)) : useAction(transferToHand(cardInfo))}
+                    onClick={() => cardView == 'hand' ? useAction(transferToDiscard(cardId)) : useAction(transferToHand(cardId))}
                 >
                     {cardView == 'hand' ? 'Discard' : 'Hand'}
                 </div>
                 { cardView === 'hand' &&
                     <div 
                         className='action'
-                        onClick={() => useAction(transferToDiscardRest(cardInfo))}
+                        onClick={() => useAction(transferToDiscardRest(cardId))}
                     >
                         Discard (Rest)
                     </div>
