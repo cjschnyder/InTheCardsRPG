@@ -79,7 +79,7 @@ export const CharacterCreator = () => {
         useAction(createCharacter({name, species, starterClass, priestOption, gear}));
         useAction(saveCharacter());
         clearState();
-        // location.replace("/character-sheet");
+        location.replace("/character-sheet");
     };
     
     return(

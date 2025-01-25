@@ -1,5 +1,6 @@
 import { useDispatch } from 'react-redux';
 import {
+    saveCharacter,
     transferToHand,
     transferToDiscard,
     transferToDiscardRest
@@ -37,14 +38,27 @@ export const Card = (props) => {
             <div className='card-actions'>
                 <div 
                     className='action'
-                    onClick={() => cardView == 'hand' ? useAction(transferToDiscard(cardId)) : useAction(transferToHand(cardId))}
+                    onClick={() => cardView == 'hand' ?
+                        (
+                            useAction(transferToDiscard(cardId)),
+                            useAction(saveCharacter())
+                        )
+                        :
+                        (
+                            useAction(transferToHand(cardId)),
+                            useAction(saveCharacter())
+                        )
+                    }
                 >
                     {cardView == 'hand' ? 'Discard' : 'Hand'}
                 </div>
                 { cardView === 'hand' &&
                     <div 
                         className='action'
-                        onClick={() => useAction(transferToDiscardRest(cardId))}
+                        onClick={() => (
+                            useAction(transferToDiscardRest(cardId)),
+                            useAction(saveCharacter())
+                        )}
                     >
                         Discard (Rest)
                     </div>

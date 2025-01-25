@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector} from 'react-redux';
-import { newScene, rest } from '../store/characterReducer';
+import { newScene, rest, saveCharacter } from '../store/characterReducer';
 import { Card } from './Card';
 import '../style/InTheCards.scss'
 
@@ -49,7 +49,10 @@ export const CardHandler = () => {
                 <div className = "card-function">
                     <div
                         className='new-scene'
-                        onClick={() => useAction(newScene())}
+                        onClick={() => (
+                            useAction(newScene()),
+                            useAction(saveCharacter())
+                        )}
                     >
                         New Scene
                     </div>
@@ -57,7 +60,10 @@ export const CardHandler = () => {
                 <div className = "card-function">
                     <div
                         className='reset-hand'
-                        onClick={() => useAction(rest())}
+                        onClick={() => (
+                            useAction(rest()),
+                            useAction(saveCharacter())
+                        )}
                     >
                         Rest
                     </div>
