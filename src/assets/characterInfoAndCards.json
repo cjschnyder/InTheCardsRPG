@@ -138,9 +138,9 @@
                "description": "You can use knowledge + arcane to make basic attacks with spears made of raw arcane energy. They are magic, have a range of 10 yards, and deal base damage equal to your knowledge + 1."
             },
             {
-               "name":"Magical Blast",
-               "type":"Active - Spell - Rest",
-               "description": "You create a 6 yard long, 2 yard wide line within 10 yards, all creatures make a Reflex skill check against your Knowledge. If they fail they take your Knowledge + your level + 3. If they succeed, they take your Knowledge + 1 in damage."
+               "name":"Detect Magic",
+               "type":"Active - Spell",
+               "description": "For the rest of the scene you can see traces of magic near you, within a number of yards equal to your Knowledge. This lets you know if a person, object, or place is magical or under the effects of magic. You also know what type, out of the 3 schools, the magic is: arcane, nature, or divine. This lets you see the magical aura of illusions and invisible creatures."
             }
          ]
       },
@@ -149,14 +149,14 @@
          "source": "mage",
          "abilities":[
             {
-               "name":"Detect Magic",
-               "type":"Active - Spell",
-               "description": "For the rest of the scene you can see traces of magic near you, within a number of yards equal to your Knowledge. This lets you know if a person, object, or place is magical or under the effects of magic. You also know what type, out of the 3 schools, the magic is: arcane, nature, or divine. This lets you see the magical aura of illusions and invisible creatures."
-            },
-            {
                "name":"Minor Telekinesis",
                "type":"Active - Spell",
                "description": "For the rest of the scene, as an action, you can either move an object, within 6 yards, 6 yards. Or you can attempt to forcibly move a creature within 6 yards. They roll an Athletics skill check against your Knowledge. If they fail you can move them 3 yards."
+            },
+            {
+               "name":"Magical Blast",
+               "type":"Active - Spell - Rest",
+               "description": "You create a 6 yard long, 2 yard wide line within 10 yards, all creatures make a Reflex skill check against your Knowledge. If they fail they take your Knowledge + your level + 3. If they succeed, they take your Knowledge + 1 in damage."
             }
          ]
       },

@@ -43,13 +43,13 @@ const characterReducer = createSlice({
             state.name = name;
             state.species = species;
             state.starterClass = starterClass;
-            state.priestOption = priestOption;
+            state.priestOption = starterClass === 'priest' ? priestOption : "";
             state.gear = gear;
             state.discard = initialState.discard;
             state.discardRest = initialState.discardRest;
 
             const seperatedCard = characterInfo.cards.filter(
-                card => (card.source === species || card.source === starterClass || card.source === priestOption || gear.includes(card.source))
+                card => (card.source === state.species || card.source === state.starterClass || card.source === state.priestOption || state.gear.includes(card.source))
             );
 
             state.hand = seperatedCard.map(card => card.id)

@@ -161,6 +161,16 @@
         
         .itc-container, .cover {
             margin-top: 70px;
+
+            .card-display {
+                display: flex;
+                justify-content: center;
+                padding: 0 20px;
+                margin-top: 20px;
+                margin-bottom: 100px;
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
         }
 
         #itc-menu-container {
