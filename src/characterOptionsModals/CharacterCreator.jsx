@@ -11,10 +11,13 @@ export const CharacterCreator = () => {
     const characterName = location.search.replace("?", "");
     const character = JSON.parse(localStorage.getItem(characterName));
     const speciesList = [
+        {value: "connected", label: "Connected"},
         {value: "dwarf", label: "Dwarf"},
         {value: "faeling", label: "Faeling"},
         {value: "goblin", label: "Goblin"},
-        {value: "human", label: "Human"}
+        {value: "gruff", label: "Gruff"},
+        {value: "human", label: "Human"},
+        {value: "magical_vampire", label: "Magical Vampire"}
     ];
     const classes = [
         {value: "fighter", label: "Fighter"},
@@ -24,7 +27,7 @@ export const CharacterCreator = () => {
         {value: "physician", label: "Physician"},
         {value: "priest", label: "Priest"},
         {value: "rogue", label: "Rogue"},
-        {value: "warlock", label: "Warlock"}
+        {value: "magic_broker", label: "Magic Broker"}
     ];
     const priestOptions = [
         {value: "healing", label: "Healing"},
@@ -50,7 +53,7 @@ export const CharacterCreator = () => {
     const [species, setSpecies] = useState(character && character.species ? character.species : "");
     const [starterClass, setStarterClass] = useState(character && character.starterClass ? character.starterClass : "");
     const [priestOption, setPriestOption] = useState(character && character.priestOption ? character.priestOption : "");
-    const [gear, setGear] = useState(character && character.cards ? character.cards : []);
+    const [gear, setGear] = useState(character && character.gear ? character.gear : []);
 
     const updateSpecies = (selected) => {
         setSpecies(selected.value);

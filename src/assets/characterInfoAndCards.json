@@ -1,13 +1,29 @@
 {
    "cards":[
       {
+         "id": 39,
+         "source": "connected",
+         "abilities":[
+            {
+               "name":"Shared Mind",
+               "type":"Passive",
+               "description": "You know everything your other knows and you know where they are at all times unless they’re on another plane."
+            },
+            {
+               "name":"Sever the Bond",
+               "type":"Triggered",
+               "description": "When you take damage, you can choose to momentarily sever your connection to your other so they do not take damage. The connection then reforms immediately."
+            }
+         ]
+      },
+      {
          "id": 1,
          "source": "dwarf",
          "abilities":[
             {
                "name":"Finally a Fair Fight",
                "type":"Passive",
-               "description": "When 3 or more enemies are adjacent to you, add +1 die to your dice pool for all attacks."
+               "description": "When 2 or more enemies are adjacent to you, add +1 die to your dice pool for all attacks."
             },
             {
                "name":"Shrug It Off",
@@ -49,6 +65,22 @@
          ]
       },
       {
+         "id": 38,
+         "source": "gruff",
+         "abilities":[
+            {
+               "name":"Hard Headed",
+               "type":"Passive",
+               "description": "You cannot be forcibly moved by mundane or magical means. This does not apply to being knocked prone. Additionally, your horns and hooves deal your Strength + 2 in damage."
+            },
+            {
+               "name":"Stampede!",
+               "type":"Triggered",
+               "description": "When you move, you can move through enemy spaces. Once your movement ends, if you’ve moved through an enemy space, roll an Any + Athletics skill check against their Strength. If you succeed, they’re knocked prone."
+            }
+         ]
+      },
+      {
          "id": 4,
          "source": "human",
          "abilities":[
@@ -61,6 +93,22 @@
                "name":"Second Wind",
                "type":"Special - Rest",
                "description": "You can use this card to replicate the ability and type of another card you have in your discard pile."
+            }
+         ]
+      },
+      {
+         "id": 40,
+         "source": "magical_vampire",
+         "abilities":[
+            {
+               "name":"Power in your Veins",
+               "type":"Passive",
+               "description": "At the end of a rest pick a Trait and increase it by 1. This does not go away if this card is discarded but it does once you start a rest."
+            },
+            {
+               "name":"Drain",
+               "type":"Active",
+               "description": "You touch a creature that can cast magic and try to drain some from it. Roll an Any + Arcane against the target's Spirit or Knowledge. If you succeed, they discard a spell card and remove 1 die from their dice pool when casting with that stat for the rest of the scene. If you do not successfully drain someone, you begin the next day with -1 in two Traits of your choice. If you are a magic caster you cannot drain yourself."
             }
          ]
       },
@@ -107,7 +155,7 @@
             },
             {
                "name":"What I Meant to Say Was…",
-               "type":"Triggered - Rest",
+               "type":"Triggered",
                "description": "When you fail a skill check that involves convincing someone of something, be it through intimidation, persuasion, or other means. You can re-roll that check."
             }
          ]
@@ -172,7 +220,7 @@
             {
                "name":"Cozy Flames",
                "type":"Active - Spell - Rest",
-               "description": "You and 2 adjacent allies can either recover stamina equal to their healing rate or put a non-rest card from their discard back into their hand."
+               "description": "You and 2 adjacent allies can either recover stamina equal to their healing rate or put a card in their discard back into their hand."
             }
          ]
       },
@@ -300,7 +348,7 @@
             {
                "name":"Flash Bomb",
                "type":"Active",
-               "description": "You throw a small self-constructed bomb at a space within 6 yards of you. All creatures in and 2 yards around the target space make a Toughness skill check against your Knowledge. If they fail they are dazed. If a creature is in the targeted space that creature removes 1 die from their dice pool before making the check."
+               "description": "You throw a small self-constructed bomb at a space within 6 yards of you. All creatures in and 2 yards around the target space make a Toughness skill check against your Knowledge. If they fail they are dazed for 1 round. If a creature is in the targeted space that creature removes 1 die from their dice pool before making the check."
             }
          ]
       },
@@ -322,12 +370,12 @@
       },
       {
          "id": 21,
-         "source": "warlock",
+         "source": "magic_broker",
          "abilities":[
             {
-               "name":"Lash of the Pact Keeper ",
+               "name":"Lash of the Pact",
                "type":"Active - Spell",
-               "description": "You pick a melee weapon and draw the symbol of your patron on it. For the rest of the scene, that weapon now has a melee range of 3 yards. Additionally, when making attacks with it you can use Knowledge + arcane/nature. You also replace the damaging trait with knowledge."
+               "description": "You pick a melee weapon, either yours or an adjacent allies, and imbue it with magic. For the rest of the scene, that weapon’s range is increased by 1. When making attacks with it you can either use Knowledge + arcane/nature to attack with and have the damaging trait be knowledge, or add +2 to its base damage."
             },
             {
                "name":"Illusion",
@@ -338,12 +386,12 @@
       },
       {
          "id": 22,
-         "source": "warlock",
+         "source": "magic_broker",
          "abilities":[
             {
-               "name":"Deal Maker",
+               "name":"Pact Maker",
                "type":"Active - Spell",
-               "description": "Choose an ally within 3 yards. For the rest of the scene you and your target share a combined health pool. Also when one of you discards a card you can instead discard a card from the other ally's hand."
+               "description": "Choose an ally within 3 yards. For the rest of the scene you and your target share a combined health pool and gain +1 magic DR. Also when one of you discards a non-rest card you can instead have your ally discard a card from their hand."
             },
             {
                "name":"Life Siphon",

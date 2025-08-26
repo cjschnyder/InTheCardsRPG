@@ -9,7 +9,8 @@ const initialState = {
     gear: [],
     hand: [],
     discard: [],
-    discardRest: []
+    discardRest: [],
+    customCards: []
 };
 
 const characterReducer = createSlice({
@@ -27,9 +28,20 @@ const characterReducer = createSlice({
                     gear: state.gear,
                     hand: state.hand,
                     discard: state.discard,
-                    discardRest: state.discardRest
+                    discardRest: state.discardRest,
+                    customCards: state.customCards
                 })
             );
+        },
+        addCustomCard(state, action) {
+            const { abilities } = action.payload;
+            const newCard = {
+                id: `custom-${state.customCards.length + 1}`,
+                source: 'custom',
+                abilities: abilities.filter(ability => ability.name && ability.type && ability.description)
+            };
+            state.customCards.push(newCard);
+            state.hand.push(newCard.id);
         },
         createCharacter(state, action) {
             const {
@@ -86,6 +98,14 @@ const characterReducer = createSlice({
             state.discard = initialState.discard;
             state.discardRest = initialState.discardRest;
         },
+        deleteCustomCard(state, action) {
+            const cardId = action.payload;
+            state.customCards = state.customCards.filter(card => card.id !== cardId);
+            state.hand = state.hand.filter(id => id !== cardId);
+            state.discard = state.discard.filter(id => id !== cardId);
+            state.discardRest = state.discardRest.filter(id => id !== cardId);
+        },
+
         loadCharacter(state, action) {
             const {
                 name,
@@ -95,7 +115,8 @@ const characterReducer = createSlice({
                 gear,
                 hand,
                 discard,
-                discardRest
+                discardRest,
+                customCards = []
             } = action.payload;
 
             state.name = name;
@@ -106,6 +127,7 @@ const characterReducer = createSlice({
             state.hand = hand;
             state.discard = discard;
             state.discardRest = discardRest;
+            state.customCards = customCards;
         }
     }
 });
@@ -116,6 +138,8 @@ export const {
     transferToHand,
     transferToDiscard,
     transferToDiscardRest,
+    addCustomCard,
+    deleteCustomCard,
     newScene,
     rest,
     loadCharacter

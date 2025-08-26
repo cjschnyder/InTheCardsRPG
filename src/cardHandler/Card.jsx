@@ -1,9 +1,10 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
     saveCharacter,
     transferToHand,
     transferToDiscard,
-    transferToDiscardRest
+    transferToDiscardRest,
+    deleteCustomCard
 } from '../store/characterReducer'
 import cardInfo from '../assets/characterInfoAndCards.json';
 import './Card.scss'
@@ -14,9 +15,12 @@ export const Card = (props) => {
     const {
         cardId,
         cardView
-    } = props
+    } = props;
 
-    const card = cardInfo.cards.find((card) => card.id === cardId);
+    const customCards = useSelector(state => state.character.customCards);
+    const card = cardId.toString().startsWith('custom-')
+        ? customCards.find(card => card.id === cardId)
+        : cardInfo.cards.find(card => card.id === cardId);
 
     return(
         <div className='card-wrapper'>
@@ -63,6 +67,19 @@ export const Card = (props) => {
                         Discard (Rest)
                     </div>
                 }
+                {cardId.toString().startsWith('custom-') && (
+                    <div 
+                        className='action delete'
+                        onClick={() => {
+                            if (window.confirm('Are you sure you want to delete this custom card?')) {
+                                useAction(deleteCustomCard(cardId));
+                                useAction(saveCharacter());
+                            }
+                        }}
+                    >
+                        Delete Card
+                    </div>
+                )}
             </div>
         </div>
     )
