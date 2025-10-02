@@ -45,8 +45,10 @@ export const CharacterCreator = () => {
         {value: "pike", label: "Pike"},
         {value: "war_hammer", label: "War Hammer"},
         {value: "bow", label: "Bow"},
-        {value: "crossbow", label: "Crossbow"},
-        {value: "shield", label: "Shield"}
+        {value: "shield", label: "Shield"},
+        {value: "pistol", label: "Pistol"},
+        {value: "rifle", label: "Rifle"},
+        {value: "shotgun", label: "Shotgun"}
     ];
 
     const [name, setName] = useState(character && character.name ? character.name : "");

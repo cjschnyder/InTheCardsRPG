@@ -575,17 +575,11 @@
                "name":"Archer’s Feint",
                "type":"Triggered",
                "description": "When you take a basic attack with the bow you can move 2 yards before attacking."
-            }
-         ]
-      },
-      {
-         "id": 36,
-         "source": "crossbow",
-         "abilities":[
+            },
             {
-               "name":"Buttstroke",
+               "name":"Silent",
                "type":"Passive",
-               "description": "When attacking in melee, you can make a basic attack using strength + ranged weapons. On a hit you deal your strength + 1. This weapon also can count as a melee weapon for the purposes of abilities."
+               "description": "Firing a bow at a target does not break stealth as long as that target is 6 or more yards away."
             }
          ]
       },
@@ -602,6 +596,39 @@
                "name":"Bash",
                "type":"Active",
                "description": "Make a strength + melee weapons skill check against an adjacent enemy’s defense. On a success deal your strength in damage and push them 2 yards."
+            }
+         ]
+      },
+      {
+         "id": 36,
+         "source": "pistol",
+         "abilities":[
+            {
+               "name":"Close Quarters",
+               "type":"Passive",
+               "description": "You take no penalty firing a pistol with an enemy adjacent to you. "
+            }
+         ]
+      },
+      {
+         "id": 41,
+         "source": "rifle",
+         "abilities":[
+            {
+               "name":"Pierce",
+               "type":"Triggered",
+               "description": "When you hit with an attack with this weapon, you can ignore any physical damage resistance the target has when dealing damage."
+            }
+         ]
+      },
+      {
+         "id": 42,
+         "source": "shotgun",
+         "abilities":[
+            {
+               "name":"Scatter Shot",
+               "type":"Passive",
+               "description": "When attacking with the shotgun you target a 4 yard cone. You make one Dexterity + Ranged Attack skill check that counts as an attack against all creature’s defense in the cone."
             }
          ]
       }
