@@ -3,37 +3,14 @@ import characterInfo from '../assets/characterInfoAndCards.json';
 
 const initialState = {
     name: "",
-    level: 1,
-    ancestry: "",
+    species: "",
     starterClass: "",
-    specialtyClassOne: "",
-    specialtyClassTwo: "",
-    skills: [
-        {skillName: 'appraise' , value: ""},
-        {skillName: 'arcane_magic' , value: ""},
-        {skillName: 'athletics' , value: ""},
-        {skillName: 'elemental_magic' , value: ""},
-        {skillName: 'engineering' , value: "",},
-        {skillName: 'finesse' , value: ""},
-        {skillName: 'history' , value: ""},
-        {skillName: 'manipulation' , value: ""},
-        {skillName: 'medicine' , value: ""},
-        {skillName: 'melee_attack' , value: ""},
-        {skillName: 'nature' , value: ""},
-        {skillName: 'perception' , value: ""},
-        {skillName: 'ranged_attack' , value: ""},
-        {skillName: 'read_intent' , value: ""},
-        {skillName: 'reflexes' , value: ""},
-        {skillName: 'resist_manipulation' , value: ""},
-        {skillName: 'social_knowledge' , value: ""},
-        {skillName: 'spiritual_magic' , value: ""},
-        {skillName: 'stealth' , value: ""},
-        {skillName: 'toughness' , value: ""}
-    ],
-    burn: [],
-    deck: [],
+    priestOption: "",
+    gear: [],
+    hand: [],
     discard: [],
-    hand: []
+    discardRest: [],
+    customCards: []
 };
 
 const characterReducer = createSlice({
@@ -44,156 +21,113 @@ const characterReducer = createSlice({
             localStorage.setItem(
                 state.name, 
                 JSON.stringify({
-                    deck: state.deck,
                     name: state.name, 
-                    level: state.level,
-                    ancestry: state.ancestry,
-                    starterClass: state.starterClass, 
-                    specialtyClassOne: state.specialtyClassOne, 
-                    specialtyClassTwo: state.specialtyClassTwo, 
-                    skills: state.skills,
+                    species: state.species,
+                    starterClass: state.starterClass,
+                    priestOption: state.priestOption,
+                    gear: state.gear,
+                    hand: state.hand,
+                    discard: state.discard,
+                    discardRest: state.discardRest,
+                    customCards: state.customCards
                 })
             );
+        },
+        addCustomCard(state, action) {
+            const { abilities } = action.payload;
+            const newCard = {
+                id: `custom-${state.customCards.length + 1}`,
+                source: 'custom',
+                abilities: abilities.filter(ability => ability.name && ability.type && ability.description)
+            };
+            state.customCards.push(newCard);
+            state.hand.push(newCard.id);
         },
         createCharacter(state, action) {
             const {
                 name,
-                level,
-                ancestry,
+                species,
                 starterClass,
-                specialtyClassOne,
-                specialtyClassTwo,
-                skills,
-                priestDomainCard
+                priestOption,
+                gear
             } = action.payload;
 
-            state.deck = [];
-            
-            ancestry && Object.entries(characterInfo.ancestries[ancestry]).forEach(entry => {
-                const [ancestryLevel, info] = entry;
-                if (level >= ancestryLevel) {
-                    info.cards && state.deck.push(...info.cards);
-                }
-            });
-            
-            starterClass && Object.entries(characterInfo.starterClasses[starterClass]).forEach(entry => {
-                const [classLevel, info] = entry;                                                                                
-                if (level >= classLevel) {
-                    info.cards && state.deck.push(...info.cards);
-                }
-            })
-                
-            if(specialtyClassOne) {
-                const SpecialtyClass = characterInfo.specialtyClasses[specialtyClassOne];
-                
-                SpecialtyClass.start.cards && state.deck.push(...SpecialtyClass.start.cards);
-            
-                if (level >= 6) {
-                    SpecialtyClass.upgrade.cards && state.deck.push(...SpecialtyClass.upgrade.cards);
-                }
-            }
-            
-            if (specialtyClassTwo) {
-                const SpecialtyClass = characterInfo.specialtyClasses[specialtyClassTwo];
-                SpecialtyClass.start.cards && state.deck.push(...SpecialtyClass.start.cards);
-            
-                if (action.level >= 8) {
-                    SpecialtyClass.upgrade.cards && state.deck.push(...SpecialtyClass.upgrade.cards);
-                }
-            }
-
-            state.deck.push(
-                ...skills.reduce((skillCards, skill) => {
-                    if (skill.value === "novice") {
-                        return (characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice") && 
-                            [...skillCards, ...characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice")]
-                        )
-                    } else if (skill.value === "journeyman") {
-                        return [...skillCards, ...characterInfo.skills[skill.skillName].cards.filter(card => card.level === "novice" || card.level === "journeyman")]
-                    } else if (skill.value === "master") {
-                        return [...skillCards, ...characterInfo.skills[skill.skillName].cards]
-                    } else {
-                        return [...skillCards]
-                    }
-                }, [])
-            );
-            
-            const fullDeck = priestDomainCard ? [...state.deck, priestDomainCard] : [...state.deck] ;
-                
-            state.hand =  initialState.hand;
-            state.discard =  initialState.deck;
-            state.burn = initialState.burn;
             state.name = name;
-            state.level = level;
-            state.ancestry = ancestry;
-            state.starterClass = starterClass; 
-            state.specialtyClassOne = specialtyClassOne; 
-            state.specialtyClassTwo = specialtyClassTwo;
-            state.skills = skills;
-            state.deck = fullDeck;
+            state.species = species;
+            state.starterClass = starterClass;
+            state.priestOption = starterClass === 'priest' ? priestOption : "";
+            state.gear = gear;
+            state.discard = initialState.discard;
+            state.discardRest = initialState.discardRest;
+
+            const seperatedCard = characterInfo.cards.filter(
+                card => (card.source === state.species || card.source === state.starterClass || card.source === state.priestOption || state.gear.includes(card.source))
+            );
+
+            state.hand = seperatedCard.map(card => card.id)
         },
-        transferHand(state, action) {
-            const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName); //this is going to cause an issue when decks have duplicate cards it them
-            state.discard = state.discard.filter(card => card.cardName != transferedCard.cardName);
-            state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
-            state.hand.push(transferedCard);
+        transferToHand(state, action) {
+            const transferedCardId = action.payload;
+            state.discard = state.discard.filter(cardId => cardId !== transferedCardId);
+            state.discardRest = state.discardRest.filter(cardId => cardId !== transferedCardId);
+            state.hand.push(transferedCardId);
         },
-        transferDiscard(state, action) {
-            const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName);
-            state.hand = state.hand.filter(card => card.cardName != transferedCard.cardName);
-            state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
-            state.discard.push(transferedCard);
+        transferToDiscard(state, action) {
+            const transferedCardId = action.payload;
+            state.hand = state.hand.filter(cardId => cardId !== transferedCardId);
+            state.discard.push(transferedCardId);
         },
-        transferBurn(state, action) {
-            const transferedCard = action.payload;
-            state.deck = state.deck.filter(card => card.cardName != transferedCard.cardName);
-            state.discard = state.discard.filter(card => card.cardName != transferedCard.cardName);
-            state.hand = state.hand.filter(card => card.cardName != transferedCard.cardName);
-            state.burn.push(transferedCard);
+        transferToDiscardRest(state, action) {
+            const transferedCardId = action.payload;
+            state.hand = state.hand.filter(cardId => cardId !== transferedCardId);
+            state.discardRest.push(transferedCardId);
         },
-        transferDeck(state, action) {
-            const transferedCard = action.payload;
-            state.hand = state.hand.filter(card => card.cardName != transferedCard.cardName);
-            state.discard = state.discard.filter(card => card.cardName != transferedCard.cardName);
-            state.burn = state.burn.filter(card => card.cardName != transferedCard.cardName);
-            state.deck.push(transferedCard);
+        newScene(state) {
+            state.hand = [
+                ...state.hand,
+                ...state.discard
+            ];
+            state.discard = initialState.discard;
         },
-        resetDeck(state) {
-            state.deck = [
-                ...state.deck,
+        rest(state) {
+            state.hand = [
                 ...state.hand,
                 ...state.discard,
-                ...state.burn
+                ...state.discardRest
             ];
-            state.hand = initialState.hand;
-            state.discard = initialState.deck;
-            state.burn = initialState.burn;
+            state.discard = initialState.discard;
+            state.discardRest = initialState.discardRest;
         },
+        deleteCustomCard(state, action) {
+            const cardId = action.payload;
+            state.customCards = state.customCards.filter(card => card.id !== cardId);
+            state.hand = state.hand.filter(id => id !== cardId);
+            state.discard = state.discard.filter(id => id !== cardId);
+            state.discardRest = state.discardRest.filter(id => id !== cardId);
+        },
+
         loadCharacter(state, action) {
             const {
                 name,
-                level,
-                ancestry,
+                species,
                 starterClass,
-                specialtyClassOne,
-                specialtyClassTwo,
-                skills,
-                deck
+                priestOption,
+                gear,
+                hand,
+                discard,
+                discardRest,
+                customCards = []
             } = action.payload;
 
-            state.hand = initialState.hand;
-            state.discard = initialState.deck;
-            state.burn = initialState.burn;
             state.name = name;
-            state.level = level;
-            state.ancestry = ancestry;
+            state.species = species;
             state.starterClass = starterClass;
-            state.specialtyClassOne = specialtyClassOne;
-            state.specialtyClassTwo = specialtyClassTwo;
-            state.skills = skills;
-            state.deck = deck;
+            state.priestOption = priestOption;
+            state.gear = gear;
+            state.hand = hand;
+            state.discard = discard;
+            state.discardRest = discardRest;
+            state.customCards = customCards;
         }
     }
 });
@@ -201,11 +135,13 @@ const characterReducer = createSlice({
 export const {
     saveCharacter,
     createCharacter,
-    transferDeck,
-    transferHand,
-    transferDiscard,
-    transferBurn,
-    resetDeck,
+    transferToHand,
+    transferToDiscard,
+    transferToDiscardRest,
+    addCustomCard,
+    deleteCustomCard,
+    newScene,
+    rest,
     loadCharacter
 } = characterReducer.actions
 
